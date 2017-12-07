@@ -1,7 +1,9 @@
 #Main runner
 
+import DRAGProj.populationgenerator as pg
+
 populationsize = 10
-copyratio = 40     #percentage
+copyratio = 0.4
 tournamentsize = 5
 crossprob = 0.3
 mutaprob = 0.6
@@ -14,11 +16,22 @@ time sig is 4/4, 15 bars in a minute, 2 bars of 4. User could also select preset
 
 2. [1,2,3,4,5,6,8] have input now in array form.
 
+"""
+
+inputlist = [7, 1, 11, 1, 7, 7, 11, 1]
+genre = "Rock"
+
+"""
+
 3. Generate population: use some copies of that array and then also generate random individuals
 constrained to the genre to fill the rest. E.g. if rock use rock generator
 List of lists as collection of candidates
-initialise list of fitness values at 0
+initialise list of fitness values at 0.
+"""
 
+population = pg.generatepopulation(populationsize, copyratio, inputlist, genre)
+
+"""
 4. while(!userSatisified || !userFinished)
       foreach candidate()
         map values to sounds()
