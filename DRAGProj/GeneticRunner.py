@@ -1,12 +1,12 @@
 #Main runner
 
-"""
-define population size,
-ratio of copies,
-tournament size,
-pc,
-pm
+populationsize = 10
+copyratio = 40     #percentage
+tournamentsize = 5
+crossprob = 0.3
+mutaprob = 0.6
 
+"""
 single form:
 1. take input from user in the form of dropdown choices, each choice is mapped to
 a drum number. mappings file from string to drum number. user also submits tempo and genre
