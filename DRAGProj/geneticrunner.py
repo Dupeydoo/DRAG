@@ -1,10 +1,11 @@
 #Main runner
 
-import DRAGProj.populationgenerator as pg
+import DRAGProj.generators.populationgenerator as pg
 
 populationsize = 10
 copyratio = 0.4
 tournamentsize = 5
+timesignature = 8     #two bars at 4:4
 crossprob = 0.3
 mutaprob = 0.6
 
@@ -29,7 +30,7 @@ List of lists as collection of candidates
 initialise list of fitness values at 0.
 """
 
-population = pg.generatepopulation(populationsize, copyratio, inputlist, genre)
+population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
 
 """
 4. while(!userSatisified || !userFinished)
