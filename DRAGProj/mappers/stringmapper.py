@@ -14,4 +14,5 @@ stringmapper = {
     "Hi-Tom, Snare and Kick": 13,
     "Kick and High-Tom": 14,
     "Kick and Snare": 15,
+    "Play nothing": 16
 }

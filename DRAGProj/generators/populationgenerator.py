@@ -20,9 +20,6 @@ def generategenretracks(population, tracknumber, genre, timesig):
     elif genre == "Jazz":
         population = gg.generatejazztracks(population, tracknumber, timesig)
 
-    elif genre == "Classical":
-        population = gg.generateclassicaltracks(population, tracknumber, timesig)
-
     return population
 
 

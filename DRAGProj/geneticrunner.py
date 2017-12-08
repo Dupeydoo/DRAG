@@ -1,4 +1,5 @@
 #Main runner
+#another with amount of times to play each note input by user but also generated
 
 import DRAGProj.generators.populationgenerator as pg
 
@@ -8,6 +9,7 @@ tournamentsize = 5
 timesignature = 8     #two bars at 4:4
 crossprob = 0.3
 mutaprob = 0.6
+fitnesses = [0 for f in range(populationsize)]
 
 """
 single form:
