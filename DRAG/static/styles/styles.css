@@ -11,6 +11,11 @@
 	padding: 80px 120px;
 }
 
+.container-fluid {
+    padding-left: 0;
+    padding-right: 0;
+}
+
 #background h1 {
 	font-size: 2rem;
 }
@@ -18,4 +23,16 @@
 #background p {
 	margin-bottom: 2rem;
 	margin-top: 2rem;
+}
+
+#diversify {
+    background-color: #e6e6e6;
+}
+
+#diversify h2 {
+    padding: 30px;
+}
+
+#diversify button {
+    margin-bottom: 60px;
 }

@@ -8,12 +8,15 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
-    <link rel="stylesheet" href="/" type="text/css" />
+    {% load static %}
+    <link rel="stylesheet" href="{% static "styles/styles.css" %}" type="text/css" />
 </head>
 <body>
     <div>
         {% block content %}
+            {% include 'DRAG/menu.html' %}
             {% include 'DRAG/header.html' %}
+            {% include 'DRAG/indexbody.html' %}
         {% endblock %}
     </div>
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
