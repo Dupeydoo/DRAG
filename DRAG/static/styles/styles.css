@@ -27,12 +27,9 @@
 
 #diversify {
     background-color: #e6e6e6;
+	padding-bottom: 60px;
 }
 
 #diversify h2 {
     padding: 30px;
-}
-
-#diversify button {
-    margin-bottom: 60px;
 }
