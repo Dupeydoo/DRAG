@@ -1,5 +1,6 @@
 #Main runner
 #another with amount of times to play each note input by user but also generated
+#main method called when validation has finished
 
 import DRAGProj.generators.populationgenerator as pg
 

@@ -3,23 +3,19 @@
     <p> Provide an input track to the genetic algorithm using one of the two options below.</p>
     <section id="customtrack">
         <h2>Make a custom track...</h2>
-        <p>To make a custom track, choose an instrument for each single 4/4 beat in two bars (eight notes)</p>
-        <form action="/CollectInput" method="post">
+        <p>To make a custom track, choose an instrument for each single 4/4 beat in <b>two bars</b> (eight notes)</p>
+        <form action="/Diversify/" method="post">
             {% csrf_token %}
             {% for beat in inputrange %}
                 <div class="form-group">
-                    <select class="form-control">
-                        <option selected>Pick a number...</option>
-                        <option value="1">One</option>
-                    </select>
+                    {{ form.custombeat }}
                 </div>
             {% endfor %}
-            <label for="bpm">Enter a BPM: </label>
-            <input id="bpm" type="text" name="BPM">
+            {{ form.bpm }}
             <input type="submit" value="Confirm Input" class="btn btn-primary" style="float: right;"/>
         </form>
     </section>
-    <section>
+    <section id="preset">
         <h2>Or use a preset</h2>
     </section>
 {% endblock %}

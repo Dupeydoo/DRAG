@@ -1,3 +1,5 @@
+# TODO delete if needed, input can map valued auto.
+
 stringmapper = {
     "Hi-Hat": 1,
     "Snare": 2,

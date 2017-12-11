@@ -1,4 +1,5 @@
 context = {
     "inputrange": range(8),
-    "beat": []
+    "beat": [],
+    "is_home": False
 }

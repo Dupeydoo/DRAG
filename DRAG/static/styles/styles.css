@@ -25,7 +25,15 @@
 	margin-top: 2rem;
 }
 
-#diversify {
+#customtrack {
+    margin-bottom: 20px;
+}
+
+#preset {
+	padding: 20px;
+}
+
+#diversify, #preset {
     background-color: #e6e6e6;
 	padding-bottom: 60px;
 }
