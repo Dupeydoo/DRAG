@@ -1,13 +1,16 @@
 from django.shortcuts import render
-from DRAGProj.custominputform import CustomInputForm
 from django.http import HttpResponseRedirect
+from DRAGProj.custominputform import CustomInputForm
 import DRAG.datacontext as dc
 import DRAGProj.dragcommon.formhelper as fh
+import DRAGProj.geneticrunner as gr
 
 def index(request):
     return render(request, 'DRAG/index.html', {"is_home": True})
 
-def fitness(request):
+def firstfitness(request):
+    context = dc.context
+    population = gr.initiliasepopulation(context["input"], context["genre"], context["bpm"])
     return render(request, "DRAG/fitness.html", dc.context)
 
 def diversify(request):
@@ -20,7 +23,7 @@ def diversify(request):
             dc.context["genre"] = genre
             dc.context["bpm"] = bpm
             dc.context["input"] = input
-            return HttpResponseRedirect('/RateFitness')
+            return HttpResponseRedirect('/FirstFitness')
 
     else:
         form = CustomInputForm()

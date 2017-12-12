@@ -22,8 +22,9 @@ time sig is 4/4, 15 bars in a minute, 2 bars of 4. User could also select preset
 
 """
 
-def main(inputlist, genre, bpm):
+def initiliasepopulation(inputlist, genre, bpm):
     population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
+    return population
 
 """
 
