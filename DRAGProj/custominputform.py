@@ -19,8 +19,22 @@ instrumentchoices = (
     (16, "Play Nothing")
 )
 
+genres = [
+    ("Rock", "Rock"),
+    ("Jazz", "Jazz"),
+    ("Blues", "Blues")
+]
+
 
 class CustomInputForm(forms.Form):
-    custombeat = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control"}))
-    bpm = forms.IntegerField(label="Enter a BPM: ", max_value=250, min_value=1,
+    beatone = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beattwo = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatthree = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatfour = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatfive = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatsix = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatseven = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beateight = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    bpm = forms.IntegerField(max_value=250, min_value=1,
                              widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
+    genre = forms.ChoiceField(choices=genres, widget=forms.Select(attrs={"class": "form-control", "id": "genre"}))

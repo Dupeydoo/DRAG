@@ -6,13 +6,23 @@
         <p>To make a custom track, choose an instrument for each single 4/4 beat in <b>two bars</b> (eight notes)</p>
         <form action="/Diversify/" method="post">
             {% csrf_token %}
-            {% for beat in inputrange %}
-                <div class="form-group">
-                    {{ form.custombeat }}
-                </div>
-            {% endfor %}
-            {{ form.bpm }}
-            <input type="submit" value="Confirm Input" class="btn btn-primary" style="float: right;"/>
+            {{ form.beatone }}
+            {{ form.beattwo }}
+            {{ form.beatthree }}
+            {{ form.beatfour }}
+            {{ form.beatfive }}
+            {{ form.beatsix }}
+            {{ form.beatseven }}
+            {{ form.beateight }}
+            <div class="form-row">
+                <label for="genre">Pick a genre: </label>
+                {{ form.genre }}
+            </div>
+            <div class="form-element">
+                <label for="bpm">Enter a BPM: </label>
+                {{ form.bpm }}
+            </div>
+            <input type="submit" value="Confirm Input" class="btn btn-primary"/>
         </form>
     </section>
     <section id="preset">

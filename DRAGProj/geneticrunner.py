@@ -22,8 +22,8 @@ time sig is 4/4, 15 bars in a minute, 2 bars of 4. User could also select preset
 
 """
 
-inputlist = [7, 1, 11, 1, 7, 7, 11, 1]
-genre = "Rock"
+def main(inputlist, genre, bpm):
+    population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
 
 """
 
@@ -33,7 +33,7 @@ List of lists as collection of candidates
 initialise list of fitness values at 0.
 """
 
-population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
+
 
 """
 4. while(!userSatisified || !userFinished)
