@@ -1,8 +1,5 @@
-#Main runner
-#another with amount of times to play each note input by user but also generated
-#main method called when validation has finished
-
 import DRAGProj.generators.populationgenerator as pg
+import DRAGProj.dragcommon.wavbuilder as wb
 
 populationsize = 10
 copyratio = 0.4
@@ -58,3 +55,11 @@ initialise list of fitness values at 0.
 
 common interface to fuse wav files based on bpm
 """
+
+def processinput(population, bpm):
+    wavpath = "/DRAG/static/wavfiles/"
+
+    for candidate in range(len(population)):
+        solution = population[candidate]
+        outputfile = wavpath + "candidate" + str(candidate) + ".wav"
+        wb.mapinput(solution, bpm, outputfile)

@@ -6,11 +6,16 @@ import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.geneticrunner as gr
 
 def index(request):
-    return render(request, 'DRAG/index.html', {"is_home": True})
+    return render(request, "DRAG/index.html", {"is_home": True})
+
+def fitness(request):
+    return render(request, "DRAG/fitness.html", dc.context)
 
 def firstfitness(request):
     context = dc.context
-    population = gr.initiliasepopulation(context["input"], context["genre"], context["bpm"])
+    bpm = context["bpm"]
+    population = gr.initiliasepopulation(context["input"], context["genre"], bpm)
+    gr.processinput(population, bpm)
     return render(request, "DRAG/fitness.html", dc.context)
 
 def diversify(request):

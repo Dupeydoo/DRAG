@@ -27,14 +27,14 @@ genres = [
 
 
 class CustomInputForm(forms.Form):
-    beatone = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beattwo = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beatthree = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beatfour = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beatfive = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beatsix = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beatseven = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
-    beateight = forms.ChoiceField(choices=instrumentchoices, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatone = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beattwo = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatthree = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatfour = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatfive = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatsix = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beatseven = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beateight = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
     bpm = forms.IntegerField(max_value=250, min_value=1,
                              widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
     genre = forms.ChoiceField(choices=genres, widget=forms.Select(attrs={"class": "form-control", "id": "genre"}))
