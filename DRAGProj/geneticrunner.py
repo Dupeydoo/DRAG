@@ -1,10 +1,12 @@
 import DRAGProj.generators.populationgenerator as pg
 import DRAGProj.dragcommon.wavbuilder as wb
+import os
 
+systempath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 populationsize = 10
 copyratio = 0.4
 tournamentsize = 5
-timesignature = 8     #two bars at 4:4
+timesignature = 8  # two bars at 4:4
 crossprob = 0.3
 mutaprob = 0.6
 fitnesses = [0 for f in range(populationsize)]
@@ -19,9 +21,11 @@ time sig is 4/4, 15 bars in a minute, 2 bars of 4. User could also select preset
 
 """
 
+
 def initiliasepopulation(inputlist, genre, bpm):
     population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
     return population
+
 
 """
 
@@ -30,8 +34,6 @@ constrained to the genre to fill the rest. E.g. if rock use rock generator
 List of lists as collection of candidates
 initialise list of fitness values at 0.
 """
-
-
 
 """
 4. while(!userSatisified || !userFinished)
@@ -56,10 +58,11 @@ initialise list of fitness values at 0.
 common interface to fuse wav files based on bpm
 """
 
+
 def processinput(population, bpm):
-    wavpath = "/DRAG/static/wavfiles/"
+    wavpath = systempath + "/DRAG/static/wavfiles/"
 
     for candidate in range(len(population)):
         solution = population[candidate]
         outputfile = wavpath + "candidate" + str(candidate) + ".wav"
-        wb.mapinput(solution, bpm, outputfile)
+        wb.mapinput(solution, bpm, outputfile, systempath)
