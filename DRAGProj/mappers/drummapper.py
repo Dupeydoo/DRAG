@@ -14,5 +14,5 @@ drummapper = {
     13: "HTomSnareKick.wav",
     14: "KickHTom.wav",
     15: "KickSnare.wav",
-    16: ""
+    16: "PlayNothing.wav"
 }
