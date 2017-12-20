@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from DRAGProj.custominputform import CustomInputForm
+from DRAGProj.forms.custominputform import CustomInputForm
 import DRAG.datacontext as dc
 import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.geneticrunner as gr

@@ -1,9 +1,10 @@
 import DRAGProj.generators.populationgenerator as pg
 import DRAGProj.dragcommon.wavbuilder as wb
+import DRAG.datacontext as dc
 import os
 
-systempath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-populationsize = 10
+systempath = dc.context["systempath"]
+populationsize = dc.context["populationsize"]
 copyratio = 0.4
 tournamentsize = 5
 timesignature = 8  # two bars at 4:4
@@ -36,7 +37,7 @@ initialise list of fitness values at 0.
 """
 
 """
-4. while(!userSatisified || !userFinished)
+4. while(!userSatisified || !userFinished || !genCount)
       foreach candidate()
         map values to sounds()
         fuse sounds into single wav()
@@ -60,9 +61,12 @@ common interface to fuse wav files based on bpm
 
 
 def processinput(population, bpm):
+    """
     wavpath = systempath + "/DRAG/static/wavfiles/"
 
     for candidate in range(len(population)):
         solution = population[candidate]
         outputfile = wavpath + "candidate" + str(candidate) + ".wav"
         wb.mapinput(solution, bpm, outputfile, systempath)
+"""
+    print("Remove me when fitness is tested")

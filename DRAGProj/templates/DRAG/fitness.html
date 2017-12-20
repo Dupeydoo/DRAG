@@ -1,3 +1,4 @@
+{% load strconcat %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +7,12 @@
     {% block resources %} {% include "DRAG/renderresources.html" %} {% endblock %}
 </head>
 <body>
-    <p>
-        {{ bpm }} <br>
-        {{ genre }} <br>
-        {{ input }} <br>
-    </p>
+    {% block content %}
+        {% include "DRAG/menu.html" %}
+        <div class="container-fluid">
+            {% include "DRAG/fitnessform.html" %}
+        </div>
+    {% endblock %}
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
         <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
                 integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

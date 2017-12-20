@@ -38,6 +38,14 @@
 	padding-bottom: 60px;
 }
 
+#fitnessform {
+    padding: 20px;
+}
+
+#fitnessform #fitnesssubmit {
+    margin-top: 20px;
+}
+
 #diversify h2 {
     padding: 30px;
 }

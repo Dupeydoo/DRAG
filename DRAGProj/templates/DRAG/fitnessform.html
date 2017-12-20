@@ -1,0 +1,24 @@
+{% block content %}
+    <section id="fitnessform">
+        <h1>Track Rating</h1>
+        <p>As in biological evolution only the fittest candidates survive! Listen to tracks
+        and assign them a quality rating between 0 and 10. Click submit when you are finished.</p>
+        <form action="/RateFitness/" method="post">
+            {% csrf_token %}
+            <div class="row">
+                {% for candidate in populationrange %}
+                    <div class="col-md-3">
+                        <audio controls>
+                            <source src="/DRAG/static/wavfiles/Snare.wav" type="audio/wav">
+                        </audio>
+                        <input type="range" min="0" max="10" value="5" id="fitnessrange">
+                        <p>
+                            <span id="rating">5</span>
+                        </p>
+                    </div>
+                {% endfor %}
+            </div>
+            <input type="submit" value="Submit" class="btn btn-primary" id="fitnesssubmit">
+        </form>
+    </section>
+{% endblock %}
