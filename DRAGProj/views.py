@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from DRAGProj.forms.custominputform import CustomInputForm
+from DRAGProj.forms.fitnessform import FitnessForm
 import DRAG.datacontext as dc
 import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.geneticrunner as gr
@@ -9,6 +10,17 @@ def index(request):
     return render(request, "DRAG/index.html", {"is_home": True})
 
 def fitness(request):
+    if request.method == 'POST':
+        form = FitnessForm(request.POST, size=dc.context["populationsize"])
+
+        if form.is_valid():
+            for fitness in form.collectfitnesses():
+                print("do something")
+            return HttpResponseRedirect('/RateFitness')
+    else:
+        form = FitnessForm(size=dc.context["populationsize"])
+
+    dc.context["fitnessform"] = form
     return render(request, "DRAG/fitness.html", dc.context)
 
 def firstfitness(request):
@@ -16,6 +28,7 @@ def firstfitness(request):
     bpm = context["bpm"]
     population = gr.initiliasepopulation(context["input"], context["genre"], bpm)
     gr.processinput(population, bpm)
+    context["fitnessform"] = FitnessForm(size=context["populationsize"])
     return render(request, "DRAG/fitness.html", dc.context)
 
 def diversify(request):

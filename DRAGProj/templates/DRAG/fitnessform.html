@@ -1,4 +1,5 @@
 {% block content %}
+    {% load static %}
     <section id="fitnessform">
         <h1>Track Rating</h1>
         <p>As in biological evolution only the fittest candidates survive! Listen to tracks
@@ -6,19 +7,17 @@
         <form action="/RateFitness/" method="post">
             {% csrf_token %}
             <div class="row">
-                {% for candidate in populationrange %}
+                {% for field in fitnessform %}
                     <div class="col-md-3">
                         <audio controls>
                             <source src="/DRAG/static/wavfiles/Snare.wav" type="audio/wav">
                         </audio>
-                        <input type="range" min="0" max="10" value="5" id="fitnessrange">
-                        <p>
-                            <span id="rating">5</span>
-                        </p>
+                        {{ field }}
                     </div>
                 {% endfor %}
             </div>
             <input type="submit" value="Submit" class="btn btn-primary" id="fitnesssubmit">
         </form>
     </section>
+    <script src="{% static "js/templates.js" %}"></script>
 {% endblock %}
