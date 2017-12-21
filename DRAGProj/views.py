@@ -13,9 +13,10 @@ def fitness(request):
     if request.method == 'POST':
         form = FitnessForm(request.POST, size=dc.context["populationsize"])
 
+        candidatefitnesses = []
         if form.is_valid():
             for fitness in form.collectfitnesses():
-                print("do something")
+                candidatefitnesses.append(fitness[1])
             return HttpResponseRedirect('/RateFitness')
     else:
         form = FitnessForm(size=dc.context["populationsize"])

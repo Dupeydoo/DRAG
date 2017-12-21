@@ -8,7 +8,7 @@ populationsize = dc.context["populationsize"]
 copyratio = 0.4
 tournamentsize = 5
 timesignature = 8  # two bars at 4:4
-crossprob = 0.3
+crossprob = 0.5
 mutaprob = 0.6
 fitnesses = [0 for f in range(populationsize)]
 
@@ -55,8 +55,6 @@ initialise list of fitness values at 0.
 
 5. Display final generation tracks for one more fitness eval
 6. Favourite one single audio player render, can download from that
-
-common interface to fuse wav files based on bpm
 """
 
 

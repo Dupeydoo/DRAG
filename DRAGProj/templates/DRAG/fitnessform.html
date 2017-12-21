@@ -9,9 +9,11 @@
             <div class="row">
                 {% for field in fitnessform %}
                     <div class="col-md-3">
+                        <h5>Track {{ forloop.counter }}:</h5>
                         <audio controls>
                             <source src="/DRAG/static/wavfiles/Snare.wav" type="audio/wav">
                         </audio>
+                        <label for="fitness">Enter 0-10: </label>
                         {{ field }}
                     </div>
                 {% endfor %}
