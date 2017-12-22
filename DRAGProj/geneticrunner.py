@@ -46,10 +46,8 @@ initialise list of fitness values at 0.
         submit and populate fitness array()
 
       perform tournament selection based on candidates fitness match index to index in collection()
-
-      foreach selected candidate()
-          perform crossover based on pc()
-          perform mutation based on pm()
+      perform crossover based on pc()
+      perform mutation based on pm()
 
       replace lowest fitness candidates with new candidates()
 
