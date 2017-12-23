@@ -4,7 +4,8 @@ from operator import itemgetter
 def doselection(population, fitnesses, tournamentsize):
     parents = []
     for selections in range(len(population)):
-        parents.append(tournamentselect(population, fitnesses, tournamentsize))
+        parent = tournamentselect(population, fitnesses, tournmentsize)
+        parents.append(parent)
     return parents
 
 def tournamentselect(population, fitnesses, tournamentsize):
