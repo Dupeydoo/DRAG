@@ -12,7 +12,6 @@ def index(request):
 def fitness(request):
     if request.method == 'POST':
         form = FitnessForm(request.POST, size=dc.context["populationsize"])
-
         candidatefitnesses = []
         if form.is_valid():
             for fitness in form.collectfitnesses():

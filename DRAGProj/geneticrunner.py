@@ -24,8 +24,11 @@ time sig is 4/4, 15 bars in a minute, 2 bars of 4. User could also select preset
 
 
 def initiliasepopulation(inputlist, genre, bpm):
-    population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
-    return population
+    if populationsize % 2 == 0 and populationsize != 0:
+        population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
+        return population
+    #raise error
+    return
 
 
 """
@@ -57,12 +60,10 @@ initialise list of fitness values at 0.
 
 
 def processinput(population, bpm):
-    """
     wavpath = systempath + "/DRAG/static/wavfiles/"
 
     for candidate in range(len(population)):
         solution = population[candidate]
         outputfile = wavpath + "candidate" + str(candidate) + ".wav"
         wb.mapinput(solution, bpm, outputfile, systempath)
-"""
-    print("Remove me when fitness is tested")
+

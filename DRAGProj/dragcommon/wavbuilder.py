@@ -1,5 +1,6 @@
 from pydub import AudioSegment
 from pydub import playback
+from DRAGProj.dragcommon.audiothread import AudioThread
 import DRAGProj.mappers.drummapper as dm
 
 def openwav(filepath):
@@ -13,8 +14,8 @@ def mapinput(candidate, bpm, outputfile, systempath):
         audio = openwav(systempath + "/DRAG/static/wavfiles/" + file)
         output = output.append(gap)
         output = output.append(audio)
-    playback.play(output)
-    writewav = output.export(outputfile, format="wav")
+    thread = AudioThread(output, outputfile)
+    thread.start()
 
 def beatoffset(bpm):
     return 60000 / bpm
