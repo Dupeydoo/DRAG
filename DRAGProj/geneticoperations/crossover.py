@@ -8,7 +8,6 @@ def docrossover(parents, crossprob):
             children += singlepointcrossover(pair)
     return children
 
-#TODO multipoint?
 def singlepointcrossover(parents):
     crossoverpoints = []
     randindex = random.randrange(0, len(parents[0]))

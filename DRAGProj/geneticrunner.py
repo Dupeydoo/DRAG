@@ -3,25 +3,20 @@ import DRAGProj.dragcommon.wavbuilder as wb
 import DRAG.datacontext as dc
 import os
 
-systempath = dc.context["systempath"]
-populationsize = dc.context["populationsize"]
-copyratio = 0.4
-tournamentsize = 5
-timesignature = 8  # two bars at 4:4
-crossprob = 0.5
-mutaprob = 0.6
-fitnesses = [0 for f in range(populationsize)]
+from DRAGProj.geneticoperations import selection
+from DRAGProj.geneticoperations import crossover
+from DRAGProj.geneticoperations import mutation
+from DRAGProj.geneticoperations import generationalreplacement
 
-"""
-single form:
-1. take input from user in the form of dropdown choices, each choice is mapped to
-a drum number. mappings file from string to drum number. user also submits tempo and genre
-time sig is 4/4, 15 bars in a minute, 2 bars of 4. User could also select presets here
-
-2. [1,2,3,4,5,6,8] have input now in array form.
-
-"""
-
+context = dc.context
+systempath = context["systempath"]
+populationsize = context["populationsize"]
+copyratio = context["copyratio"]
+tournamentsize = context["tournamentsize"]
+timesignature = context["timesignature"]
+crossprob = context["crossprob"]
+mutaprob = context["mutaprob"]
+fitnesses = context["fitnesses"]
 
 def initiliasepopulation(inputlist, genre, bpm):
     if populationsize % 2 == 0 and populationsize != 0:
@@ -30,40 +25,17 @@ def initiliasepopulation(inputlist, genre, bpm):
     #raise error
     return
 
-
-"""
-
-3. Generate population: use some copies of that array and then also generate random individuals
-constrained to the genre to fill the rest. E.g. if rock use rock generator
-List of lists as collection of candidates
-initialise list of fitness values at 0.
-"""
-
-"""
-4. while(!userSatisified || !userFinished || !genCount)
-      foreach candidate()
-        map values to sounds()
-        fuse sounds into single wav()
-        render a small audio player with dropdown rating default 0()
-        render button to submit to server()
-        submit and populate fitness array()
-
-      perform tournament selection based on candidates fitness match index to index in collection()
-      perform crossover based on pc()
-      perform mutation based on pm()
-
-      replace lowest fitness candidates with new candidates()
-
-5. Display final generation tracks for one more fitness eval
-6. Favourite one single audio player render, can download from that
-"""
-
-
 def processinput(population, bpm):
     wavpath = systempath + "/DRAG/static/wavfiles/"
-
     for candidate in range(len(population)):
         solution = population[candidate]
         outputfile = wavpath + "candidate" + str(candidate) + ".wav"
         wb.mapinput(solution, bpm, outputfile, systempath)
 
+
+def performgenetics(population, fitnessinput):
+    parents = selection.doselection(population, fitnessinput, tournamentsize)
+    children = crossover.docrossover(parents, crossprob)
+    children = mutation.domutation(children, mutaprob)
+    newpopulation = generationalreplacement.doreplacement(population, children)
+    return newpopulation

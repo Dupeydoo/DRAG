@@ -10,18 +10,20 @@ def index(request):
     return render(request, "DRAG/index.html", {"is_home": True})
 
 def fitness(request):
+    context = dc.context
     if request.method == 'POST':
-        form = FitnessForm(request.POST, size=dc.context["populationsize"])
         candidatefitnesses = []
+        form = FitnessForm(request.POST, size=context["populationsize"])
         if form.is_valid():
             for fitness in form.collectfitnesses():
                 candidatefitnesses.append(fitness[1])
+            population = gr.performgenetics(context["population"], candidatefitnesses)
             return HttpResponseRedirect('/RateFitness')
     else:
-        form = FitnessForm(size=dc.context["populationsize"])
+        form = FitnessForm(size=context["populationsize"])
 
-    dc.context["fitnessform"] = form
-    return render(request, "DRAG/fitness.html", dc.context)
+    context["fitnessform"] = form
+    return render(request, "DRAG/fitness.html", context)
 
 def firstfitness(request):
     context = dc.context
@@ -29,6 +31,7 @@ def firstfitness(request):
     population = gr.initiliasepopulation(context["input"], context["genre"], bpm)
     gr.processinput(population, bpm)
     context["fitnessform"] = FitnessForm(size=context["populationsize"])
+    context["population"] = population
     return render(request, "DRAG/fitness.html", dc.context)
 
 def diversify(request):
