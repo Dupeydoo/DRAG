@@ -3,6 +3,7 @@ import re
 from pydub import AudioSegment
 from DRAGProj.dragcommon.audiothread import AudioThread
 import DRAGProj.mappers.drummapper as dm
+import DRAG.datacontext as dc
 
 def openwav(filepath):
     return AudioSegment.from_wav(filepath)
@@ -22,9 +23,16 @@ def mapinput(candidate, bpm, outputfile, systempath):
 def beatoffset(bpm):
     return 60000 / bpm
 
-def clearwavcandidates(wavdirectory, regpattern):
+def clearwavcandidates(wavdirectory, string):
     for file in os.listdir(wavdirectory):
-        if re.search(regpattern, file):
-            os.remove(os.path.join(dir, file))
+        if string in file:
+            os.remove(os.path.join(wavdirectory, file))
 
 # regpattern for candidates "/^candidate[0-9]*.wav$/"
+
+if __name__ == "__main__":
+    string = "candidate"
+    systempath = dc.context["systempath"]
+    wavpath = "/DRAG/static/wavfiles"
+
+    clearwavcandidates(systempath + wavpath, string)

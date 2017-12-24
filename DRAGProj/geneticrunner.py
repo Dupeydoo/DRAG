@@ -16,7 +16,6 @@ tournamentsize = context["tournamentsize"]
 timesignature = context["timesignature"]
 crossprob = context["crossprob"]
 mutaprob = context["mutaprob"]
-fitnesses = context["fitnesses"]
 
 def initiliasepopulation(inputlist, genre, bpm):
     if populationsize % 2 == 0 and populationsize != 0:

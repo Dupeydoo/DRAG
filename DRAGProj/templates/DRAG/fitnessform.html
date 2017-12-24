@@ -1,5 +1,6 @@
 {% block content %}
     {% load static %}
+    {% load strconcat %}
     <section id="fitnessform">
         <h1>Track Rating</h1>
         <p>As in biological evolution only the fittest candidates survive! Listen to tracks
@@ -11,7 +12,7 @@
                     <div class="col-md-3">
                         <h5>Track {{ forloop.counter }}:</h5>
                         <audio controls>
-                            <source src="/DRAG/static/wavfiles/Snare.wav" type="audio/wav">
+                            <source src="{{ "/DRAG/static/wavfiles/"|strconcat:"candidate"|strconcat:forloop.counter0|strconcat:".wav" }}" type="audio/wav">
                         </audio>
                         <label for="fitness">Enter 0-10: </label>
                         {{ field }}
