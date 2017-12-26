@@ -28,8 +28,6 @@ def clearwavcandidates(wavdirectory, string):
         if string in file:
             os.remove(os.path.join(wavdirectory, file))
 
-# regpattern for candidates "/^candidate[0-9]*.wav$/"
-
 if __name__ == "__main__":
     string = "candidate"
     systempath = dc.context["systempath"]

@@ -1,5 +1,6 @@
 import DRAGProj.generators.populationgenerator as pg
 import DRAGProj.dragcommon.wavbuilder as wb
+import DRAGProj.dragcommon.dragmaths as dm
 import DRAG.datacontext as dc
 import os
 
@@ -18,7 +19,7 @@ crossprob = context["crossprob"]
 mutaprob = context["mutaprob"]
 
 def initiliasepopulation(inputlist, genre, bpm):
-    if populationsize % 2 == 0 and populationsize != 0:
+    if dm.iseven(populationsize) and populationsize != 0:
         population = pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
         return population
     #raise error

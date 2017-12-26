@@ -18,6 +18,7 @@ def fitness(request):
             for fitness in form.collectfitnesses():
                 candidatefitnesses.append(fitness[1])
             population = gr.performgenetics(context["population"], candidatefitnesses)
+            context["population"] = population
             return HttpResponseRedirect('/RateFitness')
     else:
         form = FitnessForm(size=context["populationsize"])
