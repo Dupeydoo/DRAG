@@ -39,3 +39,7 @@ def performgenetics(population, fitnessinput):
     children = mutation.domutation(children, mutaprob)
     newpopulation = generationalreplacement.doreplacement(population, children)
     return newpopulation
+
+def clearwavfiles():
+    wavpath = systempath + "/DRAG/static/wavfiles/"
+    wb.clearwavcandidates(wavpath, "candidate")

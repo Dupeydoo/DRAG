@@ -6,6 +6,8 @@ def docrossover(parents, crossprob):
         pair = [parentone, parenttwo]
         if random.random() < crossprob:
             children += singlepointcrossover(pair)
+        else:
+            children += pair
     return children
 
 def singlepointcrossover(parents):

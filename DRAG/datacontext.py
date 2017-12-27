@@ -2,8 +2,10 @@ import os
 
 context = {
     "inputrange": range(8),
+    "manualgenerations": 10,
+    "currentgeneration": 1,
     "populationsize": 10,
-    "copyratio" : 0.4,
+    "copyratio": 0.4,
     "tournamentsize": 5,
     "timesignature": 8,  # two bars at 4:4
     "crossprob": 0.5,
