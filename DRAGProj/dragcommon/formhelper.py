@@ -1,3 +1,5 @@
+import DRAG.datacontext as dc
+
 def constructinput(cleaned_data):
     input = []
     input.append(cleaned_data["beatone"])
@@ -9,3 +11,6 @@ def constructinput(cleaned_data):
     input.append(cleaned_data["beatseven"])
     input.append(cleaned_data["beateight"])
     return input
+
+def getpreset(index):
+    return dc.context["presets"][index]

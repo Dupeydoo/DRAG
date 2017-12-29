@@ -1,5 +1,4 @@
 import os
-import re
 from pydub import AudioSegment
 from DRAGProj.dragcommon.audiothread import AudioThread
 import DRAGProj.mappers.drummapper as dm

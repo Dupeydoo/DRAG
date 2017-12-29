@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponseRedirect
 
 from DRAGProj.forms.custominputform import CustomInputForm
+from DRAGProj.forms.presetform import PresetForm
 from DRAGProj.forms.fitnessform import FitnessForm
 
 import DRAG.datacontext as dc
@@ -10,7 +11,6 @@ import DRAGProj.geneticrunner as gr
 import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.dragcommon.pageerror as pe
 import DRAGProj.dragcommon.viewshelper as vh
-
 
 def index(request):
     dc.context["currentgeneration"] = 1
@@ -31,8 +31,7 @@ def fitness(request):
     else:
         try:
             bpm, population = context["bpm"], context["population"]
-            if context["currentgeneration"] == context["manualgenerations"]:
-                return HttpResponseRedirect('/NeuralNetwork')
+            vh.generationcheck(context["currentgeneration"], context["manualgenerations"])
             context["currentgeneration"] = context["currentgeneration"] + 1
             form = FitnessForm(size=context["populationsize"])
         except KeyError as k:
@@ -56,22 +55,37 @@ def firstfitness(request):
 
 
 def diversify(request):
+    context = dc.context
     if request.method == 'POST':
         form = CustomInputForm(request.POST)
         if form.is_valid():
-            genre = form.cleaned_data["genre"]
-            bpm = form.cleaned_data["bpm"]
-            input = fh.constructinput(form.cleaned_data)
-            dc.context["genre"] = genre
-            dc.context["bpm"] = bpm
-            dc.context["input"] = input
+            context["genre"] = form.cleaned_data["genre"]
+            context["bpm"] = form.cleaned_data["bpm"]
+            context["input"] = fh.constructinput(form.cleaned_data)
             return HttpResponseRedirect('/FirstFitness')
 
     else:
         form = CustomInputForm()
+        preset = PresetForm()
+        context["presetform"] = preset
 
-    dc.context["form"] = form
-    return render(request, 'DRAG/startdiversify.html', dc.context)
+    context["form"] = form
+    return render(request, 'DRAG/startdiversify.html', context)
+
+def preset(request):
+    context = dc.context
+    if request.method == 'POST':
+        form = PresetForm(request.POST)
+        if form.is_valid():
+            context["bpm"] = form.cleaned_data["bpm"]
+            context["input"] = fh.getpreset(form.cleaned_data["preset"])
+            context["genre"] = "Rock"
+            return HttpResponseRedirect('/FirstFitness')
+
+    else:
+        return pe.catchpreseterror(request)
+
+    return render(request, 'DRAG/startdiversify.html')
 
 def neuralnetwork(request):
     context = dc.context

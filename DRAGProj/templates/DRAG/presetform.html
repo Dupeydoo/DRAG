@@ -1,0 +1,14 @@
+{% block content %}
+    <section id="preset">
+        <h2>Or use a preset</h2>
+        <form action="/Preset/" method="post">
+            {% csrf_token %}
+            {{ presetform.preset }}
+            <div class="form-element">
+                <label for="bpmtwo">Enter a BPM: </label>
+                {{ presetform.bpm }}
+            </div>
+            <input type="submit" value="Confirm Input" class="btn btn-primary"/>
+        </section>
+    </form>
+{% endblock %}

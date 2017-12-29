@@ -7,5 +7,6 @@ urlpatterns = [
     path('FirstFitness/', views.firstfitness, name='firstfitness'),
     path('RateFitness/', views.fitness, name='fitness'),
     path('NeuralNetwork/', views.neuralnetwork, name='neuralnet'),
-    path('DRAGError/', views.error, name='error')
+    path('DRAGError/', views.error, name='error'),
+    path('Preset/', views.preset, name='preset')
 ]
