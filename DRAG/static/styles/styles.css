@@ -55,6 +55,12 @@
     padding: 30px;
 }
 
+#footer {
+	color: white;
+	background-color: #343a40;
+	padding: 40px;
+}
+
 form .cb {
     margin-bottom: 10px;
 }

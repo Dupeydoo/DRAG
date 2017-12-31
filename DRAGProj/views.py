@@ -22,18 +22,14 @@ def fitness(request):
     if request.method == 'POST':
         form = FitnessForm(request.POST, size=context["populationsize"])
         if form.is_valid():
-            candidatefitnesses = vh.gatherfitnessinput(form.collectfitnesses())
-            population = gr.performgenetics(context["population"], candidatefitnesses)
-            context["population"] = population
-            gr.clearwavfiles()
-            gr.processinput(population, context["bpm"])
+            vh.performgeneration(form)
             return HttpResponseRedirect('/RateFitness')
     else:
         try:
-            bpm, population = context["bpm"], context["population"]
+            bpm = context["bpm"]
             vh.generationcheck(context["currentgeneration"], context["manualgenerations"])
-            context["currentgeneration"] = context["currentgeneration"] + 1
             form = FitnessForm(size=context["populationsize"])
+            context["currentgeneration"] = context["currentgeneration"] + 1
         except KeyError as k:
             return pe.catchkeyerror(request)
 
@@ -51,8 +47,6 @@ def firstfitness(request):
         return render(request, "DRAG/fitness.html", dc.context)
     except KeyError as k:
         return pe.catchkeyerror(request)
-
-
 
 def diversify(request):
     context = dc.context
@@ -90,7 +84,7 @@ def preset(request):
 def neuralnetwork(request):
     context = dc.context
     try:
-        bpm, population = context["bpm"], context["population"]
+        bpm = context["bpm"]
     except KeyError as k:
         return pe.catchkeyerror(request)
     return render(request, 'DRAG/neuralnetwork.html', context)

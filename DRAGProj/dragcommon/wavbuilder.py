@@ -2,7 +2,6 @@ import os
 from pydub import AudioSegment
 from DRAGProj.dragcommon.audiothread import AudioThread
 import DRAGProj.mappers.drummapper as dm
-import DRAG.datacontext as dc
 
 def openwav(filepath):
     return AudioSegment.from_wav(filepath)
@@ -26,10 +25,3 @@ def clearwavcandidates(wavdirectory, string):
     for file in os.listdir(wavdirectory):
         if string in file:
             os.remove(os.path.join(wavdirectory, file))
-
-if __name__ == "__main__":
-    string = "candidate"
-    systempath = dc.context["systempath"]
-    wavpath = "/DRAG/static/wavfiles"
-
-    clearwavcandidates(systempath + wavpath, string)

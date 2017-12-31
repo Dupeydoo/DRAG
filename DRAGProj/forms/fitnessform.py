@@ -8,7 +8,8 @@ class FitnessForm(forms.Form):
 
         for candidate in range(size):
             self.fields["fitness" + str(candidate)] = forms.IntegerField(max_value=10, min_value=0,
-                                 widget=forms.NumberInput(attrs={"class": "fitness", "name": "fitness"}))
+                                 widget=forms.NumberInput(attrs={"class": "fitness", "name": "fitness",
+                                                                 "tabindex": size + 1}))
 
 
     def collectfitnesses(self):
