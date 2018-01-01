@@ -16,3 +16,6 @@ drummapper = {
     15: "KickSnare.wav",
     16: "PlayNothing.wav"
 }
+
+def isSymbal(drum):
+    return "HHat" in drummapper[drum]
