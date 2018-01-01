@@ -2,6 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <title>DRAG - Rate Fitness</title>
     {% block resources %} {% include "DRAG/renderresources.html" %} {% endblock %}
@@ -17,5 +18,6 @@
     {% block bodyscripts %}
         {% include "DRAG/bodyscripts.html" %}
     {% endblock %}
+    <script src="{% static "js/keybindings.js" %}"></script>
 </body>
 </html>
