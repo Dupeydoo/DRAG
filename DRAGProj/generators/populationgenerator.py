@@ -1,8 +1,8 @@
 import DRAGProj.generators.genregenerator as gg
+from DRAGProj.dragcommon.track import Track
 
 def generatepopulation(psize, cratio, inputlist, genre, timesig):
-    copyappend = cratio * psize
-    copyappend = int(copyappend)
+    copyappend = int(cratio * psize)
     population = []
 
     population = populatecopies(population, copyappend, inputlist)
@@ -25,5 +25,6 @@ def generategenretracks(population, tracknumber, genre, timesig):
 
 def populatecopies(population, copynumber, inputlist):
     for candidate in range(copynumber):
-        population.append(inputlist)
+        track = Track(inputlist, 0)
+        population.append(track)
     return population

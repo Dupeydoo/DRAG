@@ -44,7 +44,7 @@ def firstfitness(request):
         gr.processinput(population, bpm)
         context["fitnessform"] = FitnessForm(size=context["populationsize"])
         context["population"] = population
-        return render(request, "DRAG/fitness.html", dc.context)
+        return render(request, "DRAG/fitness.html", context)
     except KeyError as k:
         return pe.catchkeyerror(request)
 

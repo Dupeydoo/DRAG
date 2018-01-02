@@ -1,18 +1,20 @@
 import random
 from operator import itemgetter
 
-def doselection(population, fitnesses, tournamentsize):
+from DRAGProj.dragcommon.track import Track
+
+def doselection(population, tournamentsize):
     parents = []
     for selections in range(len(population)):
-        parent = tournamentselect(population, fitnesses, tournamentsize)
+        parent = tournamentselect(population, tournamentsize)
         parents.append(parent)
     return parents
 
-def tournamentselect(population, fitnesses, tournamentsize):
+def tournamentselect(population, tournamentsize):
     randomselections = []
     for candidates in range(tournamentsize):
-        randindex = random.randrange(0, len(fitnesses))
-        randomselections.append((randindex, fitnesses[randindex]))
+        randindex = random.randrange(0, len(population))
+        randomselections.append((randindex, population[randindex].fitness))
     return tournament(population, randomselections)
 
 def tournament(population, selections):

@@ -33,8 +33,8 @@ def processinput(population, bpm):
         wb.mapinput(solution, bpm, outputfile, systempath)
 
 
-def performgenetics(population, fitnessinput):
-    parents = selection.doselection(population, fitnessinput, tournamentsize)
+def performgenetics(population):
+    parents = selection.doselection(population, tournamentsize)
     children = crossover.docrossover(parents, crossprob)
     children = mutation.domutation(children, mutaprob)
     newpopulation = generationalreplacement.doreplacement(population, children)

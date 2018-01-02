@@ -1,4 +1,5 @@
 import random as rand
+from DRAGProj.dragcommon.track import Track
 
 def generaterocktracks(population, tracknumber, timesig):
     structure = [1, 5, 6, 7, 8, 9, 10, 11]
@@ -22,11 +23,11 @@ def generatejazztracks(population, tracknumber, timesig):
     return population
 
 def buildtrack(structure, timesig, index, commonvalue=None):
-    track = []
+    track = Track([], 0)
     for beat in range(timesig-1):
         instrument = rand.choice(structure)
-        track.append(instrument)
-    track.insert(index, commonvalue)
+        track.addtocontents(instrument)
+    track.insertintocontents(index, commonvalue)
     return track
 
 
