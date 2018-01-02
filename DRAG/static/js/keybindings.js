@@ -2,10 +2,6 @@ $(document).ready(function () {
    var tracks = $(".track").length;
    addkeybindings(tracks);
 
-   $(".track").focus(function(){
-      console.log(document.activeElement);
-   });
-
    function addkeybindings(tracks) {
         for (var i = 0; i < tracks; i++) {
             (function (i) {
