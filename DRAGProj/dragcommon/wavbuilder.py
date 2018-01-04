@@ -7,14 +7,17 @@ import DRAGProj.mappers.drummapper as dm
 def openwav(filepath):
     return AudioSegment.from_wav(filepath)
 
-def mapinput(candidate, bpm, outputfile, systempath):
+def mapinput(candidate, bpm, outputfile, path):
     output = AudioSegment.silent(duration=100)
     gap = AudioSegment.silent(duration=beatoffset(bpm))
     for instrument in candidate.content:
         file = dm.drummapper[instrument]
-        audio = openwav(systempath + "/DRAG/static/wavfiles/" + file)
+        audio = openwav(path + file)
         output = output.append(gap)
         output = output.append(audio)
+    beginaudiothread(output, outputfile, gap)
+
+def beginaudiothread(output, outputfile, gap):
     output = output.append(gap)
     thread = AudioThread(output, outputfile)
     thread.start()

@@ -40,7 +40,7 @@ def firstfitness(request):
     context = dc.context
     try:
         bpm = context["bpm"]
-        population = gr.initiliasepopulation(context["input"], context["genre"], bpm)
+        population = gr.initiliasepopulation(context["input"], context["genre"])
         gr.processinput(population, bpm)
         context["fitnessform"] = FitnessForm(size=context["populationsize"])
         context["population"] = population

@@ -5,7 +5,7 @@ class Track:
         self.content = content
         self.fitness = fitness
         self.idmethod = idmethod
-        self.hash = 0
+        self.hasChanged = False
 
         if idmethod == None:
             self.__incrementidcounter()
@@ -22,3 +22,8 @@ class Track:
 
     def __incrementidcounter(self):
         Track.idcounter += 1
+
+    @staticmethod
+    def pairchanged(tracklist):
+        for track in tracklist:
+            track.hasChanged = True

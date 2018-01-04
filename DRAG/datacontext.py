@@ -12,5 +12,6 @@ context = {
     "mutaprob": 0.4,
     "is_home": False,
     "systempath": os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
+    "wavpath": "/DRAG/static/wavfiles/",
     "presets": [[7, 1, 11, 1, 7, 1, 11, 1], [7, 7, 11, 1, 1, 11, 1, 1], [7, 7, 11, 7, 7, 7, 11, 1]]
 }

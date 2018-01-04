@@ -7,6 +7,7 @@ def doselection(population, tournamentsize):
     parents = []
     for selections in range(len(population)):
         parent = tournamentselect(population, tournamentsize)
+        parent.hasChanged = False
         parents.append(parent)
     return parents
 

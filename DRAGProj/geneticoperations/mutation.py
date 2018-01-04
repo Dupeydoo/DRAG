@@ -8,6 +8,7 @@ def domutation(children, mutaprob):
     mutatedchildren = []
     for child in children:
         if random.random() < mutaprob:
+            child.hasChanged = True
             mutatedchildren.append(mutate(child))
 
         else:

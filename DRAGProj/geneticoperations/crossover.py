@@ -9,6 +9,7 @@ def docrossover(parents, crossprob):
     for parentone, parenttwo in zip(*[iter(parents)] * 2):
         pair = [parentone, parenttwo]
         if random.random() < crossprob:
+            Track.pairchanged(pair)
             if random.random() < singlepointprob:
                 children += singlepointcrossover(pair)
 
@@ -17,7 +18,6 @@ def docrossover(parents, crossprob):
         else:
             children += pair
     return children
-
 
 def singlepointcrossover(parents):
     randindex = random.randrange(0, len(parents[0].content))
@@ -43,7 +43,8 @@ def recombine(parents, index):
 def multirecombine(parents, idxone, idxtwo):
     firstparent = parents[0].content
     secondparent = parents[1].content
-    firstchild = Track((firstparent[:idxone] + secondparent[idxone:idxtwo] + firstparent[idxtwo:]), parents[0].fitness,
+    firstchild = Track((firstparent[:idxone] + secondparent[idxone:idxtwo] + firstparent[idxtwo:]),
+                       parents[0].fitness,
                        parents[0].trackid)
     secondchild = Track((secondparent[:idxone] + firstparent[idxone:idxtwo] + secondparent[idxtwo:]),
                         parents[1].fitness,
