@@ -55,7 +55,8 @@ ROOT_URLCONF = 'DRAG.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'DRAGProj/templates/DRAG')]
+        'DIRS': [os.path.join(BASE_DIR, 'DRAGProj/templates/DRAG'),
+                 os.path.join(BASE_DIR, 'DRAGNN/templates/DRAGNN')]
         ,
         'APP_DIRS': True,
         'OPTIONS': {

@@ -22,7 +22,8 @@
     <option name="TEMPLATE_CONFIGURATION" value="Django" />
     <option name="TEMPLATE_FOLDERS">
       <list>
-        <option value="$MODULE_DIR$/../DRAG\DRAGProj/templates/DRAG" />
+        <option value="$MODULE_DIR$/DRAGProj/templates/DRAG" />
+        <option value="$MODULE_DIR$/DRAGNN/templates/DRAGNN" />
       </list>
     </option>
   </component>

@@ -81,14 +81,6 @@ def preset(request):
 
     return render(request, 'DRAG/startdiversify.html')
 
-def neuralnetwork(request):
-    context = dc.context
-    try:
-        bpm = context["bpm"]
-    except KeyError as k:
-        return pe.catchkeyerror(request)
-    return render(request, 'DRAG/neuralnetwork.html', context)
-
 def error(request):
     return render(request, 'DRAG/error.html', dc.context)
 
