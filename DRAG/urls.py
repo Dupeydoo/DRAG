@@ -4,10 +4,10 @@ from django.urls import path, include
 """
 Django module containing url routing for the DRAG application.
 
-    author:
+    Author:
         James
         
-    version:
+    Version:
         1.1.0
 """
 
@@ -17,5 +17,5 @@ urlpatterns = [
     path('Diversify/', include('DRAGProj.urls'))
 ]
 """
-list: contains the controller patterns for different typed urls.
+urlpatterns (:obj:`list`): contains the controller patterns for different typed urls.
 """

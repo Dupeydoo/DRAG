@@ -27,5 +27,5 @@ context = {
     "presets": [[7, 1, 11, 1, 7, 1, 11, 1], [7, 7, 11, 1, 1, 11, 1, 1], [7, 7, 11, 7, 7, 7, 11, 1]]
 }
 """
-dict: Context containing algorithm parameters.
+context (:obj:`dict`): Context containing algorithm parameters.
 """
