@@ -24,10 +24,10 @@ def openwav(filepath):
     open a wav file.
 
     Args:
-        filepath (:obj:str): A string representing the file to open.
+        filepath (:obj:`str`): A string representing the file to open.
 
     Returns:
-        :obj:AudioSegment: An AudioSegment object containing the file.
+        :obj:`AudioSegment`: An AudioSegment object containing the file.
     """
     return AudioSegment.from_wav(filepath)
 
@@ -37,10 +37,10 @@ def mapinput(candidate, bpm, outputfile, path):
     Builds a wav track to write to the staticfiles dir.
 
     Args:
-        candidate (:obj:Track): A Track object to use to write the file.
+        candidate (:obj:`Track`): A Track object to use to write the file.
         bpm (int): A number representing the beats per minute or tempo of the track.
-        outputfile (:obj:str) : A string representing the file to write to.
-        path (:obj:str): A string representing a combination of the website and staticfiles directories.
+        outputfile (:obj:`str`) : A string representing the file to write to.
+        path (:obj:`str`): A string representing a combination of the website and staticfiles directories.
 
     See:
         DRAGProj.mappers.drummapper
@@ -60,9 +60,9 @@ def beginaudiothread(output, outputfile, gap):
     Begins an AudioThread and thus, the writing process of a wav file.
 
     Args:
-        output (:obj:AudioSegment): The AudioSegment object representing the track to be written.
-        outputfile (:obj:str) : A string representing the file to write to.
-        gap (:obj:AudioSegment): An AudioSegment object of a specified silence duration.
+        output (:obj:`AudioSegment`): The AudioSegment object representing the track to be written.
+        outputfile (:obj:`str`) : A string representing the file to write to.
+        gap (:obj:`AudioSegment`): An AudioSegment object of a specified silence duration.
 
     See:
         DRAGProj.dragcommon.audiothread
@@ -91,8 +91,8 @@ def clearwavcandidates(wavdirectory, string):
     A function to clear out old wav files from a previous generation.
 
     Args:
-        wavdirectory (:obj:str): A string representing the directory to clear of candidates.
-        string (:obj:str): A string to match against files in the directory for deletion.
+        wavdirectory (:obj:`str`): A string representing the directory to clear of candidates.
+        string (:obj:`str`): A string to match against files in the directory for deletion.
 
     See:
         os

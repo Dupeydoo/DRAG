@@ -38,9 +38,9 @@ def catchcriticalerror(request):
     Represents a critical generic errors.
 
     Args:
-        request (:obj:Request): The request object associated with the page.
+        request (:obj:`Request`): The request object associated with the page.
 
     Returns:
-        :obj:HTTPResponse: A HTTPResponse object to the given page with the request and context.
+        :obj:`HTTPResponse`: A HTTPResponse object to the given page with the request and context.
     """
     return render(request, "DRAG/error.html", context)

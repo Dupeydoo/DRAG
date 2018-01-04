@@ -13,7 +13,7 @@ class Track:
     A class to represent a music track within DRAG.
 
     Attributes:
-        content (:obj:list of int): The tracks encoding.
+        content (:obj:`list` of int): The tracks encoding.
         fitness (int): A value between 0 and 10 representing the users satisfaction.
         idmethod (:obj:): Either a None when not specified, or an int when specified.
         haschanged (bool): False when unchanged from last generation.
@@ -26,7 +26,7 @@ class Track:
         Constructor for Track class.
 
         Args:
-            content (:obj:list of int): The tracks encoding.
+            content (:obj:`list` of int): The tracks encoding.
             fitness (int): A value between 0 and 10 representing the users satisfaction.
             idmethod (:obj:): Either a None when not specified, or a readable string when specified.
         """
@@ -73,7 +73,7 @@ class Track:
         Static method to take a pair of tracks and change haschanged.
 
         Args:
-            tracklist (:obj:list of :obj:Track): A list (usually a pair) of tracks.
+            tracklist (:obj:`list` of :obj:`Track`): A list (usually a pair) of tracks.
         """
         for track in tracklist:
             track.hasChanged = True

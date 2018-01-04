@@ -15,6 +15,7 @@ constructing the algorithm input.
         DRAGProj.views
 """
 
+
 def constructinput(cleaned_data):
     """
     A function to collect the clean form data and
@@ -38,6 +39,7 @@ def constructinput(cleaned_data):
     input.append(cleaned_data["beateight"])
     return input
 
+
 def getpreset(index):
     """
     An accessor function to get a preset based on its index.
@@ -46,7 +48,7 @@ def getpreset(index):
         index (int): Index of preset.
 
     Returns:
-        :obj:list of int: The preset list.
+        :obj:`list` of int: The preset list.
 
     See:
         DRAG.datacontext

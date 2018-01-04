@@ -25,7 +25,7 @@ def performgeneration(form):
     Performs a normal generation of the genetic algorithm.
 
     Args:
-        form (:obj:Form): The fitness audio form.
+        form (:obj:`Form`): The fitness audio form.
     See:
         DRAG.datacontext
         DRAGProg.geneticrunner
@@ -44,12 +44,12 @@ def gatherfitnessinput(dict, population):
     them to the respective population members.
 
     Args:
-        dict (:obj:generator of int): The generator object to access fitnesses from.
-        population (:obj:list of :obj:Track): The Track population.
+        dict (:obj:`generator` of int): The generator object to access fitnesses from.
+        population (:obj:`list` of :obj:`Track`): The Track population.
     """
-    for counter, fitness in enumerate(dict):   # enumerate exposes a counter while allowing normal generator iteration.
+    for counter, fitness in enumerate(dict):  # enumerate exposes a counter while allowing normal generator iteration.
         popmember = population[counter]
-        popmember.fitness = fitness[1] # get the fitness value and assign to a population member.
+        popmember.fitness = fitness[1]  # get the fitness value and assign to a population member.
 
 
 def generationcheck(currentgeneration, maxgeneration):

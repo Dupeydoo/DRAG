@@ -1,5 +1,19 @@
 from django import forms
 
+"""
+A module containing the form class and recipes to make the custom beat input form.
+
+    Author:
+        James
+        
+    Version:
+        1.0.0
+        
+    See:
+        forms.Form,
+        DRAGProj.views
+"""
+
 instrumentchoices = (
     (1, "Hi-Hat"),
     (2, "Snare Drum"),
@@ -18,15 +32,30 @@ instrumentchoices = (
     (15, "Kick and Snare"),
     (16, "Play Nothing")
 )
+"""
+instrumentchoices (:obj:`tuple` of :obj:`tuple`): The choices to be visible on the input dropdowns.
+"""
 
 genres = [
     ("Rock", "Rock"),
     ("Jazz", "Jazz"),
     ("Blues", "Blues")
 ]
+"""
+genres (:obj:`list` of :obj:`tuple`): The choices of genre for the input dropdown.
+"""
 
 
 class CustomInputForm(forms.Form):
+    """
+    The CustomInputForm class has fields for each beat of a 2 bar crotchet 4:4 timesig track
+    where the user may create a custom track from a selection of instruments.
+
+    Attributes:
+        beat + number (:obj:`TypedChoiceField`): Each beat has its own dropdown object using a HTML5 Select.
+        bpm (:obj:`IntegerField`): An object representing a HTML5 number input for the bpm.
+        genre (:obj:`ChoiceField`): An object representing a HTML5 dropdown for choosing track genre.
+    """
     beatone = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
     beattwo = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
     beatthree = forms.TypedChoiceField(choices=instrumentchoices, coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
