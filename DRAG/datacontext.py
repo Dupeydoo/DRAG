@@ -15,8 +15,8 @@ context = {
     "inputrange": range(8),
     "manualgenerations": 10,
     "currentgeneration": 1,
-    "populationsize": 10,
-    "copyratio": 0.4,
+    "populationsize": 20,
+    "copyratio": 0.2,
     "tournamentsize": 5,
     "timesignature": 8,  # two bars at 4:4
     "crossprob": 0.5,

@@ -8,6 +8,7 @@ This module performs replacement of the population using a simple generational a
         1.0.0
 """
 
+
 def doreplacement(currentpopulation, children):
     """
     Performs replacement.
@@ -23,6 +24,3 @@ def doreplacement(currentpopulation, children):
     for candidate in range(len(newpopulation)):
         newpopulation[candidate] = children[candidate]
     return newpopulation
-
-
-

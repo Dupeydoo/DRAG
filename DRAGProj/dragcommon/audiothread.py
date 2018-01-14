@@ -1,5 +1,4 @@
 import threading
-from pydub import AudioSegment
 
 """
 A module which houses the AudioThread class.

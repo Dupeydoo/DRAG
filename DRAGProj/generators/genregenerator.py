@@ -66,7 +66,7 @@ def generatejazztracks(population, tracknumber, timesig):
     return population
 
 
-def buildtrack(structure, timesig, index, commonvalue=None):
+def buildtrack(structure, timesig, index, commonvalue):
     """
     Builds a track using the structure and an index to insert a common value at.
 
@@ -74,7 +74,7 @@ def buildtrack(structure, timesig, index, commonvalue=None):
         structure (:obj:`list` of int): A list of genre structural instruments.
         timesig (int): The time signature used in track generation.
         index (int): The index to insert a common value at.
-        commonvalue(:obj:): If specified takes the value of a common instrument used.
+        commonvalue(:obj:): Takes the value of a common instrument used.
 
     Returns:
         track (:obj:Track): The constructed track.
