@@ -27,7 +27,7 @@ def generaterocktracks(population, tracknumber, timesig):
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
-    structure = [1, 5, 6, 7, 8, 9, 10, 11]  # Common rock rhythm instruments
+    structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]  # Common rock rhythm instruments
     population = generatetracks(population, tracknumber, structure, timesig, 0, 7)
     return population
 

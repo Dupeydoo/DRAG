@@ -63,7 +63,7 @@ def initiliasepopulation(inputlist, genre):
     Returns:
         :obj:`list` of :obj:`Track`: The initial population.
     """
-    if dm.iseven(populationsize) and populationsize <= 0:  # Genetic crossover takes place on pairs.
+    if dm.iseven(populationsize) and populationsize >= 0:  # Genetic crossover takes place on pairs.
         return pg.generatepopulation(populationsize, copyratio, inputlist, genre, timesignature)
     else:
         popsize = 20  # If incorrect input is set for whatever reason, assume a default.

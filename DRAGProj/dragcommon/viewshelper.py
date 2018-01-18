@@ -1,9 +1,8 @@
 from django.http import HttpResponseRedirect
 
+import DRAGNN.storage.datastore as ds
 import DRAGProj.geneticrunner as gr
 import DRAG.datacontext as dc
-
-from DRAGProj.dragcommon.track import Track
 
 """
 This module provides assisting functions to views.py to keep the views logic
@@ -32,6 +31,7 @@ def performgeneration(form):
     """
     context = dc.context
     gatherfitnessinput(form.collectfitnesses(), context["population"])
+    ds.storeData(context["population"], ds.getdatastore())  # Write data to HDF5 for neural net later
     population = gr.performgenetics(context["population"])  # start the genetic operations.
     context["population"] = population
     gr.clearwavfiles()
