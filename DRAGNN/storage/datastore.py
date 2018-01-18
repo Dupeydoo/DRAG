@@ -34,6 +34,12 @@ def converttonp(tracks, fitnesses):
 def getdatastore():
     return store
 
+def deletedatastore(path):
+    dstore = getdatastore()
+    dstore.remove("track")
+    dstore.remove("fitness")
+
+
 
 if __name__ == "__main__":
     lst = [1, 2, 3, 4, 5, 6, 7, 8]
