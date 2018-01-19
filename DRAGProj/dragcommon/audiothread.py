@@ -37,3 +37,9 @@ class AudioThread(threading.Thread):
         """
         writewav = self.output.export(self.outputfile, format="wav")  # Write the wav file to the static wavfiles dir.
 
+    @staticmethod
+    def finishthreads():
+        threads = threading.enumerate()
+        for thread in threads:
+            thread.join()
+

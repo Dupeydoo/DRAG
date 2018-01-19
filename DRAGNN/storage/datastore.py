@@ -4,7 +4,8 @@ import DRAG.datacontext as dc
 
 context = dc.context
 storepath = context["systempath"] + "/DRAGNN/storage/"
-store = pd.HDFStore(storepath + "data.h5")
+testpath = context["systempath"] + "/DRAG/static/TestData/"
+store = pd.HDFStore(testpath + "data.h5")
 
 
 def storeData(population, dstore):
@@ -19,7 +20,7 @@ def storeData(population, dstore):
 
 
 def readData(timesig, dstore):
-    content = list(dstore.select("content"))
+    content = list(dstore.select("track"))
     tracks = [content[i:i + timesig] for i in range(0, len(content), timesig)]
     fitnesses = list(dstore.select("fitness"))
     return converttonp(tracks, fitnesses)

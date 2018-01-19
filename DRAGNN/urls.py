@@ -2,5 +2,6 @@ from django.urls import path
 from . import views
 
 urlpatterns = [
-    path('NeuralNetwork/', views.neuralnetwork, name='neuralnet')
+    path('MachineLearn/', views.machinelearn, name='machinelearning'),
+    path('Finished/', views.finished, name='finish')
 ]

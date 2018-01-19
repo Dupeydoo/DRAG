@@ -63,5 +63,4 @@ def generationcheck(currentgeneration, maxgeneration):
     Returns:
         HttpResponseRedirect (:obj:HTTPResponseRedirect): A redirect object to route to a different url.
     """
-    if currentgeneration == maxgeneration:
-        return HttpResponseRedirect('/NeuralNetwork')  # Redirect to the Machine Learning app, DRAGNN.
+    return currentgeneration == maxgeneration

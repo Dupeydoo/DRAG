@@ -70,7 +70,8 @@ def fitness(request):
     else:
         try:  # Here we check to see if the user is accessing the page correctly.
             bpm = context["bpm"]
-            vh.generationcheck(context["currentgeneration"], context["manualgenerations"])  # See if its time to ANN.
+            if vh.generationcheck(context["currentgeneration"], context["manualgenerations"]):  # See if its time to ANN.
+                return HttpResponseRedirect("/MachineLearn")
             form = FitnessForm(size=context["populationsize"])
             context["currentgeneration"] = context["currentgeneration"] + 1  # increment the generations.
 

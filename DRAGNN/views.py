@@ -2,12 +2,18 @@ from django.shortcuts import render
 from DRAG.datacontext import context
 
 from DRAGProj.dragcommon import pageerror as pe
-from DRAGNN.machinelearning import linearregressiontest
+from DRAGNN.machinelearning import regression
 
 
-def neuralnetwork(request):
+def machinelearn(request):
     try:
-        linearregressiontest.linearregression()
-    except:
+        regression.linearregression()
+    except KeyError as k:
         return pe.catchkeyerror(request)
-    return render(request, "neuralnetwork.html", context)
+    return render(request, "machinelearn.html", context)
+
+
+def finished(request):
+    if context["currentgeneration"] != context["manualgenerations"] + context["automatedgenerations"]:
+        return pe.catchcriticalerror(request)
+    return render(request, "finish.html", context)
