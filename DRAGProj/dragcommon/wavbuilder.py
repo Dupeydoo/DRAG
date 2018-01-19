@@ -18,61 +18,61 @@ and manages them.
 """
 
 
-def openwav(filepath):
+def open_wav(file_path):
     """
     A method that utilises the AudioSegment class to
     open a wav file.
 
     Args:
-        filepath (:obj:`str`): A string representing the file to open.
+        file_path (:obj:`str`): A string representing the file to open.
 
     Returns:
         :obj:`AudioSegment`: An AudioSegment object containing the file.
     """
-    return AudioSegment.from_wav(filepath)
+    return AudioSegment.from_wav(file_path)
 
 
-def mapinput(candidate, bpm, outputfile, path):
+def map_input(candidate, bpm, output_file, path):
     """
     Builds a wav track to write to the staticfiles dir.
 
     Args:
         candidate (:obj:`Track`): A Track object to use to write the file.
         bpm (int): A number representing the beats per minute or tempo of the track.
-        outputfile (:obj:`str`) : A string representing the file to write to.
+        output_file (:obj:`str`) : A string representing the file to write to.
         path (:obj:`str`): A string representing a combination of the website and staticfiles directories.
 
     See:
         DRAGProj.mappers.drummapper
     """
     output = AudioSegment.silent(duration=100)  # initialise the track output
-    gap = AudioSegment.silent(duration=beatoffset(bpm))  # create a gap based on provided bpm.
+    gap = AudioSegment.silent(duration=beat_offset(bpm))  # create a gap based on provided bpm.
     for instrument in candidate.content:
-        file = dm.drummapper[instrument]  # get the correlating instrument to the int value.
-        audio = openwav(path + file)
+        file = dm.drum_mapper[instrument]  # get the correlating instrument to the int value.
+        audio = open_wav(path + file)
         output = output.append(gap)  # start with a small gap to reduce edge fuzziness.
         output = output.append(audio)  # append the audio file to the track.
-    beginaudiothread(output, outputfile, gap)
+    begin_audio_thread(output, output_file, gap)
 
 
-def beginaudiothread(output, outputfile, gap):
+def begin_audio_thread(output, output_file, gap):
     """
     Begins an AudioThread and thus, the writing process of a wav file.
 
     Args:
         output (:obj:`AudioSegment`): The AudioSegment object representing the track to be written.
-        outputfile (:obj:`str`) : A string representing the file to write to.
+        output_file (:obj:`str`) : A string representing the file to write to.
         gap (:obj:`AudioSegment`): An AudioSegment object of a specified silence duration.
 
     See:
         DRAGProj.dragcommon.audiothread
     """
     output = output.append(gap)  # append a gap to reduce fuzziness.
-    thread = AudioThread(output, outputfile)  # create an AudioThread to write the track.
+    thread = AudioThread(output, output_file)  # create an AudioThread to write the track.
     thread.start()
 
 
-def beatoffset(bpm):
+def beat_offset(bpm):
     """
     A function to return pauses between component wav files.
     Doing so allows adjustment of tempo to over 300 bpm.
@@ -86,17 +86,17 @@ def beatoffset(bpm):
     return 60000 / bpm  # 60000 milliseconds are in a minute
 
 
-def clearwavcandidates(wavdirectory, string):
+def clear_wav_candidates(wav_directory, string):
     """
     A function to clear out old wav files from a previous generation.
 
     Args:
-        wavdirectory (:obj:`str`): A string representing the directory to clear of candidates.
+        wav_directory (:obj:`str`): A string representing the directory to clear of candidates.
         string (:obj:`str`): A string to match against files in the directory for deletion.
 
     See:
         os
     """
-    for file in os.listdir(wavdirectory):
+    for file in os.listdir(wav_directory):
         if string in file:
-            os.remove(os.path.join(wavdirectory, file))
+            os.remove(os.path.join(wav_directory, file))

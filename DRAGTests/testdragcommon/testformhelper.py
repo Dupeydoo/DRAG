@@ -6,23 +6,23 @@ from DRAGProj.dragcommon import formhelper as fh
 class TestFormHelper(unittest.TestCase):
     def setUp(self):
         self.clean = {
-            "beatone": 1,
-            "beattwo": 1,
-            "beatthree": 1,
-            "beatfour": 1,
-            "beatfive": 1,
-            "beatsix": 1,
-            "beatseven": 1,
-            "beateight": 1
+            "beat_one": 1,
+            "beat_two": 1,
+            "beat_three": 1,
+            "beat_four": 1,
+            "beat_five": 1,
+            "beat_six": 1,
+            "beat_seven": 1,
+            "beat_eight": 1
         }
         self.context = context
 
-    def testconstructinput(self):
-        self.assertEqual([1, 1, 1, 1, 1, 1, 1, 1], fh.constructinput(self.clean),
+    def test_construct_input(self):
+        self.assertEqual([1, 1, 1, 1, 1, 1, 1, 1], fh.construct_input(self.clean),
                          "The input should be [1,1,1,1,1,1,1,1]")
 
-    def testgetpreset(self):
-        self.assertEqual([7, 7, 11, 1, 1, 11, 1, 1], fh.getpreset(1), "Preset should be [7,7,11,1,1,11,1,1]")
+    def test_get_preset(self):
+        self.assertEqual([7, 7, 11, 1, 1, 11, 1, 1], fh.get_preset(1), "Preset should be [7,7,11,1,1,11,1,1]")
 
     def tearDown(self):
         del self.clean, self.context

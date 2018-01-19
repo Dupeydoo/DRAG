@@ -5,12 +5,12 @@ from DRAGTests.mock.mockpopulation import MockPopulation
 
 class TestGenerationalReplacement(unittest.TestCase):
     def setUp(self):
-        self.oldpopulation = MockPopulation().population
-        self.newpopulation = MockPopulation().childpopulation
+        self.old_population = MockPopulation().population
+        self.new_population = MockPopulation().child_population
 
-    def testdoreplacement(self):
-        population = gr.doreplacement(self.oldpopulation, self.newpopulation)
-        self.assertNotEqual(population[0].content, self.oldpopulation[0].content)
+    def test_do_replacement(self):
+        population = gr.do_replacement(self.old_population, self.new_population)
+        self.assertNotEqual(population[0].content, self.old_population[0].content)
 
     def tearDown(self):
-        del self.oldpopulation, self.newpopulation
+        del self.old_population, self.new_population

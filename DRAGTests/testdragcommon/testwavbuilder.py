@@ -6,16 +6,16 @@ from DRAG import datacontext as dc
 class TestWavBuilder(unittest.TestCase):
     def setUp(self):
         context = dc.context
-        self.wavpath = context["systempath"] + context["wavpath"]
-        self.path = self.wavpath + "test.wav"
+        self.wav_path = context["systempath"] + context["wavpath"]
+        self.path = self.wav_path + "test.wav"
         self.bpm = 200
 
-    def testopenwav(self):
-        file = wb.openwav(self.path)
+    def test_open_wav(self):
+        file = wb.open_wav(self.path)
         self.assertEqual(1.0, file.duration_seconds, "Test.wav was not opened correctly!")
 
-    def testbeatoffset(self):
-        self.assertEqual(300, wb.beatoffset(200), "The beat offset was calculated incorrectly!")
+    def test_beat_offset(self):
+        self.assertEqual(300, wb.beat_offset(200), "The beat offset was calculated incorrectly!")
 
     def tearDown(self):
-        del self.wavpath, self.path, self.bpm
+        del self.wav_path, self.path, self.bpm

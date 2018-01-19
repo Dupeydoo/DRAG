@@ -4,18 +4,18 @@ from DRAGProj.forms.presetform import PresetForm
 
 class TestPresetForm(TestCase):
     def setUp(self):
-        self.formdata = {
+        self.form_data = {
             "preset": 1,
             "bpm": 200
         }
-        self.presetform = PresetForm(data=self.formdata)
+        self.preset_form = PresetForm(data=self.form_data)
 
-    def testform(self):
-        self.assertTrue(self.presetform.is_valid(), "The preset form is invalid!")
+    def test_form(self):
+        self.assertTrue(self.preset_form.is_valid(), "The preset form is invalid!")
 
-    def testformdata(self):
-        self.presetform.is_valid()
-        self.assertEqual(200, self.presetform.cleaned_data["bpm"], "The form data is invalid!")
+    def test_form_data(self):
+        self.preset_form.is_valid()
+        self.assertEqual(200, self.preset_form.cleaned_data["bpm"], "The form data is invalid!")
 
     def tearDown(self):
-        del self.formdata, self.presetform
+        del self.form_data, self.preset_form

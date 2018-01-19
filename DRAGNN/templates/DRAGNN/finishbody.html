@@ -9,8 +9,8 @@
         {% for track in population %}
             <div class="col-md-3">
                 <h5>Track {{ forloop.counter }}:</h5>
-                <audio id="{{ "track"|strconcat:forloop.counter0 }}" class="track" controls>
-                    <source src="{{ "/DRAG/static/wavfiles/"|strconcat:"candidate"|strconcat:forloop.counter0|strconcat:".wav" }}"
+                <audio id="{{ "track"|str_concat:forloop.counter0 }}" class="track" controls>
+                    <source src="{{ "/DRAG/static/wavfiles/"|str_concat:"candidate"|str_concat:forloop.counter0|str_concat:".wav" }}"
                             type="audio/wav">
                 </audio>
             </div>

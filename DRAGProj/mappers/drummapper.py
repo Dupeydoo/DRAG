@@ -10,7 +10,7 @@ can be used to located the wav file.
         1.0.0
 """
 
-drummapper = {
+drum_mapper = {
     1: "HHat.wav",
     2: "HHatKick.wav",
     3: "HHatSnare.wav",
@@ -29,10 +29,11 @@ drummapper = {
     16: "HHatKickSnareHTom.wav"
 }
 """
-drummapper (:obj:`dict` of int keys and :obj:`str` values): The drummapper dictionary.
+drum_mapper (:obj:`dict` of int keys and :obj:`str` values): The drum_mapper dictionary.
 """
 
-def isSymbal(drum):
+
+def is_cymbal(drum):
     """
     Checks the drum to see if it is a symbal, namely a HiHat.
 
@@ -42,4 +43,4 @@ def isSymbal(drum):
     Returns:
         bool: True if it is a symbal, False if not.
     """
-    return "HHat" in drummapper[drum]
+    return "HHat" in drum_mapper[drum]

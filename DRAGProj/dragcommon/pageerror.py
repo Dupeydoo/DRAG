@@ -13,27 +13,27 @@ accessed directly by URL.
 """
 
 
-def catchkeyerror(request):
+def catch_key_error(request):
     """
     Represents an error when trying to access a page with required input.
 
     Args/Returns:
-        See catchcriticalerror(request)
+        See catch_critical_error(request)
     """
-    return catchcriticalerror(request)
+    return catch_critical_error(request)
 
 
-def catchpreseterror(request):
+def catch_preset_error(request):
     """
     Represents an error when trying to access the preset intermediary.
 
     Args/Returns:
-        See catchcriticalerror(request)
+        See catch_critical_error(request)
     """
-    return catchcriticalerror(request)
+    return catch_critical_error(request)
 
 
-def catchcriticalerror(request):
+def catch_critical_error(request):
     """
     Represents a critical generic errors.
 

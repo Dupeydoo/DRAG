@@ -9,7 +9,7 @@ class MockAudioThread(threading.Thread):
         context = dc.context
         path = context["systempath"] + context["wavpath"] + "test.wav"
         self.output = AudioSegment.silent(duration=1000)
-        self.outputfile = path
+        self.output_file = path
 
     def run(self):
-        writewav = self.output.export(self.outputfile, format="wav")
+        write_wav = self.output.export(self.output_file, format="wav")

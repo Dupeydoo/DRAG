@@ -9,7 +9,7 @@ A module containing generic mathematics functions.
 """
 
 
-def iseven(number):
+def is_even(number):
     """
     Determines whether the argument is an even number.
 

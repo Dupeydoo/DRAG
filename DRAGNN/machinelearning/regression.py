@@ -8,15 +8,15 @@ from DRAGNN.machinelearning import automategeneration as ag
 from DRAG.datacontext import context
 
 
-def linearregression():
-    timesig = context["timesignature"]
-    mldata = ds.readData(timesig, ds.getdatastore())
-    splitdata(mldata)
+def linear_regression():
+    time_sig = context["timesignature"]
+    ml_data = ds.read_data(time_sig, ds.get_data_store())
+    split_data(ml_data)
 
 
-def splitdata(mldata):
-    data = mldata[0]
-    fitness = mldata[1].ravel()
+def split_data(ml_data):
+    data = ml_data[0]
+    fitness = ml_data[1].ravel()
 
     # data_new = SelectKBest(chi2, k=4).fit_transform(data, fitness)
     # data = np.tile(data, (10, 1))
@@ -27,18 +27,18 @@ def splitdata(mldata):
 
     testing_data = data[-20:]
     testing_fitness = fitness[-20:]
-    performregression(training_data, training_fitness, testing_data, testing_fitness)
+    perform_regression(training_data, training_fitness, testing_data, testing_fitness)
 
 
-def performregression(training_data, training_fitness, testing_data, testing_fitness):
+def perform_regression(training_data, training_fitness, testing_data, testing_fitness):
     regr = linear_model.HuberRegressor()
     regr.fit(training_data, training_fitness)
-    logregressionmodel(regr, testing_data, testing_fitness)
+    log_regression_model(regr, testing_data, testing_fitness)
     if 1 == 0:
         ag.run(regr)
 
 
-def logregressionmodel(model, testing_data, testing_fitness):
+def log_regression_model(model, testing_data, testing_fitness):
     print("Regression Coefficients:\n")
     print(model.coef_)
     msq = np.mean((model.predict(testing_data) - testing_fitness)) ** 2
@@ -50,4 +50,4 @@ def logregressionmodel(model, testing_data, testing_fitness):
 
 
 if __name__ == "__main__":
-    linearregression()
+    linear_regression()

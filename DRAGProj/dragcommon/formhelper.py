@@ -16,7 +16,7 @@ constructing the algorithm input.
 """
 
 
-def constructinput(cleaned_data):
+def construct_input(cleaned_data):
     """
     A function to collect the clean form data and
     populate a list with it.
@@ -25,22 +25,22 @@ def constructinput(cleaned_data):
         cleaned_data (:obj:`dict` of :obj:`str` keys and int values): The valid form data.
 
     Returns:
-        input (:obj:`list` of int): The input list to the algorithm.
+        input_list (:obj:`list` of int): The input list to the algorithm.
 
     """
-    input = []
-    input.append(cleaned_data["beatone"])
-    input.append(cleaned_data["beattwo"])
-    input.append(cleaned_data["beatthree"])
-    input.append(cleaned_data["beatfour"])
-    input.append(cleaned_data["beatfive"])
-    input.append(cleaned_data["beatsix"])
-    input.append(cleaned_data["beatseven"])
-    input.append(cleaned_data["beateight"])
-    return input
+    input_list = []
+    input_list.append(cleaned_data["beat_one"])
+    input_list.append(cleaned_data["beat_two"])
+    input_list.append(cleaned_data["beat_three"])
+    input_list.append(cleaned_data["beat_four"])
+    input_list.append(cleaned_data["beat_five"])
+    input_list.append(cleaned_data["beat_six"])
+    input_list.append(cleaned_data["beat_seven"])
+    input_list.append(cleaned_data["beat_eight"])
+    return input_list
 
 
-def getpreset(index):
+def get_preset(index):
     """
     An accessor function to get a preset based on its index.
 

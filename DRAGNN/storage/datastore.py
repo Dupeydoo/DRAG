@@ -3,43 +3,43 @@ import numpy as np
 import DRAG.datacontext as dc
 
 context = dc.context
-storepath = context["systempath"] + "/DRAGNN/storage/"
-testpath = context["systempath"] + "/DRAG/static/TestData/"
-store = pd.HDFStore(testpath + "data.h5")
+store_path = context["systempath"] + "/DRAGNN/storage/"
+test_path = context["systempath"] + "/DRAG/static/testdata/"
+store = pd.HDFStore(test_path + "data.h5")
 
 
-def storeData(population, dstore):
+def store_data(population, d_store):
     fitness = []
     for track in population:
         content = pd.Series(track.content)
-        dstore.append("track", content)
+        d_store.append("track", content)
         fitness.append(track.fitness)
 
     fitness = pd.Series(fitness)
     store.append("fitness", fitness)
 
 
-def readData(timesig, dstore):
-    content = list(dstore.select("track"))
-    tracks = [content[i:i + timesig] for i in range(0, len(content), timesig)]
-    fitnesses = list(dstore.select("fitness"))
-    return converttonp(tracks, fitnesses)
+def read_data(time_sig, d_store):
+    content = list(d_store.select("track"))
+    tracks = [content[i:i + time_sig] for i in range(0, len(content), time_sig)]
+    fitnesses = list(d_store.select("fitness"))
+    return convert_to_np(tracks, fitnesses)
 
 
-def converttonp(tracks, fitnesses):
-    tracknp = np.array(tracks)
-    fitnessnp = np.array(fitnesses).reshape(len(fitnesses), 1)
-    return tracknp, fitnessnp
+def convert_to_np(tracks, fitnesses):
+    track_np = np.array(tracks)
+    fitness_np = np.array(fitnesses).reshape(len(fitnesses), 1)
+    return track_np, fitness_np
 
 
-def getdatastore():
+def get_data_store():
     return store
 
-def deletedatastore(path):
-    dstore = getdatastore()
-    dstore.remove("track")
-    dstore.remove("fitness")
 
+def delete_data_store():
+    d_store = get_data_store()
+    d_store.remove("track")
+    d_store.remove("fitness")
 
 
 if __name__ == "__main__":

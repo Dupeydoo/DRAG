@@ -5,24 +5,24 @@ from DRAGProj.generators import genregenerator as gg
 class TestGenreGenerator(unittest.TestCase):
     def setUp(self):
         self.structure = [1, 5, 6, 7, 8, 9, 10, 11]
-        self.timesig = 8
+        self.time_sig = 8
         self.index = 3
-        self.commonvalue = 7
+        self.common_value = 7
 
-    def testbuildtracklength(self):
-        track = gg.buildtrack(self.structure, self.timesig, self.index, self.commonvalue)
-        correctlength = True if len(track.content) == 8 else False
-        self.assertTrue(correctlength)
+    def test_build_track_length(self):
+        track = gg.build_track(self.structure, self.time_sig, self.index, self.common_value)
+        correct_length = True if len(track.content) == 8 else False
+        self.assertTrue(correct_length)
 
-    def testbuildtrackcommon(self):
-        track = gg.buildtrack(self.structure, self.timesig, self.index, self.commonvalue)
-        correctvalue = True if track.content[self.index] == self.commonvalue else False
-        self.assertTrue(correctvalue)
+    def test_build_track_common(self):
+        track = gg.build_track(self.structure, self.time_sig, self.index, self.common_value)
+        correct_value = True if track.content[self.index] == self.common_value else False
+        self.assertTrue(correct_value)
 
-    def testgeneratetracks(self):
-        population = gg.generaterocktracks([], 5, 8)
-        correctlength = True if len(population) == 5 else False
-        self.assertTrue(correctlength)
+    def test_generate_tracks(self):
+        population = gg.generate_rock_tracks([], 5, 8)
+        correct_length = True if len(population) == 5 else False
+        self.assertTrue(correct_length)
 
     def tearDown(self):
-        del self.structure, self.timesig, self.index, self.commonvalue
+        del self.structure, self.time_sig, self.index, self.common_value

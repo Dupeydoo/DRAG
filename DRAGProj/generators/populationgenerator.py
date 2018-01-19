@@ -16,61 +16,62 @@ the genetic algorithm.
 """
 
 
-def generatepopulation(psize, cratio, inputlist, genre, timesig):
+def generate_population(p_size, c_ratio, input_list, genre, time_sig):
     """
     This functions generates the population and returns it to the caller.
 
     Args:
-        psize (int): The size of the population to be generated.
-        cratio (float): The ratio of input copies to use.
-        inputlist (:obj:`list` of int): The list of instrument ints to use as input.
+        p_size (int): The size of the population to be generated.
+        c_ratio (float): The ratio of input copies to use.
+        input_list (:obj:`list` of int): The list of instrument ints to use as input.
         genre (:obj:`str`): The genre of the track to diversify.
-        timesig (int): The time signature used in track generation.
+        time_sig (int): The time signature used in track generation.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
     """
-    copyappend = int(cratio * psize)  # The number of copies to insert into the population.
+    copy_append = int(c_ratio * p_size)  # The number of copies to insert into the population.
     population = []
 
-    population = populatecopies(population, copyappend, inputlist)  # Create the copies.
-    population = generategenretracks(population, (psize - copyappend), genre, timesig)  # Add genre generated remainder.
+    population = populate_copies(population, copy_append, input_list)  # Create the copies.
+    population = generate_genre_tracks(population, (p_size - copy_append), genre,
+                                       time_sig)  # Add genre generated remainder.
     return population
 
 
-def generategenretracks(population, tracknumber, genre, timesig):
+def generate_genre_tracks(population, track_number, genre, time_sig):
     """
     Inspects the genre and generates the required genre tracks.
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        tracknumber (int): The number of tracks to generate.
+        track_number (int): The number of tracks to generate.
         genre (:obj:`str`): The genre of the track to diversify.
-        timesig (int): The time signature used in track generation.
+        time_sig (int): The time signature used in track generation.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     if genre == "Rock":
-        population = gg.generaterocktracks(population, tracknumber, timesig)
+        population = gg.generate_rock_tracks(population, track_number, time_sig)
 
     elif genre == "Blues":
-        population = gg.generatebluestracks(population, tracknumber, timesig)
+        population = gg.generate_blues_tracks(population, track_number, time_sig)
 
     elif genre == "Jazz":
-        population = gg.generatejazztracks(population, tracknumber, timesig)
+        population = gg.generate_jazz_tracks(population, track_number, time_sig)
 
     return population
 
 
-def populatecopies(population, copynumber, inputlist):
+def populate_copies(population, copy_number, input_list):
     """
-    Creates copies of the inputlist to fill the first generation.
+    Creates copies of the input_list to fill the first generation.
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        copynumber (int): The number of copies to generate.
-        inputlist (:obj:`list` of int): The list of instrument ints to use as input.
+        copy_number (int): The number of copies to generate.
+        input_list (:obj:`list` of int): The list of instrument ints to use as input.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with copies added.
@@ -78,7 +79,7 @@ def populatecopies(population, copynumber, inputlist):
     See:
         DRAGProj.dragcommon.track
     """
-    for candidate in range(copynumber):
-        track = Track(inputlist, 0)  # Create a new track.
+    for candidate in range(copy_number):
+        track = Track(input_list, 0)  # Create a new track.
         population.append(track)
     return population

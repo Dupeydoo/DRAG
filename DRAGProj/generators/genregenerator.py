@@ -15,94 +15,94 @@ This module generates tracks based on input genre.
 """
 
 
-def generaterocktracks(population, tracknumber, timesig):
+def generate_rock_tracks(population, track_number, time_sig):
     """
     This function generates rock style tracks using a structure of instruments.
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        tracknumber (int): The number of tracks to generate.
-        timesig (int): The time signature used in track generation.
+        track_number (int): The number of tracks to generate.
+        time_sig (int): The time signature used in track generation.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]  # Common rock rhythm instruments
-    population = generatetracks(population, tracknumber, structure, timesig, 0, 2)
+    population = generate_tracks(population, track_number, structure, time_sig, 0, 2)
     return population
 
 
-def generatebluestracks(population, tracknumber, timesig):
+def generate_blues_tracks(population, track_number, time_sig):
     """
     This function generates blues style tracks using a structure of instruments.
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        tracknumber (int): The number of tracks to generate.
-        timesig (int): The time signature used in track generation.
+        track_number (int): The number of tracks to generate.
+        time_sig (int): The time signature used in track generation.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [7, 11, 16]  # Common blues rhythm instruments
-    population = generatetracks(population, tracknumber, structure, timesig, 1, 3)
+    population = generate_tracks(population, track_number, structure, time_sig, 1, 3)
     return population
 
 
-def generatejazztracks(population, tracknumber, timesig):
+def generate_jazz_tracks(population, track_number, time_sig):
     """
     This function generates jazz style tracks using a structure of instruments.
 
     Args:
         population (:`obj`:list of :obj:`Track`): The population of tracks.
-        tracknumber (int): The number of tracks to generate.
-        timesig (int): The time signature used in track generation.
+        track_number (int): The number of tracks to generate.
+        time_sig (int): The time signature used in track generation.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [1, 2, 3, 4, 7, 11, 16]  # Common jazz rhythm instruments
-    population = generatetracks(population, tracknumber, structure, timesig, 3, 3)
+    population = generate_tracks(population, track_number, structure, time_sig, 3, 3)
     return population
 
 
-def buildtrack(structure, timesig, index, commonvalue):
+def build_track(structure, time_sig, index, common_value):
     """
     Builds a track using the structure and an index to insert a common value at.
 
     Args:
         structure (:obj:`list` of int): A list of genre structural instruments.
-        timesig (int): The time signature used in track generation.
+        time_sig (int): The time signature used in track generation.
         index (int): The index to insert a common value at.
-        commonvalue(:obj:): Takes the value of a common instrument used.
+        common_value(:obj:): Takes the value of a common instrument used.
 
     Returns:
         track (:obj:Track): The constructed track.
     """
     track = Track([], 0)
-    for beat in range(timesig - 1):
+    for beat in range(time_sig - 1):
         instrument = rand.choice(structure)  # Choose from the structure.
         track.addtocontents(instrument)  # Add the instrument to the track.
-    track.insertintocontents(index, commonvalue)  # Insert the common value into the track.
+    track.insertintocontents(index, common_value)  # Insert the common value into the track.
     return track
 
 
-def generatetracks(population, tracknumber, structure, timesig, index, commonvalue=None):
+def generate_tracks(population, track_number, structure, time_sig, index, common_value=None):
     """
     A helper function to abstract the track building logic out of the generation methods.
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        tracknumber (int): The number of tracks to generate.
+        track_number (int): The number of tracks to generate.
         structure (:obj:`list` of int): A list of genre structural instruments.
-        timesig (int): The time signature used in track generation.
+        time_sig (int): The time signature used in track generation.
         index (int): The index to insert a common value at.
-        commonvalue(:obj:): If specified takes the value of a common instrument used.
+        common_value(:obj:): If specified takes the value of a common instrument used.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of built tracks.
     """
-    for track in range(tracknumber):
-        track = buildtrack(structure, timesig, index, commonvalue)
+    for track in range(track_number):
+        track = build_track(structure, time_sig, index, common_value)
         population.append(track)
     return population

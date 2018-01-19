@@ -17,7 +17,7 @@ Django module containing url routing for the DRAGProj application.
 urlpatterns = [
     path('', views.index, name='index'),
     path('Diversify/', views.diversify, name='diversify'),
-    path('FirstFitness/', views.firstfitness, name='firstfitness'),
+    path('FirstFitness/', views.first_fitness, name='firstfitness'),
     path('RateFitness/', views.fitness, name='fitness'),
     path('DRAGError/', views.error, name='error'),
     path('Preset/', views.preset, name='preset')

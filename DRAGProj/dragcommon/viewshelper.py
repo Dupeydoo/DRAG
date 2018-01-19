@@ -19,7 +19,7 @@ isolated.
 """
 
 
-def performgeneration(form):
+def perform_generation(form):
     """
     Performs a normal generation of the genetic algorithm.
 
@@ -30,15 +30,15 @@ def performgeneration(form):
         DRAGProg.geneticrunner
     """
     context = dc.context
-    gatherfitnessinput(form.collectfitnesses(), context["population"])
-    ds.storeData(context["population"], ds.getdatastore())  # Write data to HDF5 for neural net later
-    population = gr.performgenetics(context["population"])  # start the genetic operations.
+    gather_fitness_input(form.collect_fitnesses(), context["population"])
+    ds.store_data(context["population"], ds.get_data_store())  # Write data to HDF5 for neural net later
+    population = gr.perform_genetics(context["population"])  # start the genetic operations.
     context["population"] = population
-    gr.clearwavfiles()
-    gr.processinput(population, context["bpm"])  # clear up and rewrite the wav files.
+    gr.clear_wav_files()
+    gr.process_input(population, context["bpm"])  # clear up and rewrite the wav files.
 
 
-def gatherfitnessinput(dict, population):
+def gather_fitness_input(dict, population):
     """
     Collects the fitness values from the fitness audio form and assigns
     them to the respective population members.
@@ -48,19 +48,19 @@ def gatherfitnessinput(dict, population):
         population (:obj:`list` of :obj:`Track`): The Track population.
     """
     for counter, fitness in enumerate(dict):  # enumerate exposes a counter while allowing normal generator iteration.
-        popmember = population[counter]
-        popmember.fitness = fitness[1]  # get the fitness value and assign to a population member.
+        pop_member = population[counter]
+        pop_member.fitness = fitness[1]  # get the fitness value and assign to a population member.
 
 
-def generationcheck(currentgeneration, maxgeneration):
+def generation_check(current_generation, max_generation):
     """
     Checks to see when manual generations have finished to begin Machine Learning.
 
     Args:
-        currentgeneration (int): The current generation.
-        maxgeneration (int): The maximum manual generations.
+        current_generation (int): The current generation.
+        max_generation (int): The maximum manual generations.
 
     Returns:
         HttpResponseRedirect (:obj:HTTPResponseRedirect): A redirect object to route to a different url.
     """
-    return currentgeneration == maxgeneration
+    return current_generation == max_generation

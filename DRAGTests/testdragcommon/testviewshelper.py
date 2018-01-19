@@ -19,8 +19,8 @@ class TestViewsHelper(unittest.TestCase):
             ("ten", 10)
         ]
 
-    def testgatherfitnessinput(self):
-        vh.gatherfitnessinput(self.dict, self.population)
+    def test_gather_fitness_input(self):
+        vh.gather_fitness_input(self.dict, self.population)
         values = [i[1] for i in self.dict]
         gathered = []
         for counter, track in enumerate(self.population):

@@ -7,7 +7,7 @@ from DRAGNN.machinelearning import regression
 
 def machinelearn(request):
     try:
-        regression.linearregression()
+        regression.linear_regression()
     except KeyError as k:
         return pe.catchkeyerror(request)
     return render(request, "machinelearn.html", context)

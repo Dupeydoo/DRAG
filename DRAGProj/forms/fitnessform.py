@@ -42,7 +42,7 @@ class FitnessForm(forms.Form):
                                                                                     "name": "fitness",
                                                                                     "tabindex": size + 1}))
 
-    def collectfitnesses(self):
+    def collect_fitnesses(self):
         """
         This method collects the cleaned fitness inputs ready for assignment.
 

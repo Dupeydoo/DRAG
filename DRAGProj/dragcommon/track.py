@@ -8,6 +8,7 @@ A module housing the Track class.
         2.1.0
 """
 
+
 class Track:
     """
     A class to represent a music track within DRAG.
@@ -15,34 +16,34 @@ class Track:
     Attributes:
         content (:obj:`list` of int): The tracks encoding.
         fitness (int): A value between 0 and 10 representing the users satisfaction.
-        idmethod (:obj:): Either a None when not specified, or an int when specified.
-        haschanged (bool): False when unchanged from last generation.
-        trackid (int): track identifier.
+        id_method (:obj:): Either a None when not specified, or an int when specified.
+        has_changed (bool): False when unchanged from last generation.
+        track_id (int): track identifier.
     """
-    idcounter = 0    # Static attribute to keep track of used ids.
+    id_counter = 0  # Static attribute to keep track of used ids.
 
-    def __init__(self, content, fitness, idmethod=None):
+    def __init__(self, content, fitness, id_method=None):
         """
         Constructor for Track class.
 
         Args:
             content (:obj:`list` of int): The tracks encoding.
             fitness (int): A value between 0 and 10 representing the users satisfaction.
-            idmethod (:obj:): Either a None when not specified, or a readable string when specified.
+            id_method (:obj:): Either a None when not specified, or a readable string when specified.
         """
         self.content = content
         self.fitness = fitness
-        self.idmethod = idmethod
-        self.hasChanged = False
+        self.id_method = id_method
+        self.has_changed = False
 
-        if idmethod == None:
-            self.__incrementidcounter()     # Normal id method, increment the idcounter.
-            self.trackid = Track.idcounter
+        if id_method is None:
+            self.__increment_id_counter()  # Normal id method, increment the id_counter.
+            self.track_id = Track.id_counter
 
         else:
-            self.trackid = self.idmethod    # else use the provided id.
+            self.track_id = self.id_method  # else use the provided id.
 
-    def addtocontents(self, instrument):
+    def add_to_contents(self, instrument):
         """
         Adds an instrument to the track content.
 
@@ -51,29 +52,29 @@ class Track:
         """
         self.content.append(instrument)
 
-    def insertintocontents(self, index, commonvalue):
+    def insert_into_contents(self, index, common_value):
         """
         Inserts an instrument at the given index of a tracks content.
 
         Args:
             index (int): An index to insert the instrument at.
-            commonvalue (int): An int representing an instrument from the drummapper often a common value.
+            common_value (int): An int representing an instrument from the drummapper often a common value.
         """
-        self.content.insert(index, commonvalue)
+        self.content.insert(index, common_value)
 
-    def __incrementidcounter(self):
+    def __increment_id_counter(self):
         """
-        Increments the static idcounter attribute when called.
+        Increments the static id_counter attribute when called.
         """
-        Track.idcounter += 1
+        Track.id_counter += 1
 
     @staticmethod
-    def pairchanged(tracklist):
+    def pair_changed(track_list):
         """
-        Static method to take a pair of tracks and change haschanged.
+        Static method to take a pair of tracks and change has_changed.
 
         Args:
-            tracklist (:obj:`list` of :obj:`Track`): A list (usually a pair) of tracks.
+            track_list (:obj:`list` of :obj:`Track`): A list (usually a pair) of tracks.
         """
-        for track in tracklist:
-            track.hasChanged = True
+        for track in track_list:
+            track.has_changed = True
