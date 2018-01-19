@@ -24,7 +24,7 @@ context = {
     "is_home": False,
     "systempath": os.path.dirname(os.path.dirname(os.path.abspath(__file__))),  # Location of the DRAG directory
     "wavpath": "/DRAG/static/wavfiles/",
-    "presets": [[7, 1, 11, 1, 7, 1, 11, 1], [7, 7, 11, 1, 1, 11, 1, 1], [7, 7, 11, 7, 7, 7, 11, 1]]
+    "presets": [[2, 1, 3, 1, 2, 1, 3, 1], [2, 2, 3, 1, 2, 2, 3, 1], [2, 2, 3, 2, 2, 2, 3, 1]]
 }
 """
 context (:obj:`dict`): Context containing algorithm parameters.

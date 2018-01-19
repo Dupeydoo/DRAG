@@ -12,21 +12,21 @@ can be used to located the wav file.
 
 drummapper = {
     1: "HHat.wav",
-    2: "Snare.wav",
-    3: "Kick.wav",
-    4: "HTom.wav",
-    5: "HHatHTom.wav",
-    6: "HHatHtomSnare.wav",
-    7: "HHatKick.wav",
-    8: "HHatKickHTom.wav",
-    9: "HHatKickSnare.wav",
-    10: "HHatKickSnareHTom.wav",
-    11: "HHatSnare.wav",
-    12: "HTomSnare.wav",
-    13: "HTomSnareKick.wav",
-    14: "KickHTom.wav",
-    15: "KickSnare.wav",
-    16: "PlayNothing.wav"
+    2: "HHatKick.wav",
+    3: "HHatSnare.wav",
+    4: "Snare.wav",
+    5: "Kick.wav",
+    6: "KickSnare.wav",
+    7: "HTom.wav",
+    8: "KickHTom.wav",
+    9: "HHatHTom.wav",
+    10: "HTomSnare.wav",
+    11: "PlayNothing.wav",
+    12: "HHatKickSnare.wav",
+    13: "HHatKickHTom.wav",
+    14: "HTomSnareKick.wav",
+    15: "HHatHtomSnare.wav",
+    16: "HHatKickSnareHTom.wav"
 }
 """
 drummapper (:obj:`dict` of int keys and :obj:`str` values): The drummapper dictionary.

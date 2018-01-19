@@ -28,7 +28,7 @@ def generaterocktracks(population, tracknumber, timesig):
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]  # Common rock rhythm instruments
-    population = generatetracks(population, tracknumber, structure, timesig, 0, 7)
+    population = generatetracks(population, tracknumber, structure, timesig, 0, 2)
     return population
 
 
@@ -45,7 +45,7 @@ def generatebluestracks(population, tracknumber, timesig):
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [7, 11, 16]  # Common blues rhythm instruments
-    population = generatetracks(population, tracknumber, structure, timesig, 1, 11)
+    population = generatetracks(population, tracknumber, structure, timesig, 1, 3)
     return population
 
 
@@ -62,7 +62,7 @@ def generatejazztracks(population, tracknumber, timesig):
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [1, 2, 3, 4, 7, 11, 16]  # Common jazz rhythm instruments
-    population = generatetracks(population, tracknumber, structure, timesig, 3, 11)
+    population = generatetracks(population, tracknumber, structure, timesig, 3, 3)
     return population
 
 
