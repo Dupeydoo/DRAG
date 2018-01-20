@@ -1,8 +1,9 @@
 {% block content %}
     {% load static %}
     {% load strconcat %}
+    {% load returnindex %}
     <section id="fitnessform">
-        <h1>Track Rating for Generation {{ currentgeneration }}</h1>
+        <h1>Track Rating for Generation {{ current_generation }}</h1>
         <p>As in biological evolution only the fittest candidates survive! Listen to tracks
             and assign them a quality rating between 0 and 10. Click submit when you are finished. You may
             listen to the first 9 tracks with numeric key shortcuts (pressing 1 will play track 1). You
@@ -13,15 +14,21 @@
         <form action="/RateFitness/" method="post">
             {% csrf_token %}
             <div class="row">
-                {% for field in fitnessform %}
+                {% for field in fitness_form %}
                     <div class="col-md-3">
-                        <h5>Track {{ forloop.counter }}:</h5>
-                        <audio id="{{ "track"|strconcat:forloop.counter0 }}" class="track" controls>
-                            <source src="{{ "/DRAG/static/wavfiles/"|strconcat:"candidate"|strconcat:forloop.counter0|strconcat:".wav" }}"
-                                    type="audio/wav">
-                        </audio>
-                        <label for="fitness">Enter 0-10: </label>
-                        {{ field }}
+                        {% with counter=forloop.counter0 %}
+                            {% with index=population|return_index:counter %}
+                                {% if index.has_changed == False %}
+                                    <h5>Track {{ forloop.counter }}:</h5>
+                                    <audio id="{{ "track"|str_concat:counter }}" class="track" controls>
+                                        <source src="{{ "/DRAG/static/wavfiles/"|str_concat:"candidate"|str_concat:counter|str_concat:".wav" }}"
+                                                type="audio/wav">
+                                    </audio>
+                                    <label for="fitness">Enter 0-10: </label>
+                                    {{ field }}
+                                {% endif %}
+                            {% endwith %}
+                        {% endwith %}
                     </div>
                 {% endfor %}
             </div>

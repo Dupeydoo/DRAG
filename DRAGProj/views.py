@@ -70,10 +70,11 @@ def fitness(request):
     else:
         try:  # Here we check to see if the user is accessing the page correctly.
             bpm = context["bpm"]
-            if vh.generation_check(context["current_generation"], context["manual_generations"]):  # See if its time to ANN.
+            if vh.generation_check(context["current_generation"],
+                                   context["manual_generations"]):  # See if its time to ANN.
                 return HttpResponseRedirect("/MachineLearn")
             form = FitnessForm(size=context["population_size"])
-            context["current_generation"] = context["current_generation"] + 1  # increment the generations.
+            context["current_generation"] += 1  # increment the generations.
 
         except KeyError as k:  # If the user tries to access the page directly by url.
             return pe.catch_key_error(request)

@@ -7,14 +7,14 @@
         <p>To make a custom track, choose an instrument for each single 4/4 beat in <b>two bars</b> (eight notes)</p>
         <form action="/Diversify/" method="post">
             {% csrf_token %}
-            {{ form.beatone }}
-            {{ form.beattwo }}
-            {{ form.beatthree }}
-            {{ form.beatfour }}
-            {{ form.beatfive }}
-            {{ form.beatsix }}
-            {{ form.beatseven }}
-            {{ form.beateight }}
+            {{ form.beat_one }}
+            {{ form.beat_two }}
+            {{ form.beat_three }}
+            {{ form.beat_four }}
+            {{ form.beat_five }}
+            {{ form.beat_six }}
+            {{ form.beat_seven }}
+            {{ form.beat_eight }}
             <div class="form-row">
                 <label for="genre">Pick a genre: </label>
                 {{ form.genre }}

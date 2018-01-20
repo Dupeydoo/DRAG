@@ -3,8 +3,8 @@ import numpy as np
 import DRAG.datacontext as dc
 
 context = dc.context
-store_path = context["systempath"] + "/DRAGNN/storage/"
-test_path = context["systempath"] + "/DRAG/static/testdata/"
+store_path = context["system_path"] + "/DRAGNN/storage/"
+test_path = context["system_path"] + "/DRAG/static/testdata/"
 store = pd.HDFStore(test_path + "data.h5")
 
 

@@ -82,8 +82,8 @@ def build_track(structure, time_sig, index, common_value):
     track = Track([], 0)
     for beat in range(time_sig - 1):
         instrument = rand.choice(structure)  # Choose from the structure.
-        track.addtocontents(instrument)  # Add the instrument to the track.
-    track.insertintocontents(index, common_value)  # Insert the common value into the track.
+        track.add_to_contents(instrument)  # Add the instrument to the track.
+    track.insert_into_contents(index, common_value)  # Insert the common value into the track.
     return track
 
 
