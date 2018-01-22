@@ -7,9 +7,11 @@ from DRAGNN.storage import datastore as ds
 from DRAGNN.machinelearning import automategeneration as ag
 from DRAG.datacontext import context
 
+from DRAGTests.mock.mockpopulation import MockPopulation
+
 
 def linear_regression():
-    time_sig = context["timesignature"]
+    time_sig = context["time_signature"]
     ml_data = ds.read_data(time_sig, ds.get_data_store())
     split_data(ml_data)
 
@@ -34,8 +36,7 @@ def perform_regression(training_data, training_fitness, testing_data, testing_fi
     regr = linear_model.HuberRegressor()
     regr.fit(training_data, training_fitness)
     log_regression_model(regr, testing_data, testing_fitness)
-    if 1 == 0:
-        ag.run(regr)
+    ag.run(regr)
 
 
 def log_regression_model(model, testing_data, testing_fitness):
@@ -44,10 +45,11 @@ def log_regression_model(model, testing_data, testing_fitness):
     msq = np.mean((model.predict(testing_data) - testing_fitness)) ** 2
     print("Mean Squared Error: " + str(msq))
     print("Root Mean Squared Error: " + str(math.sqrt(msq)))
-    print("Coefficient of Determination: " + str(model.score(testing_data, testing_fitness)))
+    print(model.score(testing_data, testing_fitness))
     print("Predict with a nice rock rhythm: " + str(model.predict([[2, 1, 3, 1, 2, 1, 3, 1]])))
     print("Predict with a rather useless rhythm: " + str(model.predict([[11, 11, 11, 11, 11, 11, 11, 11]])))
 
 
 if __name__ == "__main__":
+    context["population"] = MockPopulation().population
     linear_regression()

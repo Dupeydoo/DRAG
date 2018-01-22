@@ -15,21 +15,23 @@
             {% csrf_token %}
             <div class="row">
                 {% for field in fitness_form %}
-                    <div class="col-md-3">
-                        {% with counter=forloop.counter0 %}
-                            {% with index=population|return_index:counter %}
-                                {% if index.has_changed == False %}
-                                    <h5>Track {{ forloop.counter }}:</h5>
-                                    <audio id="{{ "track"|str_concat:counter }}" class="track" controls>
-                                        <source src="{{ "/DRAG/static/wavfiles/"|str_concat:"candidate"|str_concat:counter|str_concat:".wav" }}"
-                                                type="audio/wav">
-                                    </audio>
-                                    <label for="fitness">Enter 0-10: </label>
-                                    {{ field }}
-                                {% endif %}
-                            {% endwith %}
+                    {% with counter=forloop.counter0 %}
+                        {% with index=population|return_index:counter %}
+                            <div class="col-md-3">
+                                <h5>Track {{ forloop.counter }}:</h5>
+                                <audio id="{{ "track"|str_concat:counter }}" class="track" controls>
+
+                                    <source src="{{ "/DRAG/static/wavfiles/"|str_concat:"candidate"|str_concat:counter|str_concat:".wav" }}"
+                                            type="audio/wav">
+
+                                </audio>
+
+                                <label for="fitness">Enter 0-10: </label>
+                                {{ field }}
+
+                            </div>
                         {% endwith %}
-                    </div>
+                    {% endwith %}
                 {% endfor %}
             </div>
             <input type="submit" value="Submit" class="btn btn-primary" id="fitnesssubmit">

@@ -5,10 +5,9 @@ from django.http import HttpResponseRedirect
 
 
 def run(model):
-    for generation in range(context["automatedgenerations"]):
-        context["currentgeneration"] += 1
+    for generation in range(context["automated_generations"]):
+        context["current_generation"] += 1
         single_generation(model)
-    return HttpResponseRedirect("/Finished")
 
 
 def single_generation(model):
