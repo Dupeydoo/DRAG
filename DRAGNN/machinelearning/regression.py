@@ -1,5 +1,5 @@
 from sklearn import linear_model
-from sklearn.feature_selection import SelectKBest, chi2
+from sklearn import ensemble
 import numpy as np
 import math
 
@@ -21,8 +21,8 @@ def split_data(ml_data):
     fitness = ml_data[1].ravel()
 
     # data_new = SelectKBest(chi2, k=4).fit_transform(data, fitness)
-    # data = np.tile(data, (10, 1))
-    # fitness = np.tile(fitness, 10)
+    data = np.tile(data, (10, 1))
+    fitness = np.tile(fitness, 10)
 
     training_data = data[:-20]
     training_fitness = fitness[:-20]
@@ -33,15 +33,16 @@ def split_data(ml_data):
 
 
 def perform_regression(training_data, training_fitness, testing_data, testing_fitness):
-    regr = linear_model.HuberRegressor()
+    # regr = linear_model.RANSACRegressor(linear_model.LinearRegression())
+    regr = ensemble.RandomForestRegressor(n_estimators=10, max_features=8)
     regr.fit(training_data, training_fitness)
     log_regression_model(regr, testing_data, testing_fitness)
-    ag.run(regr)
+    # ag.run(regr)
 
 
 def log_regression_model(model, testing_data, testing_fitness):
     print("Regression Coefficients:\n")
-    print(model.coef_)
+    # print(model.coef_)
     msq = np.mean((model.predict(testing_data) - testing_fitness)) ** 2
     print("Mean Squared Error: " + str(msq))
     print("Root Mean Squared Error: " + str(math.sqrt(msq)))

@@ -70,7 +70,7 @@ def initiliase_population(input_list, genre):
         return pg.generate_population(pop_size, copy_ratio, input_list, genre, time_signature)
 
 
-def process_input(population, bpm):
+def process_input(population, bpm, request):
     """
     Initiates the wav file creation process.
 
@@ -81,7 +81,8 @@ def process_input(population, bpm):
     path = system_path + wav_path  # Get the full path to write files to.
     for candidate in range(len(population)):
         solution = population[candidate]
-        output_file = path + "candidate" + str(candidate) + ".wav"  # Build unique candidate file names
+        output_file = path + request.session["user_id"] + "candidate" + str(
+            candidate) + ".wav"  # Build unique candidate file names
         wb.map_input(solution, bpm, output_file, path)  # Write the wav files.
 
 

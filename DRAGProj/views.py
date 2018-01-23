@@ -43,8 +43,10 @@ def index(request):
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
     dc.context["current_generation"] = 1  # Reset the generations if the user goes home mid-diversification.
-    gr.clear_wav_files()
-    return render(request, "DRAG/index.html", {"is_home": True})
+    response = render(request, "DRAG/index.html", {"is_home": True})
+    cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" in request.COOKIES else None
+    vh.set_uuid_cookie(response, request, cookie_uuid)
+    return response
 
 
 def fitness(request):
@@ -64,7 +66,7 @@ def fitness(request):
                            size=context["population_size"])  # Create a fitness form object with the POST data.
 
         if form.is_valid():  # If the data is valid perform a generation and redirect back here with a GET request.
-            vh.perform_generation(form)
+            vh.perform_generation(form, request)
             return HttpResponseRedirect('/RateFitness')
 
     else:
@@ -97,7 +99,7 @@ def first_fitness(request):
     try:
         bpm = context["bpm"]
         population = gr.initiliase_population(context["input"], context["genre"])  # Initialise the population.
-        gr.process_input(population, bpm)
+        gr.process_input(population, bpm, request)
         context["fitness_form"] = FitnessForm(size=context["population_size"])  # Create a fitness form to use.
         context["population"] = population  # Reassign the population.
         return render(request, "DRAG/fitness.html", context)
@@ -172,4 +174,7 @@ def error(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
-    return render(request, 'DRAG/error.html', dc.context)
+    response = render(request, 'DRAG/error.html', dc.context)
+    cookie_uuid = request.COOKIES["track_identifier"]
+    vh.set_uuid_cookie(response, request, cookie_uuid)
+    return response

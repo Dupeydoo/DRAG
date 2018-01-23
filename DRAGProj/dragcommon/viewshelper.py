@@ -1,8 +1,11 @@
-from django.http import HttpResponseRedirect
+import uuid
 
 import DRAGNN.storage.datastore as ds
 import DRAGProj.geneticrunner as gr
+import DRAGProj.dragcommon.wavbuilder as wb
 import DRAG.datacontext as dc
+
+from DRAGProj.models.anonymoususer import AnonymousUser
 
 """
 This module provides assisting functions to views.py to keep the views logic
@@ -19,7 +22,7 @@ isolated.
 """
 
 
-def perform_generation(form):
+def perform_generation(form, request):
     """
     Performs a normal generation of the genetic algorithm.
 
@@ -34,8 +37,7 @@ def perform_generation(form):
     ds.store_data(context["population"], ds.get_data_store())  # Write data to HDF5 for neural net later
     population = gr.perform_genetics(context["population"])  # start the genetic operations.
     context["population"] = population
-    gr.clear_wav_files()
-    gr.process_input(population, context["bpm"])  # clear up and rewrite the wav files.
+    gr.process_input(population, context["bpm"], request)  # clear up and rewrite the wav files.
 
 
 def gather_fitness_input(dict, population):
@@ -64,3 +66,31 @@ def generation_check(current_generation, max_generation):
         HttpResponseRedirect (:obj:HTTPResponseRedirect): A redirect object to route to a different url.
     """
     return current_generation == max_generation
+
+
+def set_uuid_cookie(response, request, cookie_uuid=None):
+    if cookie_uuid is not None:
+        cookie_uuid = str(cookie_uuid)
+        user = AnonymousUser(UUID=cookie_uuid)
+
+        if not AnonymousUser.objects.get_or_create(UUID=cookie_uuid)[1]:
+            context = dc.context
+            wb.clear_wav_candidates((context["system_path"] + context["wav_path"]), cookie_uuid)
+            request.session["user_id"] = cookie_uuid
+        else:
+            new_uuid = generate_uuid(response, request)
+            user = AnonymousUser(UUID=new_uuid)
+            user.save()
+
+    else:
+        new_uuid = generate_uuid(response, request)
+        user = AnonymousUser(UUID=new_uuid)
+        user.save()
+
+
+def generate_uuid(response, request):
+    new_uuid = uuid.uuid1()
+    new_uuid = str(new_uuid)
+    response.set_cookie("track_identifier", new_uuid)
+    request.session["user_id"] = new_uuid
+    return new_uuid
