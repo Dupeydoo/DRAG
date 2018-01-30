@@ -3,10 +3,10 @@
         <h2>Or use a preset</h2>
         <form action="/Preset/" method="post">
             {% csrf_token %}
-            {{ preset_form.preset }}
+            {{ preset.preset }}
             <div class="form-element">
                 <label for="bpmtwo">Enter a BPM: </label>
-                {{ preset_form.bpm }}
+                {{ preset.bpm }}
             </div>
             <input type="submit" value="Confirm Input" class="btn btn-primary"/>
         </form>

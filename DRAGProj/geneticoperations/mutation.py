@@ -23,13 +23,17 @@ def do_mutation(children, muta_prob):
     Returns:
         mutated_children (:obj:`list` of :obj:`Track`): A list of children that have been mutated.
     """
+    muta_type_prob = 0.5
     mutated_children = []
     for child in children:
         # If we perform mutation.
         if random.random() < muta_prob:
             child.has_changed = True  # Some children may have not been changed by crossover.
-            mutated_children.append(mutate(child))
+            if random.random() < muta_type_prob:
+                mutated_children.append(mutate(child))
 
+            else:
+                mutated_children.append(drum_group_mutate(child))
         else:
             mutated_children.append(child)
 

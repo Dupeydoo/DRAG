@@ -62,7 +62,8 @@ class Track:
         """
         self.content.insert(index, common_value)
 
-    def __increment_id_counter(self):
+    @staticmethod
+    def __increment_id_counter():
         """
         Increments the static id_counter attribute when called.
         """

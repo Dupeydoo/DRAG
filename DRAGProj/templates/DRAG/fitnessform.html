@@ -3,7 +3,7 @@
     {% load strconcat %}
     {% load returnindex %}
     <section id="fitnessform">
-        <h1>Track Rating for Generation {{ current_generation }}</h1>
+        <h1>Track Rating for Generation {{ request.session.current_generation }}</h1>
         <p>As in biological evolution only the fittest candidates survive! Listen to tracks
             and assign them a quality rating between 0 and 10. Click submit when you are finished. You may
             listen to the first 9 tracks with numeric key shortcuts (pressing 1 will play track 1). You

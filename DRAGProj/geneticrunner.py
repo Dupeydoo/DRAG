@@ -66,7 +66,7 @@ def initiliase_population(input_list, genre):
     if dm.is_even(population_size) and population_size >= 0:  # Genetic crossover takes place on pairs.
         return pg.generate_population(population_size, copy_ratio, input_list, genre, time_signature)
     else:
-        pop_size = 20  # If incorrect input is set for whatever reason, assume a default.
+        pop_size = 10  # If incorrect input is set for whatever reason, assume a default.
         return pg.generate_population(pop_size, copy_ratio, input_list, genre, time_signature)
 
 

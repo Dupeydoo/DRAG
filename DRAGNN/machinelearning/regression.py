@@ -10,18 +10,18 @@ from DRAG.datacontext import context
 from DRAGTests.mock.mockpopulation import MockPopulation
 
 
-def linear_regression():
+def linear_regression(request):
     time_sig = context["time_signature"]
     ml_data = ds.read_data(time_sig, ds.get_data_store())
-    split_data(ml_data)
+    split_data(ml_data, request)
 
 
-def split_data(ml_data):
+def split_data(ml_data, request):
     data = ml_data[0]
     fitness = ml_data[1].ravel()
 
     # data_new = SelectKBest(chi2, k=4).fit_transform(data, fitness)
-    data = np.tile(data, (10, 1))
+    # data = np.tile(data, (10, 1))
     fitness = np.tile(fitness, 10)
 
     training_data = data[:-20]
@@ -29,15 +29,15 @@ def split_data(ml_data):
 
     testing_data = data[-20:]
     testing_fitness = fitness[-20:]
-    perform_regression(training_data, training_fitness, testing_data, testing_fitness)
+    perform_regression(training_data, training_fitness, testing_data, testing_fitness, request)
 
 
-def perform_regression(training_data, training_fitness, testing_data, testing_fitness):
+def perform_regression(training_data, training_fitness, testing_data, testing_fitness, request):
     # regr = linear_model.RANSACRegressor(linear_model.LinearRegression())
     regr = ensemble.RandomForestRegressor(n_estimators=10, max_features=8)
     regr.fit(training_data, training_fitness)
     log_regression_model(regr, testing_data, testing_fitness)
-    # ag.run(regr)
+    # ag.run(regr, request)
 
 
 def log_regression_model(model, testing_data, testing_fitness):

@@ -5,7 +5,7 @@ import DRAG.datacontext as dc
 context = dc.context
 store_path = context["system_path"] + "/DRAGNN/storage/"
 test_path = context["system_path"] + "/DRAG/static/testdata/"
-store = pd.HDFStore(test_path + "data.h5")
+store = pd.HDFStore(store_path + "data.h5")
 
 
 def store_data(population, d_store):

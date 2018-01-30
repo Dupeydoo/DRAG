@@ -52,3 +52,19 @@ class FitnessForm(forms.Form):
         """
         for name, fitness in self.cleaned_data.items():  # This forms cleaned items.
             yield (self.fields[name], fitness)
+
+    def clean(self):
+        cleaned_data = super().clean()
+        fields = cleaned_data.values()
+        adjacent_laziness, temp = 0, 0
+        for field in fields:
+            if temp == field:
+                adjacent_laziness += 1
+            temp = field
+
+        if adjacent_laziness >= 3:
+            raise forms.ValidationError(
+                "Abnormal repetition in ratings"
+                "detected! Please listen to the"
+                "tracks properly."
+            )

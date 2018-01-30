@@ -32,12 +32,12 @@ def perform_generation(form, request):
         DRAG.datacontext
         DRAGProg.geneticrunner
     """
-    context = dc.context
-    gather_fitness_input(form.collect_fitnesses(), context["population"])
-    ds.store_data(context["population"], ds.get_data_store())  # Write data to HDF5 for neural net later
-    population = gr.perform_genetics(context["population"])  # start the genetic operations.
-    context["population"] = population
-    gr.process_input(population, context["bpm"], request)  # clear up and rewrite the wav files.
+    population = dc.context[request.session["user_id"] + "population"]
+    gather_fitness_input(form.collect_fitnesses(), population)
+    ds.store_data(population, ds.get_data_store())  # Write data to HDF5 for neural net later
+    population = gr.perform_genetics(population)  # start the genetic operations.
+    dc.context[request.session["user_id"] + "population"] = population
+    gr.process_input(population, request.session["bpm"], request)  # clear up and rewrite the wav files.
 
 
 def gather_fitness_input(dict, population):

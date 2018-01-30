@@ -8,13 +8,13 @@ from DRAGNN.machinelearning import regression
 
 def machinelearn(request):
     try:
-        regression.linear_regression()
+        regression.linear_regression(request)
     except KeyError as k:
         return pe.catch_key_error(request)
     return HttpResponseRedirect("/Finished")
 
 
 def finished(request):
-    if context["current_generation"] != context["manual_generations"] + context["automated_generations"]:
+    if request.session["current_generation"] != context["manual_generations"] + context["automated_generations"]:
         return pe.catch_critical_error(request)
     return render(request, "finish.html", context)
