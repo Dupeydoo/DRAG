@@ -12,7 +12,6 @@ information used when DRAG runs.
 """
 
 context = {
-    "input_range": range(8),
     "manual_generations": 10,
     "automated_generations": 200,
     "population_size": 10,
@@ -23,8 +22,7 @@ context = {
     "muta_prob": 0.6,
     "is_home": False,
     "system_path": os.path.dirname(os.path.dirname(os.path.abspath(__file__))),  # Location of the DRAG directory
-    "wav_path": "/DRAG/static/wavfiles/",
-    "presets": [[2, 1, 3, 1, 2, 1, 3, 1], [2, 2, 3, 1, 2, 2, 3, 1], [2, 2, 3, 2, 2, 2, 3, 1]]
+    "wav_path": "/DRAG/static/wavfiles/"
 }
 """
 context (:obj:`dict`): Context containing algorithm parameters.

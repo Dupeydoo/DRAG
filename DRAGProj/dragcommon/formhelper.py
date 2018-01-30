@@ -1,4 +1,5 @@
 import DRAG.datacontext as dc
+from DRAGProj.models.preset import Preset
 
 """
 A module which assists the beat input form in
@@ -28,15 +29,9 @@ def construct_input(cleaned_data):
         input_list (:obj:`list` of int): The input list to the algorithm.
 
     """
-    input_list = []
-    input_list.append(cleaned_data["beat_one"])
-    input_list.append(cleaned_data["beat_two"])
-    input_list.append(cleaned_data["beat_three"])
-    input_list.append(cleaned_data["beat_four"])
-    input_list.append(cleaned_data["beat_five"])
-    input_list.append(cleaned_data["beat_six"])
-    input_list.append(cleaned_data["beat_seven"])
-    input_list.append(cleaned_data["beat_eight"])
+    input_list = [cleaned_data["beat_one"], cleaned_data["beat_two"], cleaned_data["beat_three"],
+                  cleaned_data["beat_four"], cleaned_data["beat_five"], cleaned_data["beat_six"],
+                  cleaned_data["beat_seven"], cleaned_data["beat_eight"]]
     return input_list
 
 
@@ -53,4 +48,7 @@ def get_preset(index):
     See:
         DRAG.datacontext
     """
-    return dc.context["presets"][index]
+    preset_from_db = Preset.objects.get(pk=index + 1)
+    return [preset_from_db.beat_one, preset_from_db.beat_two, preset_from_db.beat_three,
+            preset_from_db.beat_four, preset_from_db.beat_five, preset_from_db.beat_six,
+            preset_from_db.beat_seven, preset_from_db.beat_eight]

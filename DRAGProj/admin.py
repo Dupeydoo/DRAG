@@ -1,3 +1,6 @@
 from django.contrib import admin
+from DRAGProj.models.preset import Preset
+from DRAGProj.models.anonymoususer import AnonymousUser
 
-# Register your models here.
+admin.site.register(Preset)
+admin.site.register(AnonymousUser)
