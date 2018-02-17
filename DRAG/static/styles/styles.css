@@ -55,8 +55,18 @@
 	margin-bottom: 10px;
 }
 
+#diversify {
+    background-image: url("/DRAG/static/images/code.jpg")
+}
+
 #diversify h2 {
     padding: 30px;
+    color: white;
+}
+
+#about .about-section {
+	margin-bottom: 20px;
+	margin-top: 20px;
 }
 
 #footer {

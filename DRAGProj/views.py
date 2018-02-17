@@ -183,6 +183,10 @@ def error(request):
     return response
 
 
+def about(request):
+    return render(request, 'DRAG/about.html', {"is_home": False})
+
+
 def page_not_found_error(request):
     return render(request, 'DRAG/404.html', {"is_home": True})
 
