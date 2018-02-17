@@ -4,6 +4,12 @@
         <form action="/Preset/" method="post">
             {% csrf_token %}
             {{ preset.preset }}
+            <div id="preview">
+                <h5>Example - Rock at 200 BPM</h5>
+                <audio controls>
+                    <source src="/DRAG/static/wavfiles/preset_example.wav" type="audio/wav">
+                </audio>
+            </div>
             <div class="form-element">
                 <label for="bpmtwo">Enter a BPM: </label>
                 {{ preset.bpm }}

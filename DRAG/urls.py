@@ -19,3 +19,6 @@ urlpatterns = [
 """
 urlpatterns (:obj:`list`): contains the controller patterns for different typed urls.
 """
+
+handler404 = 'DRAGProj.views.page_not_found_error'
+handler500 = 'DRAGProj.views.server_error'

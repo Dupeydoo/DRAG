@@ -181,3 +181,11 @@ def error(request):
     cookie_uuid = request.COOKIES["track_identifier"]
     vh.set_uuid_cookie(response, request, cookie_uuid)
     return response
+
+
+def page_not_found_error(request):
+    return render(request, 'DRAG/404.html', {"is_home": True})
+
+
+def server_error(request):
+    return render(request, 'DRAG/500.html', {"is_home": True})

@@ -5,7 +5,7 @@ import DRAG.datacontext as dc
 context = dc.context
 store_path = context["system_path"] + "/DRAGNN/storage/"
 test_path = context["system_path"] + "/DRAG/static/testdata/"
-store = pd.HDFStore(store_path + "data.h5")
+store = pd.HDFStore(test_path + "data.h5")
 
 
 def store_data(population, d_store):
@@ -22,13 +22,15 @@ def store_data(population, d_store):
 def read_data(time_sig, d_store):
     content = list(d_store.select("track"))
     tracks = [content[i:i + time_sig] for i in range(0, len(content), time_sig)]
+    # for track in range(len(tracks)):
+       # tracks[track] = sum(tracks[track])
     fitnesses = list(d_store.select("fitness"))
     return convert_to_np(tracks, fitnesses)
 
 
 def convert_to_np(tracks, fitnesses):
-    track_np = np.array(tracks)
-    fitness_np = np.array(fitnesses).reshape(len(fitnesses), 1)
+    track_np = np.array(tracks).astype(float)
+    fitness_np = np.array(fitnesses).reshape(len(fitnesses), 1).astype(float)
     return track_np, fitness_np
 
 

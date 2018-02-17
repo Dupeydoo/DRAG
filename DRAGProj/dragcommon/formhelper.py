@@ -1,4 +1,5 @@
-import DRAG.datacontext as dc
+import DRAGProj.dragcommon.wavbuilder as wb
+from DRAG.datacontext import context
 from DRAGProj.models.preset import Preset
 
 """
@@ -52,3 +53,4 @@ def get_preset(index):
     return [preset_from_db.beat_one, preset_from_db.beat_two, preset_from_db.beat_three,
             preset_from_db.beat_four, preset_from_db.beat_five, preset_from_db.beat_six,
             preset_from_db.beat_seven, preset_from_db.beat_eight]
+
