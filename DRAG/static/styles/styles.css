@@ -105,10 +105,21 @@ form .form-element {
 	height: 100px;
 	text-align: center;
 	border-radius: 20px 0 0 20px;
+    z-index: 100;
 }
 
 #scroller img {
 	margin-top: 50%;
 	min-width: 50%;
     min-height: 40%;
+}
+
+.confirmed {
+    border: #00FF00 !important;
+    box-shadow: 0 0 2px 0.2rem #00FF00 !important;
+}
+
+.form-control:focus {
+    border: none;
+    box-shadow: none;
 }

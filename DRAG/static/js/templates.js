@@ -37,8 +37,35 @@ $(document).ready(function () {
         }
     });
 
+
+    $(window).scroll(function () {
+        checkAnimation();
+    });
+
     $("a[href='#']").click(function () {
         $('html, body').animate({scrollTop: 0}, 'slow');
         return false;
     });
+
+    $(".form-control").change(function () {
+        $(this).addClass("confirmed");
+    });
 });
+
+function isElementInViewport(elem) {
+    var $elem = $(elem);
+    var scrollElem = ((navigator.userAgent.toLowerCase().indexOf('webkit') != -1) ? 'body' : 'html');
+    var viewportTop = $(scrollElem).scrollTop();
+    var viewportBottom = viewportTop + $(window).height();
+    var elemTop = Math.round($elem.offset().top);
+    var elemBottom = elemTop + $elem.height();
+    return ((elemTop < viewportBottom) && (elemBottom > viewportTop));
+}
+
+function checkAnimation() {
+    var $elem = $('.about-section img');
+    if ($elem.hasClass('rollIn animated')) return;
+    if (isElementInViewport($elem)) {
+        $elem.addClass('rollIn animated');
+    }
+}

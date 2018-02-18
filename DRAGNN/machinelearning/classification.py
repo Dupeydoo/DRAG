@@ -18,9 +18,11 @@ def classification():
 
 def split_data(ml_data):
     data = ml_data[0]
+    # data = preprocessing.scale(data)
     fitness = decompose_fitness(ml_data[1].ravel())
 
-    data = preprocessing.scale(data)
+    enc = preprocessing.OneHotEncoder()
+    data = enc.fit_transform(data).toarray()
     perform_classification(data, fitness)
 
 
@@ -30,11 +32,14 @@ def perform_classification(data, fitness):
     print("Predictions: ")
     print(predictions)
     print("\n")
+    print("Actuals: ")
+    print(fitness)
+    print("\n")
     print("Differences ")
     differences = []
     for predict in range(0, len(predictions)):
         differences.append(predictions[predict] - fitness[predict])
-    print(np.asarray(differences))
+    print(np.asarray(differences).ravel())
 
 
 def log_classification_model(model, testing_data, testing_fitness):
