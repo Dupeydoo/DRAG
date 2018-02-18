@@ -12,7 +12,7 @@ $(document).ready(function () {
      * @param event      The event bound to.
      * @param eventfunc  The function that runs.
      */
-    $(".smooth").on('click', function(event) {
+    $(".smooth").on('click', function (event) {
         if (this.hash !== "") {
             event.preventDefault();  // Prevent the default behaviour for clicking this class
 
@@ -27,7 +27,18 @@ $(document).ready(function () {
         }
     });
 
-    $("#preset select").change(function() {
-        
+    $(document).scroll(function () {
+        if ($(window).scrollTop() === 0) {
+            $('#scroller').fadeOut();
+        }
+
+        else {
+            $('#scroller').fadeIn();
+        }
+    });
+
+    $("a[href='#']").click(function () {
+        $('html, body').animate({scrollTop: 0}, 'slow');
+        return false;
     });
 });

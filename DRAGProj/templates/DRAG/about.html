@@ -7,53 +7,57 @@
     {% block resources %} {% include 'DRAG/renderresources.html' %} {% endblock %}
 </head>
 <body>
-    <div>
-        {% block content %}
-            {% include 'DRAG/menu.html' %}
-            {% include 'DRAG/header.html' %}
-            <div class="container text-center" id="about">
-                <h1>About DRAG</h1>
-                <p class="about-section">
-                    DRAG is all about generating and diversifying drum music. In the past, musicians have
-                    tirelessly put pen to paper in order to produce accompaniment to their music. DRAG
-                    simplifies this process by using an Interactive Genetic Algorithm to manipulate a
-                    drum track which you input.
-                </p>
-                <div class="row about-section">
-                    <div class="col-md-4">
-                        <img src="/DRAG/static/images/drum.png">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="/DRAG/static/images/biology.png">
-                    </div>
-                    <div class="col-md-4">
-                        <img src="/DRAG/static/images/brain.png">
-                    </div>
+<div>
+    {% block content %}
+        {% include 'DRAG/scroller.html' %}
+        {% include 'DRAG/menu.html' %}
+        {% include 'DRAG/header.html' %}
+        <div class="container text-center" id="about">
+            <h1>About DRAG</h1>
+            <p class="about-section">
+                DRAG is all about generating and diversifying drum music. In the past, musicians have
+                tirelessly put pen to paper in order to produce accompaniment to their music. DRAG
+                simplifies this process by using an Interactive Genetic Algorithm to manipulate a
+                drum track which you input.
+            </p>
+            <div class="row about-section">
+                <div class="col-md-4">
+                    <img src="/DRAG/static/images/drum.png" alt="Small drum in a circle.">
                 </div>
-                <p class="about-section">
-                    Once you have rated tracks for a number of manual generations, machine learning is used
-                    to automatically learn a function representing how you learn tracks. Thus, DRAG automates
-                    hundreds of generations for you instantly, before reporting back with the final generation.
-                </p>
-                <p class="about-section">
-                    DRAG works on drum tracks that consist of two measures at 4:4. 8 beats per bar is DRAG's language.
-                    Although simple, it is hoped that you can utilise DRAG to either produce accompaniment you
-                    may have not thought of, or help the novice generate accompaniment for their projects.
-                </p>
-                <div class="row about-section">
-                    <img src="/DRAG/static/images/electric-kit.jpg" style="margin: auto; border-radius: 12px;">
+                <div class="col-md-4">
+                    <img src="/DRAG/static/images/biology.png" alt="Picture of magnifying class dna.">
                 </div>
-                <p class="about-section">
-                    DRAG is the work of a dissertation on Interactive Genetic Algorithms and music produced by James
-                    Du Plessis. I hope that the tool is both useful and provides you with the fun I intended when
-                    building it.
-                </p>
+                <div class="col-md-4">
+                    <img src="/DRAG/static/images/brain.png" alt="A brain.">
+                </div>
             </div>
-            {% include 'DRAG/footer.html' %}
-        {% endblock %}
-    </div>
-    {% block bodyscripts %}
-        {% include "DRAG/bodyscripts.html" %}
+            <p class="about-section">
+                Once you have rated tracks for a number of manual generations, machine learning is used
+                to automatically learn a function representing how you learn tracks. Thus, DRAG automates
+                hundreds of generations for you instantly, before reporting back with the final generation.
+            </p>
+            <p class="about-section">
+                DRAG works on drum tracks that consist of two measures at 4:4. 8 beats per bar is DRAG's language.
+                Although simple, it is hoped that you can utilise DRAG to either produce accompaniment you
+                may have not thought of, or help the novice generate accompaniment for their projects.
+            </p>
+            <div class="row about-section">
+                <div class="col-md-12">
+                    <img src="/DRAG/static/images/electric-kit.jpg" style="margin: auto; border-radius: 12px;"
+                         alt="An electronic drum kit.">
+                </div>
+            </div>
+            <p class="about-section">
+                DRAG is the work of a dissertation on Interactive Genetic Algorithms and music produced by James
+                Du Plessis. I hope that the tool is both useful and provides you with the fun I intended when
+                building it.
+            </p>
+        </div>
+        {% include 'DRAG/footer.html' %}
     {% endblock %}
+</div>
+{% block bodyscripts %}
+    {% include "DRAG/bodyscripts.html" %}
+{% endblock %}
 </body>
 </html>
