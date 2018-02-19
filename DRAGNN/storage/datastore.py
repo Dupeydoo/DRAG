@@ -23,7 +23,7 @@ def read_data(time_sig, d_store):
     content = list(d_store.select("track"))
     tracks = [content[i:i + time_sig] for i in range(0, len(content), time_sig)]
     # for track in range(len(tracks)):
-       # tracks[track] = sum(tracks[track])
+      # tracks[track] = sum(tracks[track])
     fitnesses = list(d_store.select("fitness"))
     return convert_to_np(tracks, fitnesses)
 
