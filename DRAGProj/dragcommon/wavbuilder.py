@@ -45,13 +45,13 @@ def map_input(candidate, bpm, output_file, path):
     See:
         DRAGProj.mappers.drummapper
     """
-    output = AudioSegment.silent(duration=100)  # initialise the track output
-    gap = AudioSegment.silent(duration=beat_offset(bpm))  # create a gap based on provided bpm.
+    output = AudioSegment.silent(duration=100)               # Initialise the track output
+    gap = AudioSegment.silent(duration=beat_offset(bpm))     # Create a gap based on provided bpm.
     for instrument in candidate.content:
-        file = dm.drum_mapper[instrument]  # get the correlating instrument to the int value.
+        file = dm.drum_mapper[instrument]                    # Get the correlating instrument to the int value.
         audio = open_wav(path + file)
-        output = output.append(gap)  # start with a small gap to reduce edge fuzziness.
-        output = output.append(audio)  # append the audio file to the track.
+        output = output.append(gap)                          # Start with a small gap to reduce edge fuzziness.
+        output = output.append(audio)                        # Append the audio file to the track.
     begin_audio_thread(output, output_file, gap)
 
 
@@ -67,8 +67,8 @@ def begin_audio_thread(output, output_file, gap):
     See:
         DRAGProj.dragcommon.audiothread
     """
-    output = output.append(gap)  # append a gap to reduce fuzziness.
-    thread = AudioThread(output, output_file)  # create an AudioThread to write the track.
+    output = output.append(gap)                              # append a gap to reduce fuzziness.
+    thread = AudioThread(output, output_file)                # create an AudioThread to write the track.
     thread.start()
 
 
@@ -83,7 +83,7 @@ def beat_offset(bpm):
     Returns:
          number: A value indicating the space between notes in milliseconds, hence 60000.
     """
-    return 60000 / bpm  # 60000 milliseconds are in a minute
+    return 60000 / bpm                                      # 60000 milliseconds are in a minute
 
 
 def clear_wav_candidates(wav_directory, string):

@@ -136,5 +136,10 @@ form .form-element {
     #header .carousel-inner img {
         width: auto;
     }
+}
 
+@media only screen and (min-width: 800px) {
+    .navbar-expand-lg .navbar-nav .nav-link {
+        padding-right: 1.5rem;
+    }
 }

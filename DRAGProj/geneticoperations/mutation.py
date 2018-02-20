@@ -50,8 +50,8 @@ def mutate(child):
     Returns:
         child (:obj:`Track`): A mutated child.
     """
-    rand_index = random.randrange(0, len(child.content))  # Pick an index to mutate.
-    instruments = list(dm.drum_mapper.keys())  # Get the drum corresponding.
+    rand_index = random.randrange(0, len(child.content))    # Pick an index to mutate.
+    instruments = list(dm.drum_mapper.keys())               # Get the drum corresponding.
     child.content[rand_index] = random.choice(instruments)  # Set the child's index to a new value.
     return child
 
@@ -67,10 +67,11 @@ def drum_group_mutate(child):
     Returns:
         child (:obj:`Track`): A mutated child.
     """
-    instruments = dm.drum_mapper  # Get the possible instruments.
+    instruments = dm.drum_mapper                              # Get the possible instruments.
     rand_index = random.randrange(0, len(child.content))
     groups = create_groups(instruments, child, rand_index)
-    if dm.is_cymbal(groups[2]):  # If the random index is a cymbal
+
+    if dm.is_cymbal(groups[2]):                               # If the random index is a cymbal
         child.content[rand_index] = random.choice(groups[0])  # Replace it with a cymbal.
     else:
         child.content[rand_index] = random.choice(groups[1])  # Or replace it with a drum if not.
@@ -86,7 +87,7 @@ def create_groups(instruments, child, rand_index):
         child (:obj:`Track`): A child that will be mutated.
         rand_index (int): The index of the tracks contents to be mutated.
     """
-    hi_hats = [d[0] for d in instruments.items() if "HHat" in d[1]]  # Comprehension: Output list is all cymbals' keys.
-    drums = [d[0] for d in instruments.items() if "HHat" not in d[1]]  # Comprehension: Output list is all drums' keys.
+    hi_hats = [d[0] for d in instruments.items() if "HHat" in d[1]]    # Comprehension: Output list is cymbals' keys.
+    drums = [d[0] for d in instruments.items() if "HHat" not in d[1]]  # Comprehension: Output list is drums' keys.
     child_drum = child.content[rand_index]
     return hi_hats, drums, child_drum

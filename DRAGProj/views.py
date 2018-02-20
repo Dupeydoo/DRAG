@@ -184,12 +184,39 @@ def error(request):
 
 
 def about(request):
+    """
+    View function for the about page.
+
+    Args:
+        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+
+    Returns:
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+    """
     return render(request, 'DRAG/about.html', {"is_home": False})
 
 
 def page_not_found_error(request):
+    """
+    View function for the 404 status code page.
+
+    Args:
+        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+
+    Returns:
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+    """
     return render(request, 'DRAG/404.html', {"is_home": True})
 
 
 def server_error(request):
+    """
+    View function for the 500 status code page.
+
+    Args:
+        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+
+    Returns:
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+    """
     return render(request, 'DRAG/500.html', {"is_home": True})

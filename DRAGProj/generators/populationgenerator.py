@@ -30,7 +30,7 @@ def generate_population(p_size, c_ratio, input_list, genre, time_sig):
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
     """
-    copy_append = int(c_ratio * p_size)  # The number of copies to insert into the population.
+    copy_append = int(c_ratio * p_size)           # The number of copies to insert into the population.
     population = []
 
     population = populate_copies(population, copy_append, input_list)  # Create the copies.

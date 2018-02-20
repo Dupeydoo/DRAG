@@ -34,7 +34,7 @@ def do_crossover(parents, cross_prob, single_point_prob=0.5):
         # For every pair in the parents iterable.
         pair = [parent_one, parent_two]
         if random.random() < cross_prob:  # Do we perform crossover.
-            Track.pair_changed(pair)  # Update if the tracks have been modified.
+            Track.pair_changed(pair)      # Update if the tracks have been modified.
 
             if random.random() < single_point_prob:
                 children += single_point_crossover(pair)
@@ -43,7 +43,7 @@ def do_crossover(parents, cross_prob, single_point_prob=0.5):
                 children += multi_point_crossover(pair)
 
         else:
-            children += pair  # Otherwise just add them to the children.
+            children += pair              # Otherwise just add them to the children.
     return children
 
 

@@ -27,7 +27,7 @@ def generate_rock_tracks(population, track_number, time_sig):
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
-    structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]  # Common rock rhythm instruments
+    structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     population = generate_tracks(population, track_number, structure, time_sig, 0, 2)
     return population
 
@@ -81,8 +81,8 @@ def build_track(structure, time_sig, index, common_value):
     """
     track = Track([], 0)
     for beat in range(time_sig - 1):
-        instrument = rand.choice(structure)  # Choose from the structure.
-        track.add_to_contents(instrument)  # Add the instrument to the track.
+        instrument = rand.choice(structure)          # Choose from the structure.
+        track.add_to_contents(instrument)            # Add the instrument to the track.
     track.insert_into_contents(index, common_value)  # Insert the common value into the track.
     return track
 

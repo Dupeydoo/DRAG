@@ -77,12 +77,13 @@ def process_input(population, bpm, request):
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
         bpm (int): A number representing the beats per minute or tempo of the track.
+        request (:obj:`HTTPRequest`): The request asking for tracks to be generated.
     """
-    path = system_path + wav_path  # Get the full path to write files to.
+    path = system_path + wav_path                       # Get the full path to write files to.
     for candidate in range(len(population)):
         solution = population[candidate]
         output_file = path + request.session["user_id"] + "candidate" + str(
-            candidate) + ".wav"  # Build unique candidate file names
+            candidate) + ".wav"                         # Build unique candidate file names
         wb.map_input(solution, bpm, output_file, path)  # Write the wav files.
 
 

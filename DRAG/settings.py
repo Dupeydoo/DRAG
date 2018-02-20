@@ -120,4 +120,5 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'DRAG/static')
 ]
 
+# Use cookies to identify anonymous users.
 SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'

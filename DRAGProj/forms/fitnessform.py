@@ -30,7 +30,7 @@ class FitnessForm(forms.Form):
         Args:
             **kwargs (:obj:`dict`): The dictionary of additional keyword arguments provided.
         """
-        size = kwargs.pop('size')  # Pop off the size keyword argument.
+        size = kwargs.pop('size')                           # Pop off the size keyword argument.
         super(FitnessForm, self).__init__(*args, **kwargs)  # Call the forms.Form constructor.
 
         for candidate in range(size):
@@ -50,20 +50,25 @@ class FitnessForm(forms.Form):
             (name, fitness) (:obj:`tuple`): name, fitness pairs from the cleaned data dictionary. The yield creates
             a generator object to use for assignment.
         """
-        for name, fitness in self.cleaned_data.items():  # This forms cleaned items.
+        for name, fitness in self.cleaned_data.items():  # Loop through the forms cleaned items.
             yield (self.fields[name], fitness)
 
     def clean(self):
+        """
+        Overrides the form clean method. Checks if the user
+        is being lazy by inspecting the ratings they attempt
+        to submit.
+        """
         cleaned_data = super().clean()
         fields = cleaned_data.values()
         adjacent_laziness, temp = 0, 0
-        for field in fields:
+        for field in fields:                            # Loops through field values and counts element repeats.
             if temp == field:
                 adjacent_laziness += 1
             temp = field
 
-        if adjacent_laziness >= 3:
-            raise forms.ValidationError(
+        if adjacent_laziness >= 3:                      # Cut-off point is 3 repeat occurrences, user is lazy.
+            raise forms.ValidationError(                # TODO Get this validation displaying!
                 "Abnormal repetition in ratings"
                 "detected! Please listen to the"
                 "tracks properly."

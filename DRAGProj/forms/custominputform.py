@@ -33,7 +33,7 @@ instrument_choices = (
     (16, "All Instruments")
 )
 """
-instrument_choices (:obj:`tuple` of :obj:`tuple`): The choices to be visible on the input dropdowns.
+instrument_choices (:obj:`tuple` of :obj:`tuple`): The choices to be visible on the input drop-downs.
 """
 
 genres = [
