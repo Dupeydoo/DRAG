@@ -6,6 +6,7 @@ import DRAGProj.dragcommon.wavbuilder as wb
 import DRAG.datacontext as dc
 
 from DRAGProj.models.anonymoususer import AnonymousUser
+from DRAGProj.dragcommon.appstart import AppStart
 
 """
 This module provides assisting functions to views.py to keep the views logic
@@ -125,3 +126,8 @@ def create_user(user_uuid):
     """
     user = AnonymousUser(UUID=user_uuid)
     user.save()
+
+
+def check_app_start(request):
+    if AppStart.clear:
+        request.session.flush()

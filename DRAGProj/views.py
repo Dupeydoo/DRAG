@@ -8,6 +8,7 @@ from DRAGProj.forms.fitnessform import FitnessForm
 import DRAG.datacontext as dc
 import DRAGProj.geneticrunner as gr
 
+from DRAGProj.dragcommon.appstart import AppStart
 import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.dragcommon.pageerror as pe
 import DRAGProj.dragcommon.viewshelper as vh
@@ -42,6 +43,8 @@ def index(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
+    request.session.flush()
+    AppStart.clear = False
     request.session["current_generation"] = 1  # Reset the generations if the user goes home mid-diversification.
     response = render(request, "DRAG/index.html", {"is_home": True})
     cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" in request.COOKIES else None
@@ -60,6 +63,7 @@ def fitness(request):
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
         :obj:`HTTPResponseRedirect`: A HTTPResponseRedirect object that redirects the user to the routed url.
     """
+    vh.check_app_start(request)
     context = dc.context
     if request.method == 'POST':  # If the form has been submitted.
         form = FitnessForm(request.POST,
@@ -98,6 +102,7 @@ def first_fitness(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
+    vh.check_app_start(request)
     context = dc.context
     try:
         bpm = request.session["bpm"]
@@ -194,6 +199,19 @@ def about(request):
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
     return render(request, 'DRAG/about.html', {"is_home": False})
+
+
+def faq(request):
+    """
+    View function for the faq page.
+
+    Args:
+        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+
+    Returns:
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+    """
+    return render(request, 'DRAG/faq.html', {"is_home": False})
 
 
 def page_not_found_error(request):

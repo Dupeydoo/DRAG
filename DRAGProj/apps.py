@@ -1,4 +1,5 @@
 from django.apps import AppConfig
+from DRAGProj.dragcommon.appstart import AppStart
 
 """
 The apps module. Exposes the app configuration for
@@ -21,3 +22,6 @@ class DragprojConfig(AppConfig):
         name (:obj:`str`): The name of the DRAGProj configuration.
     """
     name = 'DRAGProj'
+
+    def ready(self):
+        AppStart.clear = True

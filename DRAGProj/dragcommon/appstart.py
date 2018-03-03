@@ -1,0 +1,2 @@
+class AppStart:
+    clear = False

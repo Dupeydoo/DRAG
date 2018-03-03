@@ -21,7 +21,8 @@ urlpatterns = [
     path('RateFitness/', views.fitness, name='fitness'),
     path('DRAGError/', views.error, name='error'),
     path('Preset/', views.preset, name='preset'),
-    path('About/', views.about, name='about')
+    path('About/', views.about, name='about'),
+    path('FAQ/', views.faq, name='faq')
 ]
 """
 urlpatterns (:obj:`list`): contains the controller patterns for different typed urls.

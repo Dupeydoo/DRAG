@@ -10,6 +10,7 @@ The module that houses the Preset class.
         1.0.0
 """
 
+
 class Preset(models.Model):
     """
     Class to represent a preset. Each beat of the preset is stored

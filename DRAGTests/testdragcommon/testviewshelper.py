@@ -1,9 +1,10 @@
-import unittest
+from django import test
 from DRAGProj.dragcommon import viewshelper as vh
 from DRAGTests.mock.mockpopulation import MockPopulation
+from DRAGProj.models.anonymoususer import AnonymousUser
 
 
-class TestViewsHelper(unittest.TestCase):
+class TestViewsHelper(test.TestCase):
     def setUp(self):
         self.population = MockPopulation().population
         self.dict = [
@@ -18,6 +19,7 @@ class TestViewsHelper(unittest.TestCase):
             ("nine", 9),
             ("ten", 10)
         ]
+        self.uuid = "HelloWorld"
 
     def test_gather_fitness_input(self):
         vh.gather_fitness_input(self.dict, self.population)
@@ -30,6 +32,14 @@ class TestViewsHelper(unittest.TestCase):
                 gathered.append(False)
 
         self.assertEqual(False, False in gathered, "The fitnesses were not assigned correctly!")
+
+    def test_generation_check(self):
+        self.assertTrue(vh.generation_check(5, 5), "The given generations are not equal!")
+
+    def test_create_user(self):
+        vh.create_user(self.uuid)
+        user = AnonymousUser.objects.get(UUID=self.uuid)
+        self.assertEqual("HelloWorld", user.UUID, "The new user was not saved correctly!")
 
     def tearDown(self):
         del self.population, self.dict

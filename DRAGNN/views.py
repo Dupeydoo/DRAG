@@ -3,12 +3,14 @@ from django.http import HttpResponseRedirect
 from DRAG.datacontext import context
 
 from DRAGProj.dragcommon import pageerror as pe
-from DRAGNN.machinelearning import gaussianregressioncv
+from DRAGProj.dragcommon import viewshelper as vh
 
 
 def machinelearn(request):
+    vh.check_app_start(request)
     try:
-        gaussianregressioncv.gaussian_regression()
+        bpm = request.session["bpm"]
+        print("Hello")
     except KeyError as k:
         return pe.catch_key_error(request)
     return HttpResponseRedirect("/Finished")

@@ -15,7 +15,8 @@ class TestSelection(unittest.TestCase):
 
     def test_tournament_select(self):
         parent = selection.tournament_select(self.population, self.tournament_size)
-        self.assertEqual(1, parent.fitness, "The tournament was performed incorrectly!")
+        self.assertEqual(1, parent.fitness,
+                         "The tournament was performed incorrectly! Actual: %d, Expected: %d" % (parent.fitness, 1))
 
     def tearDown(self):
         del self.population, self.tournament_size

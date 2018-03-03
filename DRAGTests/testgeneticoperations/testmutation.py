@@ -1,5 +1,5 @@
 import unittest
-from DRAGProj.mappers.drummapper import drummapper
+from DRAGProj.mappers.drummapper import drum_mapper
 from DRAGProj.geneticoperations import mutation
 from DRAGProj.dragcommon.track import Track
 from DRAGTests.mock.mockpopulation import MockPopulation
@@ -27,9 +27,9 @@ class TestMutation(unittest.TestCase):
         self.assertNotEqual(child.content, self.child.content, "The track was not mutated!")
 
     def test_create_groups(self):
-        result = mutation.create_groups(drummapper, self.child, 5)
+        result = mutation.create_groups(drum_mapper, self.child, 5)
         changed_correctly = True if 1 or 5 or 6 or 7 or 8 or 9 or 10 or 11 == result[0][0] else False
         self.assertTrue(changed_correctly)
 
     def tearDown(self):
-        del self.children
+        del self.children, self.child, self.muta_prob

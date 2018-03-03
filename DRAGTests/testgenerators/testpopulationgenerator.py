@@ -1,6 +1,5 @@
 import unittest
 from DRAGProj.generators import populationgenerator as pg
-from DRAGTests.mock.mockpopulation import MockPopulation
 
 
 class TestPopulationGenerator(unittest.TestCase):

@@ -7,7 +7,7 @@ class MockAudioThread(threading.Thread):
     def __init__(self):
         threading.Thread.__init__(self)
         context = dc.context
-        path = context["systempath"] + context["wavpath"] + "test.wav"
+        path = context["system_path"] + context["wav_path"] + "test.wav"
         self.output = AudioSegment.silent(duration=1000)
         self.output_file = path
 

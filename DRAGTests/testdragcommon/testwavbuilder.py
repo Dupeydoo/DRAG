@@ -1,14 +1,18 @@
 import unittest
 from DRAGProj.dragcommon import wavbuilder as wb
 from DRAG import datacontext as dc
+import os
 
 
 class TestWavBuilder(unittest.TestCase):
     def setUp(self):
         context = dc.context
-        self.wav_path = context["systempath"] + context["wavpath"]
+        self.wav_path = context["system_path"] + context["wav_path"]
         self.path = self.wav_path + "test.wav"
         self.bpm = 200
+
+        with open("testwavbuilder_clearwavcandidates/test.dat", "w") as file:
+            file.write("Hello World.")
 
     def test_open_wav(self):
         file = wb.open_wav(self.path)
@@ -16,6 +20,11 @@ class TestWavBuilder(unittest.TestCase):
 
     def test_beat_offset(self):
         self.assertEqual(300, wb.beat_offset(200), "The beat offset was calculated incorrectly!")
+
+    def test_clear_wav_candidates(self):
+        wav_directory = "testwavbuilder_clearwavcandidates/"
+        wb.clear_wav_candidates(wav_directory, "test")
+        self.assertEqual([], os.listdir(wav_directory), "Test.dat was not removed!")
 
     def tearDown(self):
         del self.wav_path, self.path, self.bpm

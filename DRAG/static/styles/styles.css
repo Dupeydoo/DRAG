@@ -64,9 +64,13 @@
     color: white;
 }
 
-#about .about-section {
+#about .about-section, #faq .faq-article {
     margin-bottom: 20px;
     margin-top: 20px;
+}
+
+#faq .faq-article li a, #faq .faq-top-list li a {
+    margin-left: 10px;
 }
 
 #footer {
