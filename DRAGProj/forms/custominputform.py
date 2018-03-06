@@ -1,4 +1,5 @@
 from django import forms
+from DRAG.datacontext import context
 
 """
 A module containing the form class and recipes to make the custom beat input form.
@@ -80,12 +81,19 @@ class CustomInputForm(forms.Form):
         cleaned_data = super().clean()
         bpm = cleaned_data["bpm"]
 
+        beats = 0
         for key, value in cleaned_data.items():
             if "beat" in key:
                 if value < 1 or value > 16 or not isinstance(value, int):
                     raise forms.ValidationError(
                         str(key) + " was given an incorrect value."
                     )
+                beats += 1
+
+        if beats < context["time_signature"]:
+            raise forms.ValidationError(
+                "You must provide all the beats of the song."
+            )
 
         if bpm > 250 or bpm < 60:
             raise forms.ValidationError(

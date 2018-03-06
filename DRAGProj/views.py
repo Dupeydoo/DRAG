@@ -162,6 +162,9 @@ def preset(request):
             request.session["genre"] = "Rock"  # As before get the cleaned form POST data.
             return HttpResponseRedirect('/FirstFitness')  # Proceed to rate tracks.
 
+        else:
+            return pe.catch_critical_error(request)
+
     else:
         return pe.catch_preset_error(request)
 

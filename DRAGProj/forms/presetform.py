@@ -40,14 +40,18 @@ class PresetForm(forms.Form):
 
     def clean(self):
         cleaned_data = super().clean()
-        bpm = cleaned_data["bpm"]
-        preset = cleaned_data["preset"]
-        if bpm > 250 or bpm < 60:
-            raise forms.ValidationError(
-                "BPM must be between 60 and 250."
-            )
+        if len(self.fields) == len(cleaned_data):
+            bpm = cleaned_data["bpm"]
+            preset = cleaned_data["preset"]
+            if bpm > 250 or bpm < 60:
+                raise forms.ValidationError(
+                    "BPM must be between 60 and 250."
+                )
 
-        if preset < 0 or preset > (len(preset_choices) - 1) or not isinstance(preset, int):
-            raise forms.ValidationError(
-                "Please choose one of the available presets."
-            )
+            if preset < 0 or preset > (len(preset_choices) - 1) or not isinstance(preset, int):
+                raise forms.ValidationError(
+                    "Please choose one of the available presets."
+                )
+
+        else:
+            raise forms.ValidationError("One of the fields was not submitted!")
