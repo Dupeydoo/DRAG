@@ -1,10 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>DRAG - Neural Network</title>
-    </head>
-    <body>
-        <p>Hello World!</p>
-    </body>
-    </html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <title>DRAG - Machine Learning</title>
+    {% block resources %} {% include "DRAG/renderresources.html" %} {% endblock %}
+</head>
+<body>
+{% block content %}
+    {% include "DRAG/menu.html" %}
+    <div class="container text-center" id="machinelearning">
+        <div class="row">
+            <div class="offset-md-4">
+                Click the big red button to start Machine Learning!
+                <form action="/MachineLoad/" method="post">
+                    <button id="big-red-button" type="button"
+                            class="button button-3d button-circle button-caution button-jumbo"></button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="learning" style="display:none;">
+        <p>
+            Learning how you rated tracks... this will only take a few minutes
+        </p>
+        <img src="/DRAG/static/images/ellipsis-loader.svg" alt="This is a spinning loading icon">
+    </div>
+    {% include "DRAG/footer.html" %}
+{% endblock %}
+{% block bodyscripts %}
+    {% include "DRAG/bodyscripts.html" %}
+    <script src="{% static "js/jquery.blockUI.js" %}"></script>
+    <script src="{% static "js/loader.js" %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static "styles/buttons.css" %}"/>
+{% endblock %}
+</body>
+</html>

@@ -10,6 +10,11 @@ from DRAGNN.machinelearning import classification as cl
 
 def machinelearn(request):
     vh.check_app_start(request)
+    return render(request, "machinelearn.html")
+
+
+def machineload(request):
+    vh.check_app_start(request)
     try:
         bpm = request.session["bpm"]
         cl.classification(request, request.session["user_id"])
