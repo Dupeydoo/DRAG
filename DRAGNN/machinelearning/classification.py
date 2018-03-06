@@ -21,23 +21,23 @@ CROSS_VAL_FOLDS = 10
 FEATURE_VALUES = 17
 
 
-def classification(user_id):
+def classification(request, user_id):
     time_sig = context["time_signature"]
     ml_data = ds.read_data(time_sig, user_id)
-    split_data(ml_data)#, request)
+    split_data(ml_data, request)
 
 
-def split_data(ml_data):#, request):
+def split_data(ml_data, request):
     data = ml_data[0]
     features = len(data[0])
     fitness = decompose_fitness(ml_data[1].ravel())
 
     enc = preprocessing.OneHotEncoder(n_values=FEATURE_VALUES)
     data = enc.fit_transform(data).toarray()
-    perform_classification(data, fitness, features)#, request, enc)
+    perform_classification(data, fitness, features, request, enc)
 
 
-def perform_classification(data, fitness, features):#, request, hot_encoder):
+def perform_classification(data, fitness, features, request, hot_encoder):
     tuned_parameters = {"n_estimators": [10], "max_depth": [5, 8, 12], "min_samples_leaf": [3, 5, 8]}
     clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
     clf.fit(data, fitness)

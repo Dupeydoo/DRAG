@@ -35,5 +35,19 @@ class PresetForm(forms.Form):
     """
     preset = forms.TypedChoiceField(choices=preset_choices, coerce=int,
                                     widget=forms.Select(attrs={"class": "form-control cb"}))
-    bpm = forms.IntegerField(max_value=250, min_value=1,
+    bpm = forms.IntegerField(max_value=250, min_value=60,
                              widget=forms.NumberInput(attrs={"id": "bpmtwo", "name": "bpmtwo"}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+        bpm = cleaned_data["bpm"]
+        preset = cleaned_data["preset"]
+        if bpm > 250 or bpm < 60:
+            raise forms.ValidationError(
+                "BPM must be between 60 and 250."
+            )
+
+        if preset < 0 or preset > (len(preset_choices) - 1) or not isinstance(preset, int):
+            raise forms.ValidationError(
+                "Please choose one of the available presets."
+            )

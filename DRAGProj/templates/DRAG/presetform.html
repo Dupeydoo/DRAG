@@ -1,6 +1,14 @@
 {% block content %}
+    {% load strconcat %}
     <section id="preset">
         <h2>Or use a preset</h2>
+        {% if preset.errors %}
+            {% for error in preset.non_field_errors %}
+                <p class="form-error">
+                    <strong>{{ "*"|str_concat:error }}</strong>
+                </p>
+            {% endfor %}
+        {% endif %}
         <form action="/Preset/" method="post">
             {% csrf_token %}
             {{ preset.preset }}

@@ -72,6 +72,22 @@ class CustomInputForm(forms.Form):
                                         widget=forms.Select(attrs={"class": "form-control cb"}))
     beat_eight = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
                                         widget=forms.Select(attrs={"class": "form-control cb"}))
-    bpm = forms.IntegerField(max_value=250, min_value=1,
+    bpm = forms.IntegerField(max_value=250, min_value=60,
                              widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
     genre = forms.ChoiceField(choices=genres, widget=forms.Select(attrs={"class": "form-control", "id": "genre"}))
+
+    def clean(self):
+        cleaned_data = super().clean()
+        bpm = cleaned_data["bpm"]
+
+        for key, value in cleaned_data.items():
+            if "beat" in key:
+                if value < 1 or value > 16 or not isinstance(value, int):
+                    raise forms.ValidationError(
+                        str(key) + " was given an incorrect value."
+                    )
+
+        if bpm > 250 or bpm < 60:
+            raise forms.ValidationError(
+                "BPM must be between 60 and 250."
+            )
