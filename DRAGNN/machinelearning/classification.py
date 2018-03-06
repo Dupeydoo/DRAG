@@ -1,59 +1,64 @@
 import numpy as np
-import math
 
 from DRAGNN.storage import datastore as ds
 from DRAGNN.machinelearning import automategeneration as ag
 from DRAG.datacontext import context
 
-from sklearn import svm
 from sklearn import preprocessing
-from sklearn.model_selection import cross_val_predict
-from sklearn import tree
+from sklearn.model_selection import GridSearchCV
+from sklearn import ensemble
 import uuid
 
+HIGH_FITNESS_DIVIDE = 7
+MID_FITNESS_DIVIDE = 4
 
-def classification():
+HIGH_FITNESS_CLASS = 2
+MID_FITNESS_CLASS = 1
+LOW_FITNESS_CLASS = 0
+
+TREE_DEPTH = 8
+CROSS_VAL_FOLDS = 10
+FEATURE_VALUES = 17
+
+
+def classification(user_id):
     time_sig = context["time_signature"]
-    ml_data = ds.read_data(time_sig, ds.get_data_store())
-    split_data(ml_data)
+    ml_data = ds.read_data(time_sig, user_id)
+    split_data(ml_data)#, request)
 
 
-def split_data(ml_data):
+def split_data(ml_data):#, request):
     data = ml_data[0]
     features = len(data[0])
-    # data = preprocessing.scale(data)
     fitness = decompose_fitness(ml_data[1].ravel())
 
-    enc = preprocessing.OneHotEncoder()
+    enc = preprocessing.OneHotEncoder(n_values=FEATURE_VALUES)
     data = enc.fit_transform(data).toarray()
-    perform_classification(data, fitness, features)
+    perform_classification(data, fitness, features)#, request, enc)
 
 
-def perform_classification(data, fitness, features):
-    clf = tree.DecisionTreeClassifier(max_depth=8)
-    predictions = cross_val_predict(clf, data, fitness, cv=20)
-    write_to_file(predictions, fitness, clf, features)
-
-
-def log_classification_model(model, testing_data, testing_fitness):
-    print("Decision Function: ")
-    print(model.decision_function(testing_data))
-    print("Mean Accuracy: " + str(model.score(testing_data, testing_fitness)))
+def perform_classification(data, fitness, features):#, request, hot_encoder):
+    tuned_parameters = {"n_estimators": [10], "max_depth": [5, 8, 12], "min_samples_leaf": [3, 5, 8]}
+    clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
+    clf.fit(data, fitness)
+    predictions = clf.predict(data)
+    write_to_file(predictions, fitness, features)
+    # ag.run(clf, request, hot_encoder)
 
 
 def decompose_fitness(fitnesses):
     for fitness in range(len(fitnesses)):
         fitness_val = fitnesses[fitness]
-        if fitness_val >= 7:
-            fitnesses[fitness] = 2
-        elif 4 <= fitness_val < 7:
-            fitnesses[fitness] = 1
+        if fitness_val >= HIGH_FITNESS_DIVIDE:
+            fitnesses[fitness] = HIGH_FITNESS_CLASS
+        elif MID_FITNESS_DIVIDE <= fitness_val < HIGH_FITNESS_DIVIDE:
+            fitnesses[fitness] = MID_FITNESS_CLASS
         else:
-            fitnesses[fitness] = 0
+            fitnesses[fitness] = LOW_FITNESS_CLASS
     return fitnesses
 
 
-def write_to_file(predictions, fitness, classifier, features):
+def write_to_file(predictions, fitness, features):
     filename = "outputdir/" + str(uuid.uuid1()) + ".txt"
     file = open(filename, "w")
 
@@ -76,10 +81,11 @@ def write_to_file(predictions, fitness, classifier, features):
     file.write("\n")
     file.write("Number of zeros: " + str(list(differences).count(0)))
     file.write("\n")
-    file.write("Max-Depth: " + str(classifier.max_depth) + "\n")
+    file.write("Max-Depth: Determined by GridSearchCV\n")
     file.write("Features: " + str(features) + "\n")
+    file.write("Cross-Val Folds: " + str(CROSS_VAL_FOLDS))
     file.close()
 
 
 if __name__ == "__main__":
-    classification()
+    classification("")

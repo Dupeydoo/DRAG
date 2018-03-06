@@ -55,6 +55,10 @@
     margin-bottom: 10px;
 }
 
+.form-error {
+    color: darkred;
+}
+
 #diversify {
     background-image: url("/DRAG/static/images/code.jpg")
 }
@@ -128,12 +132,21 @@ form .form-element {
     box-shadow: none;
 }
 
+figure {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.figure-caption {
+    margin-top: 3%;
+}
+
 @media only screen and (max-width: 800px) {
     .about-section img {
         margin-bottom: 20px;
     }
 
-    #forms-diversify, #index-body, #about {
+    #forms-diversify, #index-body, #about, #faq {
         padding: 20px;
     }
 

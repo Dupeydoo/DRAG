@@ -14,6 +14,9 @@ This module generates tracks based on input genre.
         DRAGProj.dragcommon.track
 """
 
+HIGH_HAT_AND_BASS = 2
+HIGH_HAT_AND_SNARE = 3
+
 
 def generate_rock_tracks(population, track_number, time_sig):
     """
@@ -28,7 +31,7 @@ def generate_rock_tracks(population, track_number, time_sig):
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
-    population = generate_tracks(population, track_number, structure, time_sig, 0, 2)
+    population = generate_tracks(population, track_number, structure, time_sig, 0, HIGH_HAT_AND_BASS)
     return population
 
 
@@ -45,7 +48,7 @@ def generate_blues_tracks(population, track_number, time_sig):
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [7, 11, 16]  # Common blues rhythm instruments
-    population = generate_tracks(population, track_number, structure, time_sig, 1, 3)
+    population = generate_tracks(population, track_number, structure, time_sig, 1, HIGH_HAT_AND_SNARE)
     return population
 
 
@@ -62,7 +65,7 @@ def generate_jazz_tracks(population, track_number, time_sig):
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
     structure = [1, 2, 3, 4, 7, 11, 16]  # Common jazz rhythm instruments
-    population = generate_tracks(population, track_number, structure, time_sig, 3, 3)
+    population = generate_tracks(population, track_number, structure, time_sig, 3, HIGH_HAT_AND_SNARE)
     return population
 
 
@@ -81,8 +84,8 @@ def build_track(structure, time_sig, index, common_value):
     """
     track = Track([], 0)
     for beat in range(time_sig - 1):
-        instrument = rand.choice(structure)          # Choose from the structure.
-        track.add_to_contents(instrument)            # Add the instrument to the track.
+        instrument = rand.choice(structure)  # Choose from the structure.
+        track.add_to_contents(instrument)  # Add the instrument to the track.
     track.insert_into_contents(index, common_value)  # Insert the common value into the track.
     return track
 

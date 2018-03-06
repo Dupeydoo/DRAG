@@ -13,7 +13,7 @@ information used when DRAG runs.
 
 context = {
     "manual_generations": 10,                                                    # Number of manual generations to run.
-    "automated_generations": 200,                                                # Number of automated generations ran.
+    "automated_generations": 100,                                                # Number of automated generations ran.
     "population_size": 10,                                                       # Size of the GA population.
     "copy_ratio": 0.2,                                                           # Number of copies to create initially.
     "tournament_size": 2,                                                        # Tournament selection parameter.

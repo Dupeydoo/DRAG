@@ -51,6 +51,9 @@ cross_prob = context["cross_prob"]
 muta_prob = context["muta_prob"]
 """muta_prob (float): The probability of genetic mutation occuring."""
 
+DEFAULT_POP_SIZE = 10
+"""DEFAULT_POP_SIZE (int): A default population size constant for incorrect population sizes."""
+
 
 def initiliase_population(input_list, genre):
     """
@@ -66,7 +69,7 @@ def initiliase_population(input_list, genre):
     if dm.is_even(population_size) and population_size >= 0:  # Genetic crossover takes place on pairs.
         return pg.generate_population(population_size, copy_ratio, input_list, genre, time_signature)
     else:
-        pop_size = 10  # If incorrect input is set for whatever reason, assume a default.
+        pop_size = DEFAULT_POP_SIZE  # If incorrect input is set for whatever reason, assume a default.
         return pg.generate_population(pop_size, copy_ratio, input_list, genre, time_signature)
 
 

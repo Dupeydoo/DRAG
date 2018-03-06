@@ -11,6 +11,13 @@
 
             Each track can be navigated easily in a grid system by using shift + a directional key to switch
             from track to track. Once a track is in focus you may use the Enter or Space key to play the track.</p>
+        {% if fitness_form.errors %}
+            {% for error in fitness_form.non_field_errors %}
+                <p class="form-error">
+                    <strong>{{ "*"|str_concat:error }}</strong>
+                </p>
+            {% endfor %}
+        {% endif %}
         <form action="/RateFitness/" method="post">
             {% csrf_token %}
             <div class="row">

@@ -68,8 +68,8 @@ class FitnessForm(forms.Form):
             temp = field
 
         if adjacent_laziness >= 3:                      # Cut-off point is 3 repeat occurrences, user is lazy.
-            raise forms.ValidationError(                # TODO Get this validation displaying!
-                "Abnormal repetition in ratings"
-                "detected! Please listen to the"
+            raise forms.ValidationError(
+                "Abnormal repetition in ratings "
+                "detected! Please listen to the "
                 "tracks properly."
             )

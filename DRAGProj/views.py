@@ -73,9 +73,6 @@ def fitness(request):
             vh.perform_generation(form, request)
             return HttpResponseRedirect('/RateFitness')
 
-        else:
-            return render(request, "DRAG/fitness.html", context)
-
     else:
         try:  # Here we check to see if the user is accessing the page correctly.
             bpm = request.session["bpm"]
@@ -198,6 +195,7 @@ def about(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
+    request.session.flush()
     return render(request, 'DRAG/about.html', {"is_home": False})
 
 
@@ -211,6 +209,7 @@ def faq(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
+    request.session.flush()
     return render(request, 'DRAG/faq.html', {"is_home": False})
 
 
@@ -224,6 +223,7 @@ def page_not_found_error(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
+    request.session.flush()
     return render(request, 'DRAG/404.html', {"is_home": True})
 
 
@@ -237,4 +237,5 @@ def server_error(request):
     Returns:
         :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
     """
+    request.session.flush()
     return render(request, 'DRAG/500.html', {"is_home": True})

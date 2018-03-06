@@ -5,12 +5,15 @@ from DRAG.datacontext import context
 from DRAGProj.dragcommon import pageerror as pe
 from DRAGProj.dragcommon import viewshelper as vh
 
+from DRAGNN.machinelearning import classification as cl
+
 
 def machinelearn(request):
     vh.check_app_start(request)
     try:
         bpm = request.session["bpm"]
-        print("Hello")
+        cl.classification(request, request.session["user_id"])
+
     except KeyError as k:
         return pe.catch_key_error(request)
     return HttpResponseRedirect("/Finished")

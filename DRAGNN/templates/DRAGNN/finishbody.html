@@ -10,7 +10,7 @@
             <div class="col-md-3">
                 <h5>Track {{ forloop.counter }}:</h5>
                 <audio id="{{ "track"|str_concat:forloop.counter0 }}" class="track" controls>
-                    <source src="{{ "/DRAG/static/wavfiles/"|str_concat:"candidate"|str_concat:forloop.counter0|str_concat:".wav" }}"
+                    <source src="{{ "/DRAG/static/wavfiles/"|str_concat:request.session.user_id|str_concat:"candidate"|str_concat:forloop.counter0|str_concat:".wav" }}"
                             type="audio/wav">
                 </audio>
             </div>

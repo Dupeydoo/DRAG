@@ -12,7 +12,7 @@ The mutation module provides the functions for mutation in the genetic algorithm
 """
 
 
-def do_mutation(children, muta_prob):
+def do_mutation(children, muta_prob, muta_type_prob=0.5):
     """
     The entry function to mutation.
 
@@ -23,7 +23,6 @@ def do_mutation(children, muta_prob):
     Returns:
         mutated_children (:obj:`list` of :obj:`Track`): A list of children that have been mutated.
     """
-    muta_type_prob = 0.5
     mutated_children = []
     for child in children:
         # If we perform mutation.

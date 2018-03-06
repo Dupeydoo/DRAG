@@ -83,7 +83,8 @@ def beat_offset(bpm):
     Returns:
          number: A value indicating the space between notes in milliseconds, hence 60000.
     """
-    return 60000 / bpm                                      # 60000 milliseconds are in a minute
+    minute_milliseconds = 60000
+    return minute_milliseconds / bpm
 
 
 def clear_wav_candidates(wav_directory, string):
