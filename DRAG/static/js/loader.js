@@ -1,9 +1,9 @@
 $(document).ready(function () {
-    var twoMinutes = 1000 * 60 * 2;
+    var twoMinutes = 1000 * 60 * 2.5;
 
     $('#big-red-button').click(function () {
         $("#machinelearning").find("form").submit();
-        $.blockUI({message: $('#learning')});
+        $.blockUI({message: $('#learning'), css: { top: "10%", left: "24%", height:"auto", width: "800px" } });
         startGame();
         setTimeout($.unblockUI, twoMinutes);
     });
@@ -14,23 +14,31 @@ var player;
 var barrier = [];
 var playerScore;
 
+var gameCanvas = {
+    canvas: document.createElement("canvas"),
+    start: function () {
+        this.canvas.width = 500;
+        this.canvas.height = 300;
+        this.context = this.canvas.getContext("2d");
+        this.frames = 0;
+        var game = document.getElementById("game-area");
+        game.appendChild(this.canvas);
+        this.interval = setInterval(updateArea, 20);
+    },
+    clear: function () {
+        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+    },
+    stop: function () {
+        clearInterval(this.interval);
+    }
+};
+
 
 function startGame() {
+    gameCanvas.start();
+    barrier = [];
     playerScore = new CreatePlayer("30px", "Consolas", "black", 280, 40, "text");
     player = new CreatePlayer(30, 30, "red", 10, 120);
-    gameCanvas.start();
-
-    Mousetrap.bind("w", moveup(), "keydown");
-    Mousetrap.bind("w", stopMove(), "keyup");
-
-    Mousetrap.bind("a", moveleft(), "keydown");
-    Mousetrap.bind("a", stopMove(), "keyup");
-
-    Mousetrap.bind("s", movedown(), "keydown");
-    Mousetrap.bind("s", stopMove(), "keyup");
-
-    Mousetrap.bind("d", moveright(), "keydown");
-    Mousetrap.bind("d", stopMove(), "keyup");
 }
 
 
@@ -93,6 +101,7 @@ function updateArea() {
     for (var i = 0; i < barrier.length; i++) {
         if (player.collide(barrier[i])) {
             gameCanvas.stop();
+            gameCanvas.clear();
             startGame();
             return;
         }
@@ -105,9 +114,9 @@ function updateArea() {
         x = gameCanvas.canvas.width;
 
         var minimumHeight = 30;
-        var maximumHeight = 200;
-        var minimumGap = 40;
-        var maximumGap = 200;
+        var maximumHeight = 170;
+        var minimumGap = 30;
+        var maximumGap = 170;
 
         var height = Math.floor(Math.random() * (maximumHeight - minimumHeight + 1) + minimumHeight);
         var gap = Math.floor(Math.random() * (maximumGap - minimumGap + 1) + minimumGap);
@@ -130,22 +139,22 @@ function updateArea() {
 
 
 function moveup() {
-    player.speedInY -= 1;
+    player.speedInY -= 1.5;
 }
 
 
 function movedown() {
-    player.speedInY += 1;
+    player.speedInY += 1.5;
 }
 
 
 function moveleft() {
-    player.speedInX -= 1;
+    player.speedInX -= 1.5;
 }
 
 
 function moveright() {
-    player.speedInX += 1;
+    player.speedInX += 1.5;
 }
 
 
@@ -158,25 +167,5 @@ function stopMove() {
 function checkInterval(currentFrame) {
     return ((gameCanvas.frames / currentFrame) % 1 == 0);
 }
-
-
-var gameCanvas = {
-    canvas: document.createElement("canvas"),
-    start: function () {
-        this.canvas.width = 480;
-        this.canvas.height = 270;
-        this.context = this.canvas.getContext("2d");
-        this.frames = 0;
-        var game = document.getElementById("game-area");
-        game.insertBefore(this.canvas, document.body.childNodes[0]);
-        this.interval = setInterval(updateArea, 20);
-    },
-    clear: function () {
-        this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    },
-    stop: function () {
-        clearInterval(this.interval);
-    }
-};
 
 

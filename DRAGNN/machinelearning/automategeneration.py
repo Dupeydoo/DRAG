@@ -9,6 +9,9 @@ def run(model, request, hot_encoder):
         print(request.session["current_generation"])
         single_generation(model, request, hot_encoder)
 
+    for member in context[request.session["user_id"] + "population"]:
+        print(member.fitness)
+
 
 def single_generation(model, request, hot_encoder):
     for track in context[request.session["user_id"] + "population"]:
