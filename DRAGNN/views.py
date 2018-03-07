@@ -6,11 +6,12 @@ from DRAGProj.dragcommon import pageerror as pe
 from DRAGProj.dragcommon import viewshelper as vh
 
 from DRAGNN.machinelearning import classification as cl
+import uuid
 
 
 def machinelearn(request):
     vh.check_app_start(request)
-    return render(request, "machinelearn.html")
+    return render(request, "machinelearn.html", {"is_home": False})
 
 
 def machineload(request):
@@ -27,4 +28,5 @@ def machineload(request):
 def finished(request):
     if request.session["current_generation"] != context["manual_generations"] + context["automated_generations"]:
         return pe.catch_critical_error(request)
+    context["population_range"] = range(context["population_size"])
     return render(request, "finish.html", context)

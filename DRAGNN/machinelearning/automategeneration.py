@@ -6,6 +6,7 @@ import numpy as np
 def run(model, request, hot_encoder):
     for generation in range(context["automated_generations"]):
         request.session["current_generation"] += 1
+        print(request.session["current_generation"])
         single_generation(model, request, hot_encoder)
 
 

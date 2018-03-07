@@ -8,24 +8,18 @@
 </head>
 <body>
 {% block content %}
-    {% include "DRAG/menu.html" %}
+    {% include "menu.html" %}
+    {% include "scroller.html" %}
+    {% block modal %}
+        {% include "mlmodal.html" %}
+    {% endblock %}
     <div class="container text-center" id="machinelearning">
-        <div class="row">
-            <div class="offset-md-4">
-                Click the big red button to start Machine Learning!
-                <form action="/MachineLoad/" method="post">
-                    <button id="big-red-button" type="button"
-                            class="button button-3d button-circle button-caution button-jumbo"></button>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="learning" style="display:none;">
-        <p>
-            Learning how you rated tracks... this will only take a few minutes
-        </p>
-        <img src="/DRAG/static/images/ellipsis-loader.svg" alt="This is a spinning loading icon">
+        <h1>Click the big red button to start Machine Learning!</h1>
+        <form action="/MachineLoad/" method="post">
+            {% csrf_token %}
+            <button id="big-red-button" type="button"
+                    class="button button-3d button-circle button-caution button-jumbo"></button>
+        </form>
     </div>
     {% include "DRAG/footer.html" %}
 {% endblock %}

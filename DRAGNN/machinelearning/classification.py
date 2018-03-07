@@ -42,8 +42,8 @@ def perform_classification(data, fitness, features, request, hot_encoder):
     clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
     clf.fit(data, fitness)
     predictions = clf.predict(data)
-    write_to_file(predictions, fitness, features)
-    # ag.run(clf, request, hot_encoder)
+    # write_to_file(predictions, fitness, features)
+    ag.run(clf, request, hot_encoder)
 
 
 def decompose_fitness(fitnesses):
@@ -59,7 +59,7 @@ def decompose_fitness(fitnesses):
 
 
 def write_to_file(predictions, fitness, features):
-    filename = "outputdir/" + str(uuid.uuid1()) + ".txt"
+    filename = context["system_path"] + "/DRAGNN/machinelearning/outputdir/" + str(uuid.uuid1()) + ".txt"
     file = open(filename, "w")
 
     file.write(

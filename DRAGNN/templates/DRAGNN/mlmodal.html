@@ -1,0 +1,31 @@
+{% block modal %}
+    <div id="learning" style="display:none;">
+        <p>
+            Learning how you rated tracks... this will only take a few minutes
+        </p>
+        <img src="/DRAG/static/images/ellipsis-loader.svg" alt="This is a spinning loading icon"
+             style="margin-bottom: 20px;">
+
+        <div id="game-area">
+            <div id="buttons">
+                <button class="btn btn-secondary" onmousedown="moveup()" onmouseup="stopMove()" ontouchstart="moveup()">
+                    Up
+                </button>
+                <br/><br/>
+                <button class="btn btn-secondary" onmousedown="movedown()" onmouseup="stopMove()"
+                        ontouchstart="movedown()">
+                    Down
+                </button>
+                <button class="btn btn-secondary" onmousedown="moveleft()" onmouseup="stopMove()"
+                        ontouchstart="moveleft()">
+                    Left
+                </button>
+                <br/><br/>
+                <button class="btn btn-secondary" onmousedown="moveright()" onmouseup="stopMove()"
+                        ontouchstart="moveright()">
+                    Right
+                </button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

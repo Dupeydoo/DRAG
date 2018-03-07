@@ -6,7 +6,7 @@ import os
 context = dc.context
 store_path = context["system_path"] + "/DRAGNN/storage/"
 test_path = context["system_path"] + "/DRAG/static/testdata/"
-current_path = test_path
+current_path = store_path
 
 
 def store_data(population, user_id):

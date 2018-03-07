@@ -35,7 +35,7 @@ def perform_generation(form, request):
     """
     population = dc.context[request.session["user_id"] + "population"]
     gather_fitness_input(form.collect_fitnesses(), population)
-    # ds.store_data(population, request.session["user_id"])  # Write data to HDF5 for neural net later
+    ds.store_data(population, request.session["user_id"])  # Write data to HDF5 for neural net later
 
     population = gr.perform_genetics(population)  # start the genetic operations.
     dc.context[request.session["user_id"] + "population"] = population
