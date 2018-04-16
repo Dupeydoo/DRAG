@@ -6,7 +6,7 @@ from DRAGProj.dragcommon import pageerror as pe
 from DRAGProj.dragcommon import viewshelper as vh
 
 from DRAGNN.machinelearning import classification as cl
-import uuid
+from DRAGNN.storage import datastore as ds
 
 
 def machinelearn(request):
@@ -29,4 +29,6 @@ def finished(request):
     if request.session["current_generation"] != context["manual_generations"] + context["automated_generations"]:
         return pe.catch_critical_error(request)
     context["population_range"] = range(context["population_size"])
+    if "user_id" not in request.session:
+        ds.delete_data_store(request.session["user_id"])
     return render(request, "finish.html", context)

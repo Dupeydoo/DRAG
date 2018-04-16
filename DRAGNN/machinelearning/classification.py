@@ -42,7 +42,7 @@ def perform_classification(data, fitness, features, request, hot_encoder):
     clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
     clf.fit(data, fitness)
     predictions = clf.predict(data)
-    # write_to_file(predictions, fitness, features)
+    write_to_file(predictions, fitness, features)
     ag.run(clf, request, hot_encoder)
 
 

@@ -16,7 +16,9 @@ This module houses the simple PresetForm used for ease of the user.
 preset_choices = (
     (0, "Rock"),
     (1, "Rock-Two"),
-    (2, "Rock-Three")
+    (2, "Rock-Three"),
+    (3, "Alternative"),
+    (4, "Alternative-Two")
 )
 """
 preset_choices (:obj:`tuple` of :obj:`tuple`): A list of available presets to 

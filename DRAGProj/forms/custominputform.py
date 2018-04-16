@@ -37,15 +37,6 @@ instrument_choices = (
 instrument_choices (:obj:`tuple` of :obj:`tuple`): The choices to be visible on the input drop-downs.
 """
 
-genres = [
-    ("Rock", "Rock"),
-    ("Jazz", "Jazz"),
-    ("Blues", "Blues")
-]
-"""
-genres (:obj:`list` of :obj:`tuple`): The choices of genre for the input drop-down.
-"""
-
 
 class CustomInputForm(forms.Form):
     """
@@ -55,7 +46,6 @@ class CustomInputForm(forms.Form):
     Attributes:
         beat + number (:obj:`TypedChoiceField`): Each beat has its own drop-down object using a HTML5 Select.
         bpm (:obj:`IntegerField`): An object representing a HTML5 number input for the bpm.
-        genre (:obj:`ChoiceField`): An object representing a HTML5 drop-down for choosing track genre.
     """
     beat_one = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
                                       widget=forms.Select(attrs={"class": "form-control cb"}))
@@ -75,7 +65,6 @@ class CustomInputForm(forms.Form):
                                         widget=forms.Select(attrs={"class": "form-control cb"}))
     bpm = forms.IntegerField(max_value=250, min_value=60,
                              widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
-    genre = forms.ChoiceField(choices=genres, widget=forms.Select(attrs={"class": "form-control", "id": "genre"}))
 
     def clean(self):
         cleaned_data = super().clean()

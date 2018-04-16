@@ -13,6 +13,8 @@ import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.dragcommon.pageerror as pe
 import DRAGProj.dragcommon.viewshelper as vh
 
+import DRAGNN.storage.datastore as ds
+
 """
 Handles view and form logic within the DRAGProj application.
 Every view function corresponds to a url pattern in DRAGProj.urls.py.
@@ -49,6 +51,9 @@ def index(request):
     response = render(request, "DRAG/index.html", {"is_home": True})
     cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" in request.COOKIES else None
     vh.set_uuid_cookie(response, request, cookie_uuid)
+
+    if "user_id" not in request.session:
+        ds.delete_data_store(request.session["user_id"])
     return response
 
 
@@ -129,7 +134,7 @@ def diversify(request):
         form = CustomInputForm(request.POST)  # Make an input form.
 
         if form.is_valid():
-            request.session["genre"] = form.cleaned_data["genre"]
+            request.session["genre"] = "Rock"
             request.session["bpm"] = form.cleaned_data["bpm"]
             request.session["input"] = fh.construct_input(
                 form.cleaned_data)  # Get all the clean data from the POST form.
@@ -159,7 +164,7 @@ def preset(request):
         if form.is_valid():
             request.session["bpm"] = form.cleaned_data["bpm"]
             request.session["input"] = fh.get_preset(form.cleaned_data["preset"])
-            request.session["genre"] = "Rock"  # As before get the cleaned form POST data.
+            request.session["genre"] = "Rock"
             return HttpResponseRedirect('/FirstFitness')  # Proceed to rate tracks.
 
         else:
@@ -185,6 +190,8 @@ def error(request):
     response = render(request, 'DRAG/error.html', dc.context)
     cookie_uuid = request.COOKIES["track_identifier"]
     vh.set_uuid_cookie(response, request, cookie_uuid)
+    if "user_id" not in request.session:
+        ds.delete_data_store(request.session["user_id"])
     return response
 
 
