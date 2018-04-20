@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        {% load static %}
+        {% load static from staticfiles %}
+        {% load strconcat %}
         <meta charset="UTF-8">
         <title>DRAG - Congratulations!</title>
         {% block resources %} {% include "DRAG/renderresources.html" %} {% endblock %}
@@ -9,9 +10,11 @@
     <body>
         {% block content %}
             {% include "DRAG/menu.html" %}
-            <div class="container-fluid">
-                {% include "finishbody.html" %}
-            </div>
+            {% block fbody %}
+                <div class="container-fluid">
+                    {% include "finishbody.html" %}
+                </div>
+            {% endblock %}
             {% include 'DRAG/footer.html' %}
         {% endblock %}
         {% block bodyscripts %}

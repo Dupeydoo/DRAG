@@ -1,5 +1,6 @@
-{% block content %}
+{% block fbody %}
     {% load strconcat %}
+    {% load static from staticfiles %}
     <section id="finished">
         <h1>Congratulations - You have finished a diversification run!</h1>
         <p>
@@ -17,6 +18,6 @@
                 </div>
             {% endfor %}
         </div>
-        <img class="img-fluid" src="/DRAG/static/images/finish.jpg" alt="You have finished!">
+        <img class="img-fluid" src="{% static "images/finish.jpg" %}" alt="You have finished!">
     </section>
-{% endblock content %}
+{% endblock %}

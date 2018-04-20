@@ -25,7 +25,7 @@ drum_mapper = {
     12: "HHatKickSnare.wav",
     13: "HHatKickHTom.wav",
     14: "HTomSnareKick.wav",
-    15: "HHatHtomSnare.wav",
+    15: "HHatHTomSnare.wav",
     16: "HHatKickSnareHTom.wav"
 }
 """

@@ -38,13 +38,11 @@ def convert_to_np(tracks, fitnesses):
 
 
 def get_data_store(user_id):
-    return pd.HDFStore(test_path + str(user_id) + "data.h5")
+    return pd.HDFStore(current_path + str(user_id) + "data.h5")
 
 
 def delete_data_store(user_id):
     store = get_data_store(user_id)
-    store.remove("track")
-    store.remove("fitness")
     store.close()
     os.remove(current_path + str(user_id) + "data.h5")
 

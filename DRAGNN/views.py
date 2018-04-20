@@ -29,6 +29,5 @@ def finished(request):
     if request.session["current_generation"] != context["manual_generations"] + context["automated_generations"]:
         return pe.catch_critical_error(request)
     context["population_range"] = range(context["population_size"])
-    if "user_id" not in request.session:
-        ds.delete_data_store(request.session["user_id"])
+    ds.delete_data_store(request.session["user_id"])
     return render(request, "finish.html", context)

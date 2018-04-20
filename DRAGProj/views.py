@@ -52,8 +52,7 @@ def index(request):
     cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" in request.COOKIES else None
     vh.set_uuid_cookie(response, request, cookie_uuid)
 
-    if "user_id" not in request.session:
-        ds.delete_data_store(request.session["user_id"])
+    ds.delete_data_store(request.session["user_id"])
     return response
 
 
@@ -190,8 +189,7 @@ def error(request):
     response = render(request, 'DRAG/error.html', dc.context)
     cookie_uuid = request.COOKIES["track_identifier"]
     vh.set_uuid_cookie(response, request, cookie_uuid)
-    if "user_id" not in request.session:
-        ds.delete_data_store(request.session["user_id"])
+    ds.delete_data_store(request.session["user_id"])
     return response
 
 

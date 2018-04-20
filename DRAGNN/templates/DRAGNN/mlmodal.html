@@ -1,10 +1,11 @@
 {% block modal %}
+    {% load static %}
     <div id="learning" style="display:none;">
         <p>
             Learning how you rated tracks... this will only take a few minutes. Please enjoy this game while
             you wait.
         </p>
-        <img src="/DRAG/static/images/ellipsis-loader.svg" alt="This is a spinning loading icon"
+        <img src="{% static "images/ellipsis-loader.svg" %}" alt="This is a spinning loading icon"
              style="margin-bottom: 20px;">
 
         <div id="game-area" style="background-color: lightgrey; height: 300px;">
