@@ -24,7 +24,7 @@
                 {% for field in fitness_form %}
                     {% with counter=forloop.counter0 %}
                         {% with index=population|return_index:counter %}
-                            <div class="col-md-3">
+                            <div class="col-md-3 collapse-under">
                                 <h5>Track {{ forloop.counter }}:</h5>
                                 <audio id="{{ "track"|str_concat:counter }}" class="track" controls>
 

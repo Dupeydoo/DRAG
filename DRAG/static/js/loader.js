@@ -3,7 +3,7 @@ $(document).ready(function () {
 
     $('#big-red-button').click(function () {
         $("#machinelearning").find("form").submit();
-        $.blockUI({message: $('#learning'), css: { top: "10%", left: "24%", height:"auto", width: "800px" } });
+        $.blockUI({message: $('#learning'), css: { top: "10%", left: "24%", height: "70%", width: "60%" } });
         startGame();
         setTimeout($.unblockUI, twoMinutes);
     });

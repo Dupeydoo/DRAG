@@ -51,6 +51,7 @@ def mutate(child):
     """
     rand_index = random.randrange(0, len(child.content))    # Pick an index to mutate.
     instruments = list(dm.drum_mapper.keys())               # Get the drum corresponding.
+    instruments.remove(child.content[rand_index])           # Prevent choosing the same drum.
     child.content[rand_index] = random.choice(instruments)  # Set the child's index to a new value.
     return child
 

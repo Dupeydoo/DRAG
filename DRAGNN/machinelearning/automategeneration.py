@@ -23,6 +23,7 @@ def single_generation(model, request, hot_encoder):
         context[request.session["user_id"] + "population"])
 
 
+# Integration Testing.
 if __name__ == "__main__":
     from DRAGTests.mock.mockpopulation import MockPopulation
     from DRAGNN.storage import datastore as ds
@@ -52,8 +53,11 @@ if __name__ == "__main__":
     enc = preprocessing.OneHotEncoder(n_values=17)
     data = enc.fit_transform(data).toarray()
 
-    tuned_parameters = {"n_estimators": [10], "max_depth": [5, 8, 12], "min_samples_leaf": [3, 5, 8]}
-    clf = model_selection.GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=10)
+    tuned_parameters = {"n_estimators": [10], "max_depth": [5, 8, 12],
+                        "min_samples_leaf": [3, 5, 8]}
+
+    clf = model_selection.GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1),
+                                       tuned_parameters, n_jobs=-1, cv=10)
     clf.fit(data, fitness_test)
 
     run(clf, request_test, enc)

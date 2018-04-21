@@ -47,6 +47,7 @@ def delete_data_store(user_id):
     os.remove(current_path + str(user_id) + "data.h5")
 
 
+# Integration Test
 if __name__ == "__main__":
     from DRAGTests.mock.mockpopulation import MockPopulation
     mock = MockPopulation().population

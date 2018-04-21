@@ -7,11 +7,13 @@ import os
 class TestWavBuilder(unittest.TestCase):
     def setUp(self):
         context = dc.context
+        self.context = context
         self.wav_path = context["system_path"] + context["wav_path"]
         self.path = self.wav_path + "test.wav"
         self.bpm = 200
 
-        with open("testwavbuilder_clearwavcandidates/test.dat", "w") as file:
+        with open(context["system_path"] + "/DRAGTests/testdragcommon/"
+                  + "/testwavbuilder_clearwavcandidates/test.wav", "w") as file:
             file.write("Hello World.")
 
     def test_open_wav(self):
@@ -22,9 +24,10 @@ class TestWavBuilder(unittest.TestCase):
         self.assertEqual(300, wb.beat_offset(200), "The beat offset was calculated incorrectly!")
 
     def test_clear_wav_candidates(self):
-        wav_directory = "testwavbuilder_clearwavcandidates/"
+        wav_directory = self.context["system_path"] + "/DRAGTests/testdragcommon/" + \
+                        "/testwavbuilder_clearwavcandidates/"
         wb.clear_wav_candidates(wav_directory, "test")
-        self.assertEqual([], os.listdir(wav_directory), "Test.dat was not removed!")
+        self.assertEqual([], os.listdir(wav_directory), "Test.wav was not removed!")
 
     def tearDown(self):
         del self.wav_path, self.path, self.bpm

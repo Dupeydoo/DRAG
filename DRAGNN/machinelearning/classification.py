@@ -42,7 +42,6 @@ def perform_classification(data, fitness, features, request, hot_encoder):
     clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
     clf.fit(data, fitness)
     predictions = clf.predict(data)
-    write_to_file(predictions, fitness, features)
     ag.run(clf, request, hot_encoder)
 
 
@@ -59,11 +58,13 @@ def decompose_fitness(fitnesses):
 
 
 def write_to_file(predictions, fitness, features):
-    filename = context["system_path"] + "/DRAGNN/machinelearning/outputdir/" + str(uuid.uuid1()) + ".txt"
+    filename = context["system_path"] + "/DRAGNN/machinelearning/outputdir/" \
+               + str(uuid.uuid1()) + ".txt"
     file = open(filename, "w")
 
     file.write(
-        "Positive difference and the actual is lower than prediction. Negative and actual is higher than prediction.\n")
+        "Positive difference and the actual is lower than prediction."
+        + " Negative and actual is higher than prediction.\n")
     file.write("Predictions: \n")
     np.savetxt(file, predictions.reshape(5, 20), fmt="%1.4f", delimiter=" ")
     file.write("\n")
@@ -75,12 +76,15 @@ def write_to_file(predictions, fitness, features):
     differences = []
     for predict in range(0, len(predictions)):
         differences.append(predictions[predict] - fitness[predict])
+
     differences = np.asarray(differences).ravel()
     file.write("Differences: \n")
     np.savetxt(file, differences.reshape(5, 20), fmt="%1.4f", delimiter=" ")
     file.write("\n")
+
     file.write("Number of zeros: " + str(list(differences).count(0)))
     file.write("\n")
+
     file.write("Max-Depth: Determined by GridSearchCV\n")
     file.write("Features: " + str(features) + "\n")
     file.write("Cross-Val Folds: " + str(CROSS_VAL_FOLDS))

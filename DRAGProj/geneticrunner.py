@@ -105,11 +105,3 @@ def perform_genetics(population):
     children = mutation.do_mutation(children, muta_prob)
     new_population = generationalreplacement.do_replacement(population, children)
     return new_population
-
-
-def clear_wav_files():
-    """
-    Helper to call the wavbuilder clear_wav_candidates(path, string)
-    """
-    path = system_path + wav_path
-    wb.clear_wav_candidates(path, "candidate")
