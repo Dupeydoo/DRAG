@@ -41,15 +41,23 @@ class PresetForm(forms.Form):
                              widget=forms.NumberInput(attrs={"id": "bpmtwo", "name": "bpmtwo"}))
 
     def clean(self):
+        """
+        Server side validation of the preset form. Raises a validation error
+        displaying a message on the page if validation fails.
+        """
         cleaned_data = super().clean()
+
         if len(self.fields) == len(cleaned_data):
             bpm = cleaned_data["bpm"]
             preset = cleaned_data["preset"]
+
+            # Check the bpm lies within the correct range.
             if bpm > 250 or bpm < 60:
                 raise forms.ValidationError(
                     "BPM must be between 60 and 250."
                 )
 
+            # Checks the preset chosen is a valid preset.
             if preset < 0 or preset > (len(preset_choices) - 1) or not isinstance(preset, int):
                 raise forms.ValidationError(
                     "Please choose one of the available presets."

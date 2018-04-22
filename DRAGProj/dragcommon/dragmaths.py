@@ -20,9 +20,3 @@ def is_even(number):
         bool: True if it is even, False if not.
     """
     return number % 2 == 0
-
-
-if __name__ == "__main__":
-    from DRAGTests.integrityscripts import integritydragmaths
-
-    integritydragmaths.integrity_drag_maths()

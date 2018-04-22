@@ -13,7 +13,8 @@ An extension module defining a filter for in Django html templates.
         django.template
 """
 
-register = template.Library()  # Register any declared filters in the library.
+# Register any declared filters in the library.
+register = template.Library()
 
 
 @register.filter

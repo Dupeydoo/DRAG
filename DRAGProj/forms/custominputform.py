@@ -1,4 +1,5 @@
 from django import forms
+
 from DRAG.datacontext import context
 
 """
@@ -67,9 +68,15 @@ class CustomInputForm(forms.Form):
                              widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
 
     def clean(self):
+        """
+        The form clean method performs validation of the input data. Should
+        incorrect input be provided a validation error is raised and indicated
+        with an on page warning.
+        """
         cleaned_data = super().clean()
         bpm = cleaned_data["bpm"]
 
+        # Checks the chosen instruments are all valid DRAG instrument values.
         beats = 0
         for key, value in cleaned_data.items():
             if "beat" in key:
@@ -79,11 +86,13 @@ class CustomInputForm(forms.Form):
                     )
                 beats += 1
 
+        # Checks all the beats are provided.
         if beats < context["time_signature"]:
             raise forms.ValidationError(
                 "You must provide all the beats of the song."
             )
 
+        # Checks that the bpm was not entered incorrectly.
         if bpm > 250 or bpm < 60:
             raise forms.ValidationError(
                 "BPM must be between 60 and 250."

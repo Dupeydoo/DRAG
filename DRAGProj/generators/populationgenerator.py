@@ -30,12 +30,13 @@ def generate_population(p_size, c_ratio, input_list, genre, time_sig):
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
     """
-    copy_append = int(c_ratio * p_size)           # The number of copies to insert into the population.
+    # The number of copies to insert into the population.
+    copy_append = int(c_ratio * p_size)
     population = []
 
-    population = populate_copies(population, copy_append, input_list)  # Create the copies.
+    population = populate_copies(population, copy_append, input_list)
     population = generate_genre_tracks(population, (p_size - copy_append), genre,
-                                       time_sig)  # Add genre generated remainder.
+                                       time_sig)
     return population
 
 
@@ -56,9 +57,11 @@ def generate_genre_tracks(population, track_number, genre, time_sig):
         population = gg.generate_rock_tracks(population, track_number, time_sig)
 
     elif genre == "Blues":
+        # DEPRECATED - Only rock is used in production!
         population = gg.generate_blues_tracks(population, track_number, time_sig)
 
     elif genre == "Jazz":
+        # DEPRECATED - Only rock is used in production!
         population = gg.generate_jazz_tracks(population, track_number, time_sig)
 
     return population
@@ -80,6 +83,6 @@ def populate_copies(population, copy_number, input_list):
         DRAGProj.dragcommon.track
     """
     for candidate in range(copy_number):
-        track = Track(input_list, 0)  # Create a new track.
+        track = Track(input_list, 0)
         population.append(track)
     return population

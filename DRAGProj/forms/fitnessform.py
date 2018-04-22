@@ -30,17 +30,19 @@ class FitnessForm(forms.Form):
         Args:
             **kwargs (:obj:`dict`): The dictionary of additional keyword arguments provided.
         """
-        size = kwargs.pop('size')                           # Pop off the size keyword argument.
-        super(FitnessForm, self).__init__(*args, **kwargs)  # Call the forms.Form constructor.
+        # Pop off the size keyword argument.
+        size = kwargs.pop('size')
+
+        # Call the forms.Form constructor.
+        super(FitnessForm, self).__init__(*args, **kwargs)
 
         for candidate in range(size):
             # Create IntegerFields dynamically based on how many population members there are.
-            self.fields["fitness" + str(candidate)] = forms.IntegerField(max_value=10,
-                                                                         min_value=0,
-                                                                         widget=forms.NumberInput(
-                                                                             attrs={"class": "fitness",
-                                                                                    "name": "fitness",
-                                                                                    "tabindex": size + 1}))
+            self.fields["fitness" + str(candidate)] = forms.IntegerField\
+                (max_value=10, min_value=0, widget=forms.NumberInput(
+                    attrs={"class": "fitness",
+                           "name": "fitness",
+                           "tabindex": size + 1}))
 
     def collect_fitnesses(self):
         """
@@ -50,7 +52,8 @@ class FitnessForm(forms.Form):
             (name, fitness) (:obj:`tuple`): name, fitness pairs from the cleaned data dictionary. The yield creates
             a generator object to use for assignment.
         """
-        for name, fitness in self.cleaned_data.items():  # Loop through the forms cleaned items.
+        # Loop through the forms cleaned items.
+        for name, fitness in self.cleaned_data.items():
             yield (self.fields[name], fitness)
 
     def clean(self):
@@ -62,14 +65,17 @@ class FitnessForm(forms.Form):
         cleaned_data = super().clean()
         fields = cleaned_data.values()
         adjacent_laziness, temp = 0, 0
-        for field in fields:                            # Loops through field values and counts element repeats.
+
+        # Loops through field values and counts element repeats.
+        for field in fields:
             if temp == field:
                 adjacent_laziness += 1
             temp = field
 
-        if adjacent_laziness >= 5:                      # Cut-off point is 3 repeat occurrences, user is lazy.
+        # Cut-off point is 5 repeat occurrences, user is lazy.
+        if adjacent_laziness >= 5:
             raise forms.ValidationError(
                 "Abnormal repetition in ratings "
-                "detected! Please listen to the "
-                "tracks properly."
+                "detected! If the ratings are genuine"
+                "then please vary one or two of them."
             )

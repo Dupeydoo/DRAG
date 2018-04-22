@@ -1,19 +1,16 @@
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
-
-from DRAGProj.forms.custominputform import CustomInputForm
-from DRAGProj.forms.presetform import PresetForm
-from DRAGProj.forms.fitnessform import FitnessForm
+from django.shortcuts import render
 
 import DRAG.datacontext as dc
-import DRAGProj.geneticrunner as gr
-
-from DRAGProj.dragcommon.appstart import AppStart
+import DRAGNN.storage.datastore as ds
 import DRAGProj.dragcommon.formhelper as fh
 import DRAGProj.dragcommon.pageerror as pe
 import DRAGProj.dragcommon.viewshelper as vh
-
-import DRAGNN.storage.datastore as ds
+import DRAGProj.geneticrunner as gr
+from DRAGProj.dragcommon.appstart import AppStart
+from DRAGProj.forms.custominputform import CustomInputForm
+from DRAGProj.forms.fitnessform import FitnessForm
+from DRAGProj.forms.presetform import PresetForm
 
 """
 Handles view and form logic within the DRAGProj application.
@@ -47,7 +44,9 @@ def index(request):
     """
     request.session.flush()
     AppStart.clear = False
-    request.session["current_generation"] = 1  # Reset the generations if the user goes home mid-diversification.
+
+    # Reset the generations if the user goes home mid-diversification.
+    request.session["current_generation"] = 1
     response = render(request, "DRAG/index.html", {"is_home": True})
     cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" in request.COOKIES else None
     vh.set_uuid_cookie(response, request, cookie_uuid)
@@ -69,24 +68,28 @@ def fitness(request):
     """
     vh.check_app_start(request)
     context = dc.context
-    if request.method == 'POST':  # If the form has been submitted.
-        form = FitnessForm(request.POST,
-                           size=context["population_size"])  # Create a fitness form object with the POST data.
 
-        if form.is_valid():  # If the data is valid perform a generation and redirect back here with a GET request.
+    # If the form has been submitted.
+    if request.method == 'POST':
+        # Create a fitness form object with the POST data.
+        form = FitnessForm(request.POST, size=context["population_size"])
+
+        # If the data is valid perform a generation and redirect back here with a GET request.
+        if form.is_valid():
             vh.perform_generation(form, request)
             return HttpResponseRedirect('/RateFitness')
 
     else:
-        try:  # Here we check to see if the user is accessing the page correctly.
+        # Here we check to see if the user is accessing the page correctly.
+        try:
             bpm = request.session["bpm"]
-            if vh.generation_check(request.session["current_generation"],
-                                   context["manual_generations"]):  # See if its time to ANN.
+            if vh.generation_check(request.session["current_generation"], context["manual_generations"]):
                 return HttpResponseRedirect("/MachineLearn")
             form = FitnessForm(size=context["population_size"])
-            request.session["current_generation"] += 1  # increment the generations.
+            request.session["current_generation"] += 1
 
-        except KeyError as k:  # If the user tries to access the page directly by url.
+        # If the user tries to access the page directly by url.
+        except KeyError as k:
             return pe.catch_key_error(request)
 
     population = context[request.session["user_id"] + "population"]
@@ -108,10 +111,14 @@ def first_fitness(request):
     try:
         bpm = request.session["bpm"]
         population = gr.initiliase_population(request.session["input"],
-                                              request.session["genre"])  # Initialise the population.
+                                              request.session["genre"])
         gr.process_input(population, bpm, request)
-        fitness_form = FitnessForm(size=context["population_size"])  # Create a fitness form to use.
-        context[request.session["user_id"] + "population"] = population  # Reassign the population.
+
+        # Create a fitness form to use.
+        fitness_form = FitnessForm(size=context["population_size"])
+
+        # Reassign the population.
+        context[request.session["user_id"] + "population"] = population
         return render(request, "DRAG/fitness.html",
                       {"fitness_form": fitness_form, "population": population, "is_home": False})
 
@@ -135,13 +142,17 @@ def diversify(request):
         if form.is_valid():
             request.session["genre"] = "Rock"
             request.session["bpm"] = form.cleaned_data["bpm"]
+
+            # Get all the clean data from the POST form.
             request.session["input"] = fh.construct_input(
-                form.cleaned_data)  # Get all the clean data from the POST form.
-            return HttpResponseRedirect('/FirstFitness')  # Proceed to rate the fitness.
+                form.cleaned_data)
+            return HttpResponseRedirect('/FirstFitness')
 
     else:
         form = CustomInputForm()
-        preset = PresetForm()  # On GET initialise both forms.
+
+        # On GET initialise both forms.
+        preset = PresetForm()
 
     preset = preset if "preset" in locals() else PresetForm()
     return render(request, 'DRAG/startdiversify.html', {"preset": preset, "form": form, "is_home": False})
@@ -164,7 +175,7 @@ def preset(request):
             request.session["bpm"] = form.cleaned_data["bpm"]
             request.session["input"] = fh.get_preset(form.cleaned_data["preset"])
             request.session["genre"] = "Rock"
-            return HttpResponseRedirect('/FirstFitness')  # Proceed to rate tracks.
+            return HttpResponseRedirect('/FirstFitness')
 
         else:
             return pe.catch_critical_error(request)

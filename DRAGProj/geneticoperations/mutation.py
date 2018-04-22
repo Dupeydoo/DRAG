@@ -1,4 +1,5 @@
 import random
+
 import DRAGProj.mappers.drummapper as dm
 
 """
@@ -19,15 +20,19 @@ def do_mutation(children, muta_prob, muta_type_prob=0.5):
     Args:
         children (:obj:`list` of :obj:`Track`): The list of children from crossover.
         muta_prob (float): The probability of mutation occuring.
+        muta_type_prob (float): Probability deciding whether to use single or multi-point crossover.
 
     Returns:
         mutated_children (:obj:`list` of :obj:`Track`): A list of children that have been mutated.
     """
     mutated_children = []
     for child in children:
+
         # If we perform mutation.
         if random.random() < muta_prob:
-            child.has_changed = True  # Some children may have not been changed by crossover.
+
+            # Some children may have not been changed by crossover.
+            child.has_changed = True
             if random.random() < muta_type_prob:
                 mutated_children.append(mutate(child))
 
@@ -49,17 +54,24 @@ def mutate(child):
     Returns:
         child (:obj:`Track`): A mutated child.
     """
-    rand_index = random.randrange(0, len(child.content))    # Pick an index to mutate.
-    instruments = list(dm.drum_mapper.keys())               # Get the drum corresponding.
-    instruments.remove(child.content[rand_index])           # Prevent choosing the same drum.
-    child.content[rand_index] = random.choice(instruments)  # Set the child's index to a new value.
+    # Pick an index to mutate.
+    rand_index = random.randrange(0, len(child.content))
+
+    # Get the corresponding drum.
+    instruments = list(dm.drum_mapper.keys())
+
+    # Prevent choosing the same drum.
+    instruments.remove(child.content[rand_index])
+
+    # Set the child's index to a new value.
+    child.content[rand_index] = random.choice(instruments)
     return child
 
 
 def drum_group_mutate(child):
     """
     Performs a sophisticated random drum choice mutation on a child.
-    based on different drum sounds, e.g. symbal or not symbal.
+    based on different drum sounds, e.g. cymbal or not cymbal.
 
     Args:
         child (:obj:`Track`): A child that will be mutated (sounds nasty).
@@ -67,14 +79,18 @@ def drum_group_mutate(child):
     Returns:
         child (:obj:`Track`): A mutated child.
     """
-    instruments = dm.drum_mapper                              # Get the possible instruments.
+    # Get the possible instruments.
+    instruments = dm.drum_mapper
     rand_index = random.randrange(0, len(child.content))
     groups = create_groups(instruments, child, rand_index)
 
-    if dm.is_cymbal(groups[2]):                               # If the random index is a cymbal
-        child.content[rand_index] = random.choice(groups[0])  # Replace it with a cymbal.
+    # If the random index is a cymbal
+    if dm.is_cymbal(groups[2]):
+        # Replace it with a cymbal.
+        child.content[rand_index] = random.choice(groups[0])
     else:
-        child.content[rand_index] = random.choice(groups[1])  # Or replace it with a drum if not.
+        # Or replace it with a drum if not.
+        child.content[rand_index] = random.choice(groups[1])
     return child
 
 
@@ -87,7 +103,10 @@ def create_groups(instruments, child, rand_index):
         child (:obj:`Track`): A child that will be mutated.
         rand_index (int): The index of the tracks contents to be mutated.
     """
-    hi_hats = [d[0] for d in instruments.items() if "HHat" in d[1]]    # Comprehension: Output list is cymbals' keys.
-    drums = [d[0] for d in instruments.items() if "HHat" not in d[1]]  # Comprehension: Output list is drums' keys.
+    # Comprehension: Output list is cymbals' keys.
+    hi_hats = [d[0] for d in instruments.items() if "HHat" in d[1]]
+
+    # Comprehension: Output list is drums' keys.
+    drums = [d[0] for d in instruments.items() if "HHat" not in d[1]]
     child_drum = child.content[rand_index]
     return hi_hats, drums, child_drum

@@ -25,8 +25,11 @@ def do_selection(population, tournament_size):
     """
     parents = []
     for selections in range(len(population)):
-        parent = tournament_select(population, tournament_size)  # Perform tournament selection.
-        parent.has_changed = False  # Nullify changes from last generation.
+        # Perform tournament selection.
+        parent = tournament_select(population, tournament_size)
+
+        # Nullify changes from last generation.
+        parent.has_changed = False
         parents.append(parent)
     return parents
 
@@ -44,8 +47,10 @@ def tournament_select(population, tournament_size):
     """
     random_selections = []
     for candidates in range(tournament_size):
-        rand_index = random.randrange(0, len(population))  # Pick a random index
-        random_selections.append((rand_index, population[rand_index].fitness))  # Create an index, and fitness pair.
+        rand_index = random.randrange(0, len(population))
+
+        # Create an index, and fitness pair.
+        random_selections.append((rand_index, population[rand_index].fitness))
     return tournament(population, random_selections)
 
 
@@ -61,12 +66,18 @@ def tournament(population, selections):
         :obj:`Track`: The winning track from the tournament.
     """
     maximums = []
+
+    # Find the first tuple with a maximum value.
     max_tuple = max(selections, key=itemgetter(1))
     for selection in range(len(selections)):
         sel = selections[selection]
+
+        # Find matching maximum value tuples.
         if sel[1] == max_tuple[1]:
             maximums.append(selection)
 
+    # If there are several matching maximum values
+    # return a choice from them.
     maximum = random.choice(maximums)
     index = selections[maximum]
     return population[index[0]]

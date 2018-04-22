@@ -1,12 +1,11 @@
 import uuid
 
-import DRAGNN.storage.datastore as ds
-import DRAGProj.geneticrunner as gr
-import DRAGProj.dragcommon.wavbuilder as wb
 import DRAG.datacontext as dc
-
-from DRAGProj.models.anonymoususer import AnonymousUser
+import DRAGNN.storage.datastore as ds
+import DRAGProj.dragcommon.wavbuilder as wb
+import DRAGProj.geneticrunner as gr
 from DRAGProj.dragcommon.appstart import AppStart
+from DRAGProj.models.anonymoususer import AnonymousUser
 
 """
 This module provides assisting functions to views.py to keep the views logic
@@ -29,31 +28,40 @@ def perform_generation(form, request):
 
     Args:
         form (:obj:`Form`): The fitness audio form.
+        request (:obj:`Request`): The current web request.
     See:
         DRAG.datacontext
         DRAGProg.geneticrunner
     """
     population = dc.context[request.session["user_id"] + "population"]
     gather_fitness_input(form.collect_fitnesses(), population)
-    ds.store_data(population, request.session["user_id"])  # Write data to HDF5 for neural net later
 
-    population = gr.perform_genetics(population)  # start the genetic operations.
+    # Write data to HDF5 for machine learning later.
+    ds.store_data(population, request.session["user_id"])
+
+    # Start the genetic operations.
+    population = gr.perform_genetics(population)
     dc.context[request.session["user_id"] + "population"] = population
-    gr.process_input(population, request.session["bpm"], request)  # clear up and rewrite the wav files.
+
+    # Clear up and rewrite the wav files.
+    gr.process_input(population, request.session["bpm"], request)
 
 
-def gather_fitness_input(dict, population):
+def gather_fitness_input(dct, population):
     """
     Collects the fitness values from the fitness audio form and assigns
     them to the respective population members.
 
     Args:
-        dict (:obj:`generator` of int): The generator object to access fitnesses from.
+        dct (:obj:`generator` of int): The generator object to access fitnesses from.
         population (:obj:`list` of :obj:`Track`): The Track population.
     """
-    for counter, fitness in enumerate(dict):  # enumerate exposes a counter while allowing normal generator iteration.
+    # Enumerate exposes a counter while allowing normal generator iteration.
+    for counter, fitness in enumerate(dct):
         pop_member = population[counter]
-        pop_member.fitness = fitness[1]  # get the fitness value and assign to a population member.
+
+        # Get the fitness value and assign to a population member.
+        pop_member.fitness = fitness[1]
 
 
 def generation_check(current_generation, max_generation):
@@ -110,7 +118,8 @@ def generate_uuid(response, request):
     Returns:
         new_uuid (:obj:`str`): The generated uuid.
     """
-    new_uuid = uuid.uuid1()  # The uuid1 method generates an identifier based on current time and randomness.
+    # The uuid1 method generates an identifier based on current time and a PRNG.
+    new_uuid = uuid.uuid1()
     new_uuid = str(new_uuid)
     response.set_cookie("track_identifier", new_uuid)
     request.session["user_id"] = new_uuid
@@ -129,5 +138,12 @@ def create_user(user_uuid):
 
 
 def check_app_start(request):
+    """
+    Checks for the start of a DRAG process and flushes the
+    session if so.
+
+    Args:
+        request (:obj:`Request`): The current web request.
+    """
     if AppStart.clear:
         request.session.flush()

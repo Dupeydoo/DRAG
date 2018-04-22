@@ -1,4 +1,5 @@
 from django.shortcuts import render
+
 from DRAG.datacontext import context
 
 """
@@ -35,12 +36,12 @@ def catch_preset_error(request):
 
 def catch_critical_error(request):
     """
-    Represents a critical generic errors.
+    Represents a critical generic error.
 
     Args:
         request (:obj:`Request`): The request object associated with the page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to the given page with the request and context.
+        :obj:`HTTPResponse`: A HTTPResponse object to the error.html page with the request and context.
     """
     return render(request, "DRAG/error.html", context)

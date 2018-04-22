@@ -35,12 +35,12 @@ drum_mapper (:obj:`dict` of int keys and :obj:`str` values): The drum_mapper dic
 
 def is_cymbal(drum):
     """
-    Checks the drum to see if it is a symbal, namely a HiHat.
+    Checks the drum to see if it is a cymbal, namely a HiHat.
 
     Args:
         drum (int): The dictionary key corresponding to a drum.
 
     Returns:
-        bool: True if it is a symbal, False if not.
+        bool: True if it is a cymbal, False if not.
     """
     return "HHat" in drum_mapper[drum]

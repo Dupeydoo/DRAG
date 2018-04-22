@@ -20,7 +20,8 @@ def do_replacement(current_population, children):
     Returns:
         new_population (:obj:`list` of :obj:`Track`): New track population.
     """
-    new_population = list(current_population)  # Assign a new memory reference.
+    # Assign a new memory reference.
+    new_population = list(current_population)
     for candidate in range(len(new_population)):
         new_population[candidate] = children[candidate]
     return new_population

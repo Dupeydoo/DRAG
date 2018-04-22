@@ -1,4 +1,5 @@
 import random as rand
+
 from DRAGProj.dragcommon.track import Track
 
 """
@@ -13,9 +14,6 @@ This module generates tracks based on input genre.
     See:
         DRAGProj.dragcommon.track
 """
-
-HIGH_HAT_AND_BASS = 2
-HIGH_HAT_AND_SNARE = 3
 
 
 def generate_rock_tracks(population, track_number, time_sig):
@@ -37,6 +35,8 @@ def generate_rock_tracks(population, track_number, time_sig):
 
 def generate_blues_tracks(population, track_number, time_sig):
     """
+    DEPRECATED: Only rock is used in production.
+
     This function generates blues style tracks using a structure of instruments.
 
     Args:
@@ -47,13 +47,16 @@ def generate_blues_tracks(population, track_number, time_sig):
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
-    structure = [7, 11, 16]  # Common blues rhythm instruments
+    # Common blues rhythm instruments
+    structure = [7, 11, 16]
     population = generate_tracks(population, track_number, structure, time_sig)
     return population
 
 
 def generate_jazz_tracks(population, track_number, time_sig):
     """
+    DEPRECATED: Only rock is used in production.
+
     This function generates jazz style tracks using a structure of instruments.
 
     Args:
@@ -64,7 +67,8 @@ def generate_jazz_tracks(population, track_number, time_sig):
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
     """
-    structure = [1, 2, 3, 4, 7, 11, 16]  # Common jazz rhythm instruments
+    # Common jazz rhythm instruments
+    structure = [1, 2, 3, 4, 7, 11, 16]
     population = generate_tracks(population, track_number, structure, time_sig)
     return population
 
@@ -82,8 +86,11 @@ def build_track(structure, time_sig):
     """
     track = Track([], 0)
     for beat in range(time_sig):
-        instrument = rand.choice(structure)  # Choose from the structure.
-        track.add_to_contents(instrument)  # Add the instrument to the track.
+        # Choose from the structure.
+        instrument = rand.choice(structure)
+
+        # Add the instrument to the track.
+        track.add_to_contents(instrument)
     return track
 
 

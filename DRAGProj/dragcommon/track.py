@@ -20,7 +20,8 @@ class Track:
         has_changed (bool): False when unchanged from last generation.
         track_id (int): track identifier.
     """
-    id_counter = 0  # Static attribute to keep track of used ids.
+    # Static attribute to keep track of used ids.
+    id_counter = 0
 
     def __init__(self, content, fitness, id_method=None):
         """
@@ -37,11 +38,13 @@ class Track:
         self.has_changed = False
 
         if id_method is None:
-            self.__increment_id_counter()  # Normal id method, increment the id_counter.
+            # Normal id method, increment the id_counter.
+            self.__increment_id_counter()
             self.track_id = Track.id_counter
 
         else:
-            self.track_id = self.id_method  # else use the provided id.
+            # Otherwise use the provided id.
+            self.track_id = self.id_method
 
     def add_to_contents(self, instrument):
         """

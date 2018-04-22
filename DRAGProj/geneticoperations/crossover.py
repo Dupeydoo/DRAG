@@ -13,7 +13,6 @@ The crossover module provides the crossover functions for the genetic algorithm.
         
     See:
         DRAGProj.dragcommon.track
-        random
 """
 
 
@@ -33,8 +32,12 @@ def do_crossover(parents, cross_prob, single_point_prob=0.5):
     for parent_one, parent_two in zip(*[iter(parents)] * 2):
         # For every pair in the parents iterable.
         pair = [parent_one, parent_two]
-        if random.random() < cross_prob:  # Do we perform crossover.
-            Track.pair_changed(pair)      # Update if the tracks have been modified.
+
+        # Do we perform crossover.
+        if random.random() < cross_prob:
+
+            # Update if the tracks have been modified.
+            Track.pair_changed(pair)
 
             if random.random() < single_point_prob:
                 children += single_point_crossover(pair)
@@ -43,7 +46,8 @@ def do_crossover(parents, cross_prob, single_point_prob=0.5):
                 children += multi_point_crossover(pair)
 
         else:
-            children += pair              # Otherwise just add them to the children.
+            # Otherwise just add them to the children.
+            children += pair
     return children
 
 
@@ -57,7 +61,8 @@ def single_point_crossover(parents):
     Returns:
         children (:obj:`list` of :obj:`Track`): The children produced by crossover.
     """
-    rand_index = random.randrange(0, len(parents[0].content))  # Choose a random crossover point.
+    # Choose a random crossover point.
+    rand_index = random.randrange(0, len(parents[0].content))
     children = recombine(parents, rand_index)
     return children
 
@@ -72,8 +77,9 @@ def multi_point_crossover(parents):
     Returns:
         children (:obj:`list` of :obj:`Track`): The children produced by crossover.
     """
+    # Choose two random crossover points.
     first_index = random.randrange(0, len(parents[0].content))
-    second_index = random.randrange(first_index, len(parents[0].content))  # Choose two random crossover points.
+    second_index = random.randrange(first_index, len(parents[0].content))
     children = multi_recombine(parents, first_index, second_index)
     return children
 
@@ -92,6 +98,7 @@ def recombine(parents, index):
     """
     first_parent = parents[0].content
     second_parent = parents[1].content
+
     # Slice up to and after the crossover points between the two lists.
     first_child = Track((first_parent[:index] + second_parent[index:]), parents[0].fitness, parents[0].track_id)
     second_child = Track((second_parent[:index] + first_parent[index:]), parents[1].fitness, parents[1].track_id)
@@ -113,6 +120,7 @@ def multi_recombine(parents, idx_one, idx_two):
     """
     first_parent = parents[0].content
     second_parent = parents[1].content
+
     # List slices up to the first point, between the points, and after the last point.
     first_child = Track((first_parent[:idx_one] + second_parent[idx_one:idx_two] + first_parent[idx_two:]),
                         parents[0].fitness,

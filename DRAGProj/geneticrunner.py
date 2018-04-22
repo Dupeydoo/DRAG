@@ -1,12 +1,11 @@
-import DRAGProj.generators.populationgenerator as pg
-import DRAGProj.dragcommon.wavbuilder as wb
-import DRAGProj.dragcommon.dragmaths as dm
 import DRAG.datacontext as dc
-
-from DRAGProj.geneticoperations import selection
+import DRAGProj.dragcommon.dragmaths as dm
+import DRAGProj.dragcommon.wavbuilder as wb
+import DRAGProj.generators.populationgenerator as pg
 from DRAGProj.geneticoperations import crossover
-from DRAGProj.geneticoperations import mutation
 from DRAGProj.geneticoperations import generationalreplacement
+from DRAGProj.geneticoperations import mutation
+from DRAGProj.geneticoperations import selection
 
 """
 This module provides the main running functions of the genetic algorithm.
@@ -66,10 +65,12 @@ def initiliase_population(input_list, genre):
     Returns:
         :obj:`list` of :obj:`Track`: The initial population.
     """
-    if dm.is_even(population_size) and population_size >= 0:  # Genetic crossover takes place on pairs.
+    # Genetic crossover takes place on pairs.
+    if dm.is_even(population_size) and population_size >= 0:
         return pg.generate_population(population_size, copy_ratio, input_list, genre, time_signature)
     else:
-        pop_size = DEFAULT_POP_SIZE  # If incorrect input is set for whatever reason, assume a default.
+        # If incorrect input is set for whatever reason, assume a default.
+        pop_size = DEFAULT_POP_SIZE
         return pg.generate_population(pop_size, copy_ratio, input_list, genre, time_signature)
 
 
@@ -82,12 +83,17 @@ def process_input(population, bpm, request):
         bpm (int): A number representing the beats per minute or tempo of the track.
         request (:obj:`HTTPRequest`): The request asking for tracks to be generated.
     """
-    path = system_path + wav_path                       # Get the full path to write files to.
+    # Get the full path to write files to.
+    path = system_path + wav_path
     for candidate in range(len(population)):
         solution = population[candidate]
+
+        # Build unique candidate file names
         output_file = path + request.session["user_id"] + "candidate" + str(
-            candidate) + ".wav"                         # Build unique candidate file names
-        wb.map_input(solution, bpm, output_file, path)  # Write the wav files.
+            candidate) + ".wav"
+
+        # Write the wav files.
+        wb.map_input(solution, bpm, output_file, path)
 
 
 def perform_genetics(population):

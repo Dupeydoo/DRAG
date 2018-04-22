@@ -13,8 +13,8 @@ A module which houses the AudioThread class.
 
 class AudioThread(threading.Thread):
     """
-    A class that extends python's threading.Thread to
-    construct an object which writes a wav file on run.
+    A class that extends Python's threading.Thread to
+    construct an object which writes a wav file.
 
     Attributes:
         output (:obj:`AudioSegment`): A pydub AudioSegment object containing wav file data.
@@ -29,19 +29,15 @@ class AudioThread(threading.Thread):
             output (:obj:`AudioSegment`): A pydub AudioSegment object containing wav file data.
             output_file (:obj:`str`): A string representing the output wav filename.
         """
-        threading.Thread.__init__(self)  # Call the Thread super-constructor.
+        # Call the Thread super-constructor.
+        threading.Thread.__init__(self)
         self.output = output
         self.output_file = output_file
 
     def run(self):
         """
-        Runs the Thread.
+        Runs the Thread, thus performing the write.
         """
+        # Writes the wav file to the static wavfiles dir.
         write_wav = self.output.export(self.output_file,
-                                       format="wav")  # Write the wav file to the static wavfiles dir.
-
-
-if __name__ == "__main__":
-    from DRAGTests.integrityscripts import integrityaudiothread
-
-    integrityaudiothread.integrity_audio_thread()
+                                       format="wav")

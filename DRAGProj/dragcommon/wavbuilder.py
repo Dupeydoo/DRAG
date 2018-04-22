@@ -1,7 +1,9 @@
 import os
+
 from pydub import AudioSegment
-from DRAGProj.dragcommon.audiothread import AudioThread
+
 import DRAGProj.mappers.drummapper as dm
+from DRAGProj.dragcommon.audiothread import AudioThread
 
 """
 A module that writes whole wav tracks from component wav instruments
@@ -45,13 +47,22 @@ def map_input(candidate, bpm, output_file, path):
     See:
         DRAGProj.mappers.drummapper
     """
-    output = AudioSegment.silent(duration=100)               # Initialise the track output
-    gap = AudioSegment.silent(duration=beat_offset(bpm))     # Create a gap based on provided bpm.
+    # Initialise the track output
+    output = AudioSegment.silent(duration=100)
+
+    # Create a gap based on provided bpm.
+    gap = AudioSegment.silent(duration=beat_offset(bpm))
     for instrument in candidate.content:
-        file = dm.drum_mapper[instrument]                    # Get the correlating instrument to the int value.
+
+        # Get the correlating instrument to the int value.
+        file = dm.drum_mapper[instrument]
         audio = open_wav(path + file)
-        output = output.append(gap)                          # Start with a small gap to reduce edge fuzziness.
-        output = output.append(audio)                        # Append the audio file to the track.
+
+        # Start with a small gap to reduce edge fuzziness.
+        output = output.append(gap)
+
+        # Append the audio file to the track.
+        output = output.append(audio)
     begin_audio_thread(output, output_file, gap)
 
 
@@ -67,8 +78,11 @@ def begin_audio_thread(output, output_file, gap):
     See:
         DRAGProj.dragcommon.audiothread
     """
-    output = output.append(gap)                              # append a gap to reduce fuzziness.
-    thread = AudioThread(output, output_file)                # create an AudioThread to write the track.
+    # Append a gap to reduce fuzziness.
+    output = output.append(gap)
+
+    # Create an AudioThread to write the track.
+    thread = AudioThread(output, output_file)
     thread.start()
 
 

@@ -11,7 +11,7 @@ constructing the algorithm input.
         2.0.0
         
     See:
-        DRAG.datacontext.py
+        DRAG.datacontext
         DRAGProj.views
 """
 
@@ -36,7 +36,7 @@ def construct_input(cleaned_data):
 
 def get_preset(index):
     """
-    An accessor function to get a preset based on its index.
+    An accessor function to get a preset from the database based on its index.
 
     Args:
         index (int): Index of preset.
@@ -47,7 +47,8 @@ def get_preset(index):
     See:
         DRAG.datacontext
     """
-    preset_from_db = Preset.objects.get(pk=index + 1)    # Get the preset using a database model.
+    # Get the preset using a database model.
+    preset_from_db = Preset.objects.get(pk=index + 1)
     return [preset_from_db.beat_one, preset_from_db.beat_two, preset_from_db.beat_three,
             preset_from_db.beat_four, preset_from_db.beat_five, preset_from_db.beat_six,
             preset_from_db.beat_seven, preset_from_db.beat_eight]
