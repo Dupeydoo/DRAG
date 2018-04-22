@@ -39,3 +39,9 @@ class AudioThread(threading.Thread):
         """
         write_wav = self.output.export(self.output_file,
                                        format="wav")  # Write the wav file to the static wavfiles dir.
+
+
+if __name__ == "__main__":
+    from DRAGTests.integrityscripts import integrityaudiothread
+
+    integrityaudiothread.integrity_audio_thread()
