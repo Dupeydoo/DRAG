@@ -30,16 +30,17 @@ class TestReturnIndex(unittest.TestCase):
 
     def test_return_index(self):
         """
-        Tests the return_index method.
+        Tests the return_index function.
         """
         def return_index(lst, index):
             """
             An identical copy of the return index
-            method.
+            function.
             """
             return lst[index]
 
-        self.assertEqual(5, return_index(self.content, self.index), "The index returned should have value 5!")
+        self.assertEqual(5, return_index(self.content, self.index),
+                         "The index returned should have value 5!")
 
     def tearDown(self):
         """

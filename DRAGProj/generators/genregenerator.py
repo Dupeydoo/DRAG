@@ -26,7 +26,8 @@ def generate_rock_tracks(population, track_number, time_sig):
         time_sig (int): The time signature used in track generation.
 
     Returns:
-        population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
+        population (:obj:`list` of :obj:`Track`): The population of tracks with
+        genre tracks added.
     """
     structure = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16]
     population = generate_tracks(population, track_number, structure, time_sig)
@@ -45,7 +46,8 @@ def generate_blues_tracks(population, track_number, time_sig):
         time_sig (int): The time signature used in track generation.
 
     Returns:
-        population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
+        population (:obj:`list` of :obj:`Track`): The population of tracks with
+        genre tracks added.
     """
     # Common blues rhythm instruments
     structure = [7, 11, 16]
@@ -65,7 +67,8 @@ def generate_jazz_tracks(population, track_number, time_sig):
         time_sig (int): The time signature used in track generation.
 
     Returns:
-        population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
+        population (:obj:`list` of :obj:`Track`): The population of tracks with
+        genre tracks added.
     """
     # Common jazz rhythm instruments
     structure = [1, 2, 3, 4, 7, 11, 16]
@@ -96,7 +99,8 @@ def build_track(structure, time_sig):
 
 def generate_tracks(population, track_number, structure, time_sig):
     """
-    A helper function to abstract the track building logic out of the generation methods.
+    A helper function to abstract the track building logic out of the generation
+    methods.
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
@@ -104,7 +108,8 @@ def generate_tracks(population, track_number, structure, time_sig):
         structure (:obj:`list` of int): A list of genre structural instruments.
         time_sig (int): The time signature used in track generation.
         index (int): The index to insert a common value at.
-        common_value(:obj:): If specified takes the value of a common instrument used.
+        common_value(:obj:): If specified takes the value of a common instrument
+        used.
 
     Returns:
         population (:obj:`list` of :obj:`Track`): The population of built tracks.

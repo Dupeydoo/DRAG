@@ -41,22 +41,26 @@ class TestWavBuilder(unittest.TestCase):
         Tests the open_wav method.
         """
         file = wb.open_wav(self.path)
-        self.assertEqual(1.0, file.duration_seconds, "Test.wav was not opened correctly!")
+        self.assertEqual(1.0, file.duration_seconds,
+                         "Test.wav was not opened correctly!")
 
     def test_beat_offset(self):
         """
         Tests the beat_offset method.
         """
-        self.assertEqual(300, wb.beat_offset(200), "The beat offset was calculated incorrectly!")
+        self.assertEqual(300, wb.beat_offset(200),
+                         "The beat offset was calculated incorrectly!")
 
     def test_clear_wav_candidates(self):
         """
         Tests the clear_wav_candidates method.
         """
-        wav_directory = self.context["system_path"] + "/DRAGTests/testdragcommon/" + \
+        wav_directory = self.context["system_path"] \
+                        + "/DRAGTests/testdragcommon/" + \
                         "/testwavbuilder_clearwavcandidates/"
         wb.clear_wav_candidates(wav_directory, "test")
-        self.assertEqual([], os.listdir(wav_directory), "Test.wav was not removed!")
+        self.assertEqual([], os.listdir(wav_directory),
+                         "Test.wav was not removed!")
 
     def tearDown(self):
         """

@@ -28,12 +28,13 @@ class TestStrConcat(unittest.TestCase):
 
     def test_str_concat(self):
         """
-        Tests the str_concat method.
+        Tests the str_concat function.
         """
         def str_concat(string, another_string):
             return str(string) + str(another_string)
 
-        self.assertEqual("Hello World!", str_concat(self.string_one, self.string_two))
+        self.assertEqual("Hello World!", str_concat(self.string_one,
+                                                    self.string_two))
 
     def tearDown(self):
         """

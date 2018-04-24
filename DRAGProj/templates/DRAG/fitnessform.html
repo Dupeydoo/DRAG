@@ -3,14 +3,18 @@
     {% load strconcat %}
     {% load returnindex %}
     <section id="fitnessform">
-        <h1>Track Rating for Generation {{ request.session.current_generation }}</h1>
-        <p>As in biological evolution only the fittest candidates survive! Listen to tracks
-            and assign them a quality rating between 0 and 10. Click submit when you are finished. You may
-            listen to the first 9 tracks with numeric key shortcuts (pressing 1 will play track 1). You
+        <h1>
+            Track Rating for Generation {{ request.session.current_generation }}
+        </h1>
+        <p>As in biological evolution only the fittest candidates survive!
+            Listen to tracks and assign them a quality rating between 0 and 10.
+            Click submit when you are finished. You may listen to the first 9
+            tracks with numeric key shortcuts (pressing 1 will play track 1). You
             can also use the tab key to switch between fitness inputs fast.
 
-            Each track can be navigated easily in a grid system by using shift + a directional key to switch
-            from track to track. Once a track is in focus you may use the Enter or Space key to play the track.</p>
+            Each track can be navigated easily in a grid system by using shift
+            + a directional key to switch from track to track. Once a track is
+            in focus you may use the Enter or Space key to play the track.</p>
         {% if fitness_form.errors %}
             {% for error in fitness_form.non_field_errors %}
                 <p class="form-error">
@@ -26,7 +30,8 @@
                         {% with index=population|return_index:counter %}
                             <div class="col-md-3 collapse-under">
                                 <h5>Track {{ forloop.counter }}:</h5>
-                                <audio id="{{ "track"|str_concat:counter }}" class="track" controls>
+                                <audio id="{{ "track"|str_concat:counter }}"
+                                       class="track" controls>
 
                                     <source src="{{ "/DRAG/static/wavfiles/"|str_concat:request.session.user_id|str_concat:"candidate"|str_concat:counter|str_concat:".wav" }}"
                                             type="audio/wav">
@@ -41,7 +46,8 @@
                     {% endwith %}
                 {% endfor %}
             </div>
-            <input type="submit" value="Submit" class="btn btn-primary" id="fitnesssubmit">
+            <input type="submit" value="Submit" class="btn btn-primary"
+                   id="fitnesssubmit">
         </form>
     </section>
 {% endblock %}

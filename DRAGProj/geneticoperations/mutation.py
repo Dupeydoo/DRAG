@@ -3,7 +3,8 @@ import random
 import DRAGProj.mappers.drummapper as dm
 
 """
-The mutation module provides the functions for mutation in the genetic algorithm.
+The mutation module provides the functions for mutation in the genetic 
+algorithm.
 
     Author:
         James
@@ -18,12 +19,16 @@ def do_mutation(children, muta_prob, muta_type_prob=0.5):
     The entry function to mutation.
 
     Args:
-        children (:obj:`list` of :obj:`Track`): The list of children from crossover.
+        children (:obj:`list` of :obj:`Track`): The list of children from
+        crossover.
+
         muta_prob (float): The probability of mutation occuring.
-        muta_type_prob (float): Probability deciding whether to use single or multi-point crossover.
+        muta_type_prob (float): Probability deciding whether to use single
+        or multi-point crossover.
 
     Returns:
-        mutated_children (:obj:`list` of :obj:`Track`): A list of children that have been mutated.
+        mutated_children (:obj:`list` of :obj:`Track`): A list of children
+        that have been mutated.
     """
     mutated_children = []
     for child in children:
@@ -99,7 +104,9 @@ def create_groups(instruments, child, rand_index):
     Picks a random drum and creates groups of cymbal and non-cymbals.
 
     Args:
-        instruments (:obj:`dict` of int keys and :obj:`str` values): The instruments that can be used in DRAG.
+        instruments (:obj:`dict` of int keys and :obj:`str` values): The
+        instruments that can be used in DRAG.
+
         child (:obj:`Track`): A child that will be mutated.
         rand_index (int): The index of the tracks contents to be mutated.
     """

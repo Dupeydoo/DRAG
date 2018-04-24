@@ -35,7 +35,8 @@ class TestAudioThread(unittest.TestCase):
         context = dc.context
         path = context["system_path"] + context["wav_path"] + "test.wav"
         self.thread.run()
-        self.assertEqual(ntpath.basename(path), "test.wav", "The file was not written!")
+        self.assertEqual(ntpath.basename(path), "test.wav",
+                         "The file was not written!")
 
     def tearDown(self):
         """

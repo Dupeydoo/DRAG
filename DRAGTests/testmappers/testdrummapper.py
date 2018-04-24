@@ -36,9 +36,10 @@ class TestDrumMapper(unittest.TestCase):
 
     def test_is_cymbal(self):
         """
-        Tests the is_cymbal method.
+        Tests the is_cymbal function.
         """
-        self.assertTrue(dm.is_cymbal(self.drum), "Drum 1 is a Hi-Hat! is_cymbal should return true!")
+        self.assertTrue(dm.is_cymbal(self.drum), "Drum 1 is a Hi-Hat! is_"
+                                                 "cymbal should return true!")
 
     def tearDown(self):
         """

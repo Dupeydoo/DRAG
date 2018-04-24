@@ -43,14 +43,16 @@ class TestCustomInputForm(TestCase):
         """
         Tests the CustomInputForm validity.
         """
-        self.assertTrue(self.input_form.is_valid(), "The input_form data is invalid!")
+        self.assertTrue(self.input_form.is_valid(),
+                        "The input_form data is invalid!")
 
     def test_form_data(self):
         """
         Tests for equality of CustomInputForm data.
         """
         self.input_form.is_valid()
-        self.assertEqual(6, self.input_form.cleaned_data["beat_six"], "The form data has an incorrect value!")
+        self.assertEqual(6, self.input_form.cleaned_data["beat_six"],
+                         "The form data has an incorrect value!")
 
     def tearDown(self):
         """

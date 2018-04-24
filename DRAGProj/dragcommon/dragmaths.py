@@ -1,5 +1,5 @@
 """
-A module containing generic mathematics functions.
+A module containing mathematics functions.
 
     Author:
         James

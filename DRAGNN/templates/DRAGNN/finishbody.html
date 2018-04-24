@@ -4,7 +4,8 @@
     <section id="finished">
         <h1>Congratulations - You have finished a diversification run!</h1>
         <p>
-            <strong>Generations: </strong> {{ automated_generations|add:manual_generations }} <br/>
+            <strong>Generations: </strong>
+            {{ automated_generations|add:manual_generations }} <br/>
             Enjoy your reward! A set of tracks diversified to your taste.
         </p>
         <div class="row">
@@ -18,6 +19,7 @@
                 </div>
             {% endfor %}
         </div>
-        <img class="img-fluid" src="{% static "images/finish.jpg" %}" alt="You have finished!">
+        <img class="img-fluid" src="{% static "images/finish.jpg" %}"
+             alt="You have finished!">
     </section>
 {% endblock %}

@@ -31,7 +31,7 @@ class TestClassification(TestCase):
 
     def test_decompose_fitness(self):
         """
-        Tests the decompose_fitness method.
+        Tests the decompose_fitness function.
         """
         expected_output = [0, 2, 0, 1, 1, 1, 2, 0, 0, 2]
         self.assertEquals(expected_output, cl.decompose_fitness(self.fitnesses),

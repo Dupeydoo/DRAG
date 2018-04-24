@@ -53,7 +53,8 @@ class TestGenreGenerator(unittest.TestCase):
         """
         population = gg.generate_rock_tracks([], 5, 8)
         correct_length = True if len(population) == 5 else False
-        self.assertTrue(correct_length, "The population was created incorrectly!")
+        self.assertTrue(correct_length,
+                        "The population was created incorrectly!")
 
     def tearDown(self):
         """

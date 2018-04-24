@@ -15,8 +15,12 @@ class Track:
 
     Attributes:
         content (:obj:`list` of int): The tracks encoding.
-        fitness (int): A value between 0 and 10 representing the users satisfaction.
-        id_method (:obj:): Either a None when not specified, or an int when specified.
+        fitness (int): A value between 0 and 10 representing the users
+        satisfaction.
+
+        id_method (:obj:): Either a None when not specified, or an int
+        when specified.
+
         has_changed (bool): False when unchanged from last generation.
         track_id (int): track identifier.
     """
@@ -29,8 +33,11 @@ class Track:
 
         Args:
             content (:obj:`list` of int): The tracks encoding.
-            fitness (int): A value between 0 and 10 representing the users satisfaction.
-            id_method (:obj:): Either a None when not specified, or a readable string when specified.
+            fitness (int): A value between 0 and 10 representing the users
+            satisfaction.
+
+            id_method (:obj:): Either a None when not specified, or a readable
+            string when specified.
         """
         self.content = content
         self.fitness = fitness
@@ -51,7 +58,8 @@ class Track:
         Adds an instrument to the track content.
 
         Args:
-            instrument (int): An int representing an instrument from the drummapper.
+            instrument (int): An int representing an instrument from the
+            drummapper.
         """
         self.content.append(instrument)
 
@@ -61,7 +69,8 @@ class Track:
 
         Args:
             index (int): An index to insert the instrument at.
-            common_value (int): An int representing an instrument from the drummapper often a common value.
+            common_value (int): An int representing an instrument from the
+            drummapper often a common value.
         """
         self.content.insert(index, common_value)
 
@@ -78,7 +87,8 @@ class Track:
         Static method to take a pair of tracks and change has_changed.
 
         Args:
-            track_list (:obj:`list` of :obj:`Track`): A list (usually a pair) of tracks.
+            track_list (:obj:`list` of :obj:`Track`): A list (usually a pair)
+            of tracks.
         """
         for track in track_list:
             track.has_changed = True

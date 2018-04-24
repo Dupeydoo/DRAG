@@ -52,8 +52,10 @@ class TestDataStore(TestCase):
         content = list(store.select("track"))
         fitnesses = list(store.select("fitness"))
 
-        self.assertTrue(content, "The population content was not added to the store!")
-        self.assertTrue(fitnesses, "The population fitnesses were not added to the store!")
+        self.assertTrue(content,
+                        "The population content was not added to the store!")
+        self.assertTrue(fitnesses,
+                        "The population fitnesses were not added to the store!")
         self.assertTrue(exists, "The data file was not stored!")
 
     def test_read_data_store(self):
@@ -66,8 +68,10 @@ class TestDataStore(TestCase):
         track_instance = True if isinstance(track_np, np.ndarray) else False
         fitness_instance = True if isinstance(fitness_np, np.ndarray) else False
 
-        self.assertTrue(track_instance, "The returned instance should be a numpy array!")
-        self.assertTrue(fitness_instance, "The returned instance should be a numpy array!")
+        self.assertTrue(track_instance,
+                        "The returned instance should be a numpy array!")
+        self.assertTrue(fitness_instance,
+                        "The returned instance should be a numpy array!")
 
     def test_get_data_store(self):
         """

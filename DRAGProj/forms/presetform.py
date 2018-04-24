@@ -28,17 +28,20 @@ use as input to the genetic algorithm.
 
 class PresetForm(forms.Form):
     """
-    PresetForm serves as the class for the preset form. Pre-built tracks can be selected as inputs to the
-    genetic algorithm.
+    PresetForm serves as the class for the preset form. Pre-built tracks can
+    be selected as inputs to the genetic algorithm.
 
     Attributes:
-        preset (:obj:`TypedChoiceField`): A HTML5 Select object to allow the user to choose the preset desired.
-        bpm (:obj:`IntegerField`): A HTML5 number input object to represent the bpm provided by the user.
+        preset (:obj:`TypedChoiceField`): A HTML5 Select object to allow the
+        user to choose the preset desired.
+
+        bpm (:obj:`IntegerField`): A HTML5 number input object to represent
+        the bpm provided by the user.
     """
     preset = forms.TypedChoiceField(choices=preset_choices, coerce=int,
-                                    widget=forms.Select(attrs={"class": "form-control cb"}))
+            widget=forms.Select(attrs={"class": "form-control cb"}))
     bpm = forms.IntegerField(max_value=250, min_value=60,
-                             widget=forms.NumberInput(attrs={"id": "bpmtwo", "name": "bpmtwo"}))
+            widget=forms.NumberInput(attrs={"id": "bpmtwo", "name": "bpmtwo"}))
 
     def clean(self):
         """
@@ -58,7 +61,8 @@ class PresetForm(forms.Form):
                 )
 
             # Checks the preset chosen is a valid preset.
-            if preset < 0 or preset > (len(preset_choices) - 1) or not isinstance(preset, int):
+            if preset < 0 or preset > (len(preset_choices) - 1) \
+                    or not isinstance(preset, int):
                 raise forms.ValidationError(
                     "Please choose one of the available presets."
                 )

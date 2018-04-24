@@ -1,5 +1,6 @@
 """
-This module performs replacement of the population using a simple generational approach.
+This module performs replacement of the population using a simple generational
+approach.
 
     Author:
         James
@@ -14,8 +15,11 @@ def do_replacement(current_population, children):
     Performs replacement.
 
     Args:
-        current_population (:obj:`list` of :obj:`Track`): Current track population.
-        children (:obj:`list` of :obj:`Track`): The children that will replace the old population.
+        current_population (:obj:`list` of :obj:`Track`): Current track
+        population.
+
+        children (:obj:`list` of :obj:`Track`): The children that will replace
+        the old population.
 
     Returns:
         new_population (:obj:`list` of :obj:`Track`): New track population.

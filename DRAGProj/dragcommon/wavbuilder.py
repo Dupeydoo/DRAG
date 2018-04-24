@@ -40,9 +40,12 @@ def map_input(candidate, bpm, output_file, path):
 
     Args:
         candidate (:obj:`Track`): A Track object to use to write the file.
-        bpm (int): A number representing the beats per minute or tempo of the track.
+        bpm (int): A number representing the beats per minute or tempo of
+        the track.
+
         output_file (:obj:`str`) : A string representing the file to write to.
-        path (:obj:`str`): A string representing a combination of the website and staticfiles directories.
+        path (:obj:`str`): A string representing a combination of the website
+        and staticfiles directories.
 
     See:
         DRAGProj.mappers.drummapper
@@ -71,9 +74,12 @@ def begin_audio_thread(output, output_file, gap):
     Begins an AudioThread and thus, the writing process of a wav file.
 
     Args:
-        output (:obj:`AudioSegment`): The AudioSegment object representing the track to be written.
+        output (:obj:`AudioSegment`): The AudioSegment object representing
+        the track to be written.
+
         output_file (:obj:`str`) : A string representing the file to write to.
-        gap (:obj:`AudioSegment`): An AudioSegment object of a specified silence duration.
+        gap (:obj:`AudioSegment`): An AudioSegment object of a specified silence
+        duration.
 
     See:
         DRAGProj.dragcommon.audiothread
@@ -92,10 +98,12 @@ def beat_offset(bpm):
     Doing so allows adjustment of tempo to over 300 bpm.
 
     Args:
-        bpm (int): A number representing the beats per minute or tempo of the track.
+        bpm (int): A number representing the beats per minute or tempo of
+        the track.
 
     Returns:
-         number: A value indicating the space between notes in milliseconds, hence 60000.
+         number: A value indicating the space between notes in milliseconds,
+         hence 60000.
     """
     minute_milliseconds = 60000
     return minute_milliseconds / bpm
@@ -106,8 +114,11 @@ def clear_wav_candidates(wav_directory, string):
     A function to clear out old wav files from a previous generation.
 
     Args:
-        wav_directory (:obj:`str`): A string representing the directory to clear of candidates.
-        string (:obj:`str`): A string to match against files in the directory for deletion.
+        wav_directory (:obj:`str`): A string representing the directory to
+        clear of candidates.
+
+        string (:obj:`str`): A string to match against files in the directory
+        for deletion.
 
     See:
         os

@@ -1,4 +1,5 @@
 from django.urls import path
+
 from . import views
 
 """
@@ -22,5 +23,6 @@ urlpatterns = [
     path('Finished/', views.finished, name='finish')
 ]
 """
-urlpatterns (:obj:`list`): contains the controller patterns for different typed urls.
+urlpatterns (:obj:`list`): contains the controller patterns for different 
+typed urls.
 """

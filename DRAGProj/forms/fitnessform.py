@@ -17,10 +17,12 @@ A module housing the form used for rating track fitness.
 
 class FitnessForm(forms.Form):
     """
-    The FitnessForm class serves as the main form the user uses to rate tracks over generations.
+    The FitnessForm class serves as the main form the user uses to rate tracks
+    over generations.
 
     Attributes:
-        fields (:obj:`dict`): Form fields collection, containing the form fields explicitly.
+        fields (:obj:`dict`): Form fields collection, containing the form fields
+        explicitly.
     """
 
     def __init__(self, *args, **kwargs):
@@ -28,7 +30,8 @@ class FitnessForm(forms.Form):
         FitnessForm constructor.
 
         Args:
-            **kwargs (:obj:`dict`): The dictionary of additional keyword arguments provided.
+            **kwargs (:obj:`dict`): The dictionary of additional keyword
+            arguments provided.
         """
         # Pop off the size keyword argument.
         size = kwargs.pop('size')
@@ -37,8 +40,9 @@ class FitnessForm(forms.Form):
         super(FitnessForm, self).__init__(*args, **kwargs)
 
         for candidate in range(size):
-            # Create IntegerFields dynamically based on how many population members there are.
-            self.fields["fitness" + str(candidate)] = forms.IntegerField\
+            # Create IntegerFields dynamically based on how many population
+            # members there are.
+            self.fields["fitness" + str(candidate)] = forms.IntegerField \
                 (max_value=10, min_value=0, widget=forms.NumberInput(
                     attrs={"class": "fitness",
                            "name": "fitness",
@@ -49,8 +53,9 @@ class FitnessForm(forms.Form):
         This method collects the cleaned fitness inputs ready for assignment.
 
         Yields:
-            (name, fitness) (:obj:`tuple`): name, fitness pairs from the cleaned data dictionary. The yield creates
-            a generator object to use for assignment.
+            (name, fitness) (:obj:`tuple`): name, fitness pairs from the cleaned
+            data dictionary. The yield creates a generator object to use for
+            assignment.
         """
         # Loop through the forms cleaned items.
         for name, fitness in self.cleaned_data.items():

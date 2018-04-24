@@ -31,7 +31,8 @@ class TestAnonymousUser(TestCase):
         Tests the AnonymousUser constructor.
         """
         instance = True if isinstance(self.user, AnonymousUser) else False
-        self.assertTrue(instance, "The Anonymous User should be an instance of Anonymous User")
+        self.assertTrue(instance, "The Anonymous User should be an "
+                                  "instance of Anonymous User")
 
     def tearDown(self):
         """

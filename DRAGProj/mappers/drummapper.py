@@ -29,7 +29,8 @@ drum_mapper = {
     16: "HHatKickSnareHTom.wav"
 }
 """
-drum_mapper (:obj:`dict` of int keys and :obj:`str` values): The drum_mapper dictionary.
+drum_mapper (:obj:`dict` of int keys and :obj:`str` values): The drum_mapper 
+dictionary.
 """
 
 

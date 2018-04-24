@@ -8,8 +8,8 @@ from DRAGProj.dragcommon.appstart import AppStart
 from DRAGProj.models.anonymoususer import AnonymousUser
 
 """
-This module provides assisting functions to views.py to keep the views logic
-isolated.
+This module provides assisting functions to views.py to keep the 
+views logic isolated.
 
     Author:
         James
@@ -53,7 +53,9 @@ def gather_fitness_input(dct, population):
     them to the respective population members.
 
     Args:
-        dct (:obj:`generator` of int): The generator object to access fitnesses from.
+        dct (:obj:`generator` of int): The generator object to access
+        fitnesses from.
+
         population (:obj:`list` of :obj:`Track`): The Track population.
     """
     # Enumerate exposes a counter while allowing normal generator iteration.
@@ -66,22 +68,24 @@ def gather_fitness_input(dct, population):
 
 def generation_check(current_generation, max_generation):
     """
-    Checks to see when manual generations have finished to begin Machine Learning.
+    Checks to see when manual generations have finished to begin Machine
+    Learning.
 
     Args:
         current_generation (int): The current generation.
         max_generation (int): The maximum manual generations.
 
     Returns:
-        HttpResponseRedirect (:obj:`HTTPResponseRedirect`): A redirect object to route to a different url.
+        HttpResponseRedirect (:obj:`HTTPResponseRedirect`): A redirect
+        object to route to a different url.
     """
     return current_generation == max_generation
 
 
 def set_uuid_cookie(response, request, cookie_uuid=None):
     """
-    Checks if the user has a cookie id, if they do, it checks if it is a valid id.
-    Issues a new cookie in all events other than a valid id.
+    Checks if the user has a cookie id, if they do, it checks if it is a
+    valid id. Issues a new cookie in all events other than a valid id.
 
     Args:
         response (:obj:`HTTPResponse`): HTTP response to bind the cookie to.
@@ -94,7 +98,8 @@ def set_uuid_cookie(response, request, cookie_uuid=None):
         # If the user with the id doesn't need to be created, we know it exists.
         if not AnonymousUser.objects.get_or_create(UUID=cookie_uuid)[1]:
             context = dc.context
-            wb.clear_wav_candidates((context["system_path"] + context["wav_path"]), cookie_uuid)
+            wb.clear_wav_candidates((context["system_path"] +
+                                     context["wav_path"]), cookie_uuid)
             request.session["user_id"] = cookie_uuid
         else:
             new_uuid = generate_uuid(response, request)

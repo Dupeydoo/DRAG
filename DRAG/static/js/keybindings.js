@@ -2,11 +2,13 @@
  * This js file provides the keybind functionality found
  * in the track rating form.
  *
+ * @author James
  * @version 2.0.0
  */
 
 $(document).ready(function () {
-   var tracks = $(".track").length;          // Get the number of tracks
+    // Get the number of tracks.
+   var tracks = $(".track").length;
    addkeybindings(tracks);
 
     /**
@@ -17,15 +19,20 @@ $(document).ready(function () {
    function addkeybindings(tracks) {
         for (var i = 0; i < tracks; i++) {
             (function (i) {
-                var bind = i + 1;   // Zero indexed so get numeric key to use
-                Mousetrap.bind(bind.toString(), function () {          // Bind the numeric key to the function below
-                    var track = document.getElementById("track" + i);  // Get the element with the current loop value
+                // Zero indexed so get numeric key to use.
+                var bind = i + 1;
+
+                // Bind the numeric key to the function below.
+                Mousetrap.bind(bind.toString(), function () {
+
+                    // Get the element with the current loop value.
+                    var track = document.getElementById("track" + i);
                     track.play();
                 });
             })(i);
         }
 
-        // AES Grid Keybinds
+        // AES Grid Keybinds.
         Mousetrap.bind({
             'shift+up': function () {
                 var direction = 0;
@@ -54,12 +61,16 @@ $(document).ready(function () {
  * @param tracks     Number of tracks.
  */
 function handletrackey(direction, tracks) {
-    var gridboundary = tracks - 1;  // The grid is zero indexed so get the boundary
+    // The grid is zero indexed so get the boundary
+    var gridboundary = tracks - 1;
     var element = getgridposition();
     switch (direction) {
         case 0:
-            var upnum = setfocus(element) - 4;                // Get where we will focus next
-            var upelem = calculatenext(upnum, gridboundary);  // See if its a valid movement
+            // Get where we will focus next.
+            var upnum = setfocus(element) - 4;
+
+            // See if its a valid movement.
+            var upelem = calculatenext(upnum, gridboundary);
             movefocus(upelem);
             break;
         case 1:
@@ -85,11 +96,11 @@ function handletrackey(direction, tracks) {
 /**
  * Gets the current grid position.
  *
- * @returns  The active element in the document, if there is no active element
- *           it returns the first track element.
+ * @returns  The active element in the document, if there is no
+ *           active element it returns the first track element.
  */
 function getgridposition() {
-    // Default focus is focus on the body
+    // Default focus is focus on the body.
     if (document.activeElement.tagName === "BODY") {
         return $("#track0")[0]
     }
@@ -104,7 +115,7 @@ function getgridposition() {
  * @returns {number}    Where to move next.
  */
 function calculatenext(number, gridboundary) {
-    // If the number is greater than zero and within the grid boundaries
+    // If the number is greater than zero and within the grid boundaries.
     return (number > 0 && number <= gridboundary) ? number : 0
 }
 
@@ -116,7 +127,8 @@ function calculatenext(number, gridboundary) {
  * @returns {number} The track number of current element.
  */
 function setfocus(element) {
-    return parseInt(element.id.substring(5)); // The track number is always beyond index 5
+    // The track number is always beyond index 5.
+    return parseInt(element.id.substring(5));
 }
 
 /**
@@ -125,6 +137,7 @@ function setfocus(element) {
  * @param nextelement  The element to move to.
  */
 function movefocus(nextelement) {
+    // Apply page focus to the element.
     var nextelem = $("#track" + nextelement.toString());
-    nextelem.focus();   // Apply page focus to the element
+    nextelem.focus();
 }

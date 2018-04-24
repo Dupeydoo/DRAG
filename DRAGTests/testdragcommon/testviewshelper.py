@@ -59,13 +59,15 @@ class TestViewsHelper(test.TestCase):
             else:
                 gathered.append(False)
 
-        self.assertEqual(False, False in gathered, "The fitnesses were not assigned correctly!")
+        self.assertEqual(False, False in gathered,
+                         "The fitnesses were not assigned correctly!")
 
     def test_generation_check(self):
         """
         Tests the generation_check method.
         """
-        self.assertTrue(vh.generation_check(5, 5), "The given generations are not equal!")
+        self.assertTrue(vh.generation_check(5, 5),
+                        "The given generations are not equal!")
 
     def test_create_user(self):
         """
@@ -73,7 +75,8 @@ class TestViewsHelper(test.TestCase):
         """
         vh.create_user(self.uuid)
         user = AnonymousUser.objects.get(UUID=self.uuid)
-        self.assertEqual("HelloWorld", user.UUID, "The new user was not saved correctly!")
+        self.assertEqual("HelloWorld", user.UUID,
+                         "The new user was not saved correctly!")
 
     def tearDown(self):
         """

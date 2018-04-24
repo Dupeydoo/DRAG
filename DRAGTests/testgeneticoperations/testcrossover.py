@@ -35,7 +35,8 @@ class TestCrossover(unittest.TestCase):
         """
         parents = self.parents.population
         children = crossover.do_crossover(parents, self.cross_prob)
-        self.assertEqual(10, len(children), "Crossover did not succeed, elements were lost.")
+        self.assertEqual(10, len(children), "Crossover did not succeed, "
+                                            "elements were lost.")
 
     def test_single_point_crossover(self):
         """
@@ -43,7 +44,8 @@ class TestCrossover(unittest.TestCase):
         """
         old_parents = [self.parents.population[0], self.parents.population[1]]
         parents = crossover.single_point_crossover(old_parents)
-        self.assertNotEqual(parents[0], old_parents[0], "The tracks were not changed!")
+        self.assertNotEqual(parents[0], old_parents[0],
+                            "The tracks were not changed!")
 
     def test_multi_point_crossover(self):
         """
@@ -51,7 +53,8 @@ class TestCrossover(unittest.TestCase):
         """
         old_parents = [self.parents.population[0], self.parents.population[1]]
         parents = crossover.multi_point_crossover(old_parents)
-        self.assertNotEqual(parents[1], old_parents[1], "The tracks were not changed!")
+        self.assertNotEqual(parents[1], old_parents[1],
+                            "The tracks were not changed!")
 
     def tearDown(self):
         """

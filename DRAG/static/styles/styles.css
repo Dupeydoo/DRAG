@@ -1,6 +1,12 @@
 /*
-* This file provides the styles to DRAG.
+* This file provides styles to DRAG.
 */
+
+/*****************************************************
+
+Default Page Styles
+
+******************************************************/
 
 #header .carousel-inner img {
     width: 100%;
@@ -168,6 +174,12 @@ figure {
     max-width: 50%;
     margin-top: 80px;
 }
+
+/*****************************************************
+
+Media Queries - Responsive CSS
+
+******************************************************/
 
 @media only screen and (max-width: 800px) {
     .about-section img {

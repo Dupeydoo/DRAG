@@ -21,7 +21,9 @@ class TestMutation(unittest.TestCase):
     Tests the mutation module.
 
     Attributes:
-        children (:obj:`list` of :obj:`Track`): The children to test mutation on.
+        children (:obj:`list` of :obj:`Track`): The children to test mutation
+        on.
+
         child (:obj:`Track`): A single child track.
         muta_prob (float): A testing probability of mutation.
     """
@@ -47,22 +49,26 @@ class TestMutation(unittest.TestCase):
         """
         child = self.child
         self.child = mutation.mutate(Track([1, 2, 3, 4, 5, 6, 7, 8], 1, 2))
-        self.assertNotEqual(child.content, self.child.content, "The track was not mutated!")
+        self.assertNotEqual(child.content, self.child.content,
+                            "The track was not mutated!")
 
     def test_drum_group_mutate(self):
         """
         Tests the drum_group_mutate function.
         """
         child = self.child
-        self.child = mutation.drum_group_mutate(Track([1, 2, 3, 4, 5, 6, 7, 8], 1, 2))
-        self.assertNotEqual(child.content, self.child.content, "The track was not mutated!")
+        self.child = mutation.drum_group_mutate(
+            Track([1, 2, 3, 4, 5, 6, 7, 8], 1, 2))
+        self.assertNotEqual(child.content, self.child.content,
+                            "The track was not mutated!")
 
     def test_create_groups(self):
         """
         Tests the create_groups function.
         """
         result = mutation.create_groups(drum_mapper, self.child, 5)
-        changed_correctly = True if 1 or 5 or 6 or 7 or 8 or 9 or 10 or 11 == result[0][0] else False
+        changed_correctly = True if 1 or 5 or 6 or 7 or 8 or 9 or 10 or 11 \
+                                    == result[0][0] else False
         self.assertTrue(changed_correctly)
 
     def tearDown(self):

@@ -26,5 +26,6 @@ urlpatterns = [
     path('FAQ/', views.faq, name='faq')
 ]
 """
-urlpatterns (:obj:`list`): contains the controller patterns for different typed urls.
+urlpatterns (:obj:`list`): contains the controller patterns for different 
+typed urls.
 """

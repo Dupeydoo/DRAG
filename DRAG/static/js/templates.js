@@ -1,6 +1,7 @@
 /**
  * This js file provides general functionality to html files.
  *
+ * @author James
  * @version 1.0.0
  */
 
@@ -14,11 +15,14 @@ $(document).ready(function () {
      */
     $(".smooth").on('click', function (event) {
         if (this.hash !== "") {
-            event.preventDefault();  // Prevent the default behaviour for clicking this class
 
-            // Store id hash
+            // Prevent the default behaviour for
+            // clicking this class.
+            event.preventDefault();
+
+            // Store id hash.
             var hash = this.hash;
-            // Perform the scroll
+            // Perform the scroll.
             $('html, body').animate({
                 scrollTop: $(hash).offset().top
             }, 800, function () {
@@ -51,10 +55,18 @@ $(document).ready(function () {
     });
 });
 
+/**
+ * Checks to see if an element is in the current viewport
+ * to allow animations to run at the correct time.
+ * @param elem         The element to check.
+ * @returns {boolean}  True if its in the viewport.
+ */
 function isElementInViewport(elem) {
     if($(elem).length !== 0) {
         var $elem = $(elem);
-        var scrollElem = ((navigator.userAgent.toLowerCase().indexOf('webkit') != -1) ? 'body' : 'html');
+        var scrollElem =
+            ((navigator.userAgent.toLowerCase().indexOf('webkit') != -1)
+                ? 'body' : 'html');
         var viewportTop = $(scrollElem).scrollTop();
         var viewportBottom = viewportTop + $(window).height();
         var elemTop = Math.round($elem.offset().top);
@@ -63,6 +75,10 @@ function isElementInViewport(elem) {
     }
 }
 
+/**
+ * Adds animation classes if the element
+ * is in the viewport.
+ */
 function checkAnimation() {
     var $img = $('.about-section img');
     if ($img.hasClass('rollIn animated')) return;

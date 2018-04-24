@@ -42,6 +42,7 @@ def catch_critical_error(request):
         request (:obj:`Request`): The request object associated with the page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to the error.html page with the request and context.
+        :obj:`HTTPResponse`: A HTTPResponse object to the error.html page with
+         the request and context.
     """
     return render(request, "DRAG/error.html", context)

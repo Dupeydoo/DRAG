@@ -30,7 +30,8 @@ class TestAppStart(TestCase):
         """
         Tests the application start AppStart change.
         """
-        self.assertEquals(True, self.start.clear, "The DRAGProj config sets clear = True!")
+        self.assertEquals(True, self.start.clear, "The DRAGProj config sets "
+                                                  "clear = True!")
 
     def tearDown(self):
         """

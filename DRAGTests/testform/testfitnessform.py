@@ -45,14 +45,16 @@ class TestFitnessForm(TestCase):
         """
         Tests the FitnessForm validity.
         """
-        self.assertTrue(self.fitness_form.is_valid(), "The fitness form is invalid!")
+        self.assertTrue(self.fitness_form.is_valid(),
+                        "The fitness form is invalid!")
 
     def test_form_data(self):
         """
         Tests for equality of FitnessForm data.
         """
         self.fitness_form.is_valid()
-        self.assertEqual(9, self.fitness_form.cleaned_data["fitness4"], "The form data is invalid!")
+        self.assertEqual(9, self.fitness_form.cleaned_data["fitness4"],
+                         "The form data is invalid!")
 
     def test_collect_fitnesses(self):
         """
@@ -62,7 +64,8 @@ class TestFitnessForm(TestCase):
         output = []
         for pair in tuple_dict:
             output.append(pair[1])
-        self.assertEqual([5, 2, 9, 0, 3], output, "Fitnesses were not collated correctly.")
+        self.assertEqual([5, 2, 9, 0, 3], output,
+                         "Fitnesses were not collated correctly.")
 
     def tearDown(self):
         """

@@ -19,7 +19,9 @@ class TestSelection(unittest.TestCase):
     Tests the selection module.
 
     Attributes:
-        population (:obj:`list` of :obj:`Track`): A testing population of tracks.
+        population (:obj:`list` of :obj:`Track`): A testing population of
+        tracks.
+
         tournament_size (int): The testing tournament size.
     """
     def setUp(self):
@@ -31,19 +33,22 @@ class TestSelection(unittest.TestCase):
 
     def test_do_selection(self):
         """
-        Tests the do_selection method.
+        Tests the do_selection function.
         """
         parents = selection.do_selection(self.population, self.tournament_size)
         changed = True if parents[0].has_changed else False
-        self.assertTrue(not changed, "The selected parents were't reset, or the parents weren't selected!")
+        self.assertTrue(not changed, "The selected parents were't reset, "
+                                     "or the parents weren't selected!")
 
     def test_tournament_select(self):
         """
         Tests the tournament_select function.
         """
-        parent = selection.tournament_select(self.population, self.tournament_size)
+        parent = selection.tournament_select(self.population,
+                                             self.tournament_size)
         self.assertEqual(1, parent.fitness,
-                         "The tournament was performed incorrectly! Actual: %d, Expected: %d" % (parent.fitness, 1))
+                         "The tournament was performed incorrectly! "
+                         "Actual: %d, Expected: %d" % (parent.fitness, 1))
 
     def tearDown(self):
         """

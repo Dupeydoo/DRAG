@@ -23,7 +23,9 @@ def generate_population(p_size, c_ratio, input_list, genre, time_sig):
     Args:
         p_size (int): The size of the population to be generated.
         c_ratio (float): The ratio of input copies to use.
-        input_list (:obj:`list` of int): The list of instrument ints to use as input.
+        input_list (:obj:`list` of int): The list of instrument ints to use
+        as input.
+
         genre (:obj:`str`): The genre of the track to diversify.
         time_sig (int): The time signature used in track generation.
 
@@ -35,8 +37,8 @@ def generate_population(p_size, c_ratio, input_list, genre, time_sig):
     population = []
 
     population = populate_copies(population, copy_append, input_list)
-    population = generate_genre_tracks(population, (p_size - copy_append), genre,
-                                       time_sig)
+    population = generate_genre_tracks(population, (p_size - copy_append),
+                                       genre, time_sig)
     return population
 
 
@@ -51,7 +53,8 @@ def generate_genre_tracks(population, track_number, genre, time_sig):
         time_sig (int): The time signature used in track generation.
 
     Returns:
-        population (:obj:`list` of :obj:`Track`): The population of tracks with genre tracks added.
+        population (:obj:`list` of :obj:`Track`): The population of tracks with
+        genre tracks added.
     """
     if genre == "Rock":
         population = gg.generate_rock_tracks(population, track_number, time_sig)
@@ -74,10 +77,12 @@ def populate_copies(population, copy_number, input_list):
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
         copy_number (int): The number of copies to generate.
-        input_list (:obj:`list` of int): The list of instrument ints to use as input.
+        input_list (:obj:`list` of int): The list of instrument ints to use as
+        input.
 
     Returns:
-        population (:obj:`list` of :obj:`Track`): The population of tracks with copies added.
+        population (:obj:`list` of :obj:`Track`): The population of tracks with
+        copies added.
 
     See:
         DRAGProj.dragcommon.track

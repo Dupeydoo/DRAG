@@ -1,12 +1,11 @@
-from django.shortcuts import render
 from django.http import HttpResponseRedirect
+from django.shortcuts import render
+
 from DRAG.datacontext import context
-
-from DRAGProj.dragcommon import pageerror as pe
-from DRAGProj.dragcommon import viewshelper as vh
-
 from DRAGNN.machinelearning import classification as cl
 from DRAGNN.storage import datastore as ds
+from DRAGProj.dragcommon import pageerror as pe
+from DRAGProj.dragcommon import viewshelper as vh
 
 """
 Handles view logic within the DRAGNN application. Every view 
@@ -38,7 +37,8 @@ def machinelearn(request):
         request (:obj:`Request`): The web request to the URL route.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to the machinelearn.html page.
+        :obj:`HTTPResponse`: A HTTPResponse object to the machinelearn.html
+        page.
     """
     vh.check_app_start(request)
     return render(request, "machinelearn.html", {"is_home": False})
@@ -79,7 +79,8 @@ def finished(request):
         :obj:`HTTPResponse`: A HTTPResponse object to the finish.html page.
     """
     # Check that all the planned generations have been fulfilled.
-    if request.session["current_generation"] != context["manual_generations"] + context["automated_generations"]:
+    if request.session["current_generation"] != context["manual_generations"] \
+            + context["automated_generations"]:
         return pe.catch_critical_error(request)
 
     # Expose a range value used to display tracks in the Django template.

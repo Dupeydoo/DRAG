@@ -31,7 +31,8 @@ class TestPreset(TestCase):
         Tests the preset constructor.
         """
         instance = True if isinstance(self.preset, Preset) else False
-        self.assertTrue(instance, "The preset should be an instance of the Preset model class")
+        self.assertTrue(instance, "The preset should be an instance "
+                                  "of the Preset model class")
 
     def tearDown(self):
         """

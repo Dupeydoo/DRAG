@@ -2,28 +2,29 @@
     {% load static %}
     <div id="learning" style="display:none; width: 100%; height: 100%">
         <p>
-            Learning how you rated tracks... this will only take a few minutes. Please enjoy this game while
-            you wait.
+            Learning how you rated tracks... this will only take a few minutes.
+            Please enjoy this game while you wait.
         </p>
-        <img src="{% static "images/ellipsis-loader.svg" %}" alt="This is a spinning loading icon"
-             style="margin-bottom: 20px;">
+        <img src="{% static "images/ellipsis-loader.svg" %}"
+             alt="This is a spinning loading icon" style="margin-bottom: 20px;">
 
         <div id="game-area" style="background-color: lightgrey; height: 300px;">
         </div>
         <div id="buttons">
-            <button class="btn btn-secondary" onmousedown="moveup()" onmouseup="stopMove()" ontouchstart="moveup()">
+            <button class="btn btn-secondary" onmousedown="moveup()"
+                    onmouseup="stopMove()" ontouchstart="moveup()">
                 Up
             </button>
-            <button class="btn btn-secondary" onmousedown="movedown()" onmouseup="stopMove()"
-                    ontouchstart="movedown()">
+            <button class="btn btn-secondary" onmousedown="movedown()"
+                    onmouseup="stopMove()" ontouchstart="movedown()">
                 Down
             </button>
-            <button class="btn btn-secondary" onmousedown="moveleft()" onmouseup="stopMove()"
-                    ontouchstart="moveleft()">
+            <button class="btn btn-secondary" onmousedown="moveleft()"
+                    onmouseup="stopMove()" ontouchstart="moveleft()">
                 Left
             </button>
-            <button class="btn btn-secondary" onmousedown="moveright()" onmouseup="stopMove()"
-                    ontouchstart="moveright()">
+            <button class="btn btn-secondary" onmousedown="moveright()"
+                    onmouseup="stopMove()" ontouchstart="moveright()">
                 Right
             </button>
         </div>

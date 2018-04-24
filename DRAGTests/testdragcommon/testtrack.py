@@ -38,7 +38,8 @@ class TestTrack(unittest.TestCase):
         """
         Tests the custom id method of the constructor.
         """
-        self.assertEqual(3, self.track_two.track_id, "The custom id was not set correctly!")
+        self.assertEqual(3, self.track_two.track_id,
+                         "The custom id was not set correctly!")
 
     def test_add_to_contents(self):
         """
@@ -59,15 +60,18 @@ class TestTrack(unittest.TestCase):
         # Insert a different value.
         self.track.insert_into_contents(3, 5)
         inserted = True if self.track.content[3] == 5 else False
-        self.assertEqual(True, inserted, "The track was not added to the contents at the correct position!")
+        self.assertEqual(True, inserted,
+            "The track was not added to the contents at the correct position!")
 
     def test_pair_changed(self):
         """
         Tests the static pair_changed method.
         """
         Track.pair_changed([self.track, self.track_two])
-        changed = True if self.track.has_changed and self.track_two.has_changed else False
-        self.assertEqual(True, changed, "The has_changed values were not set to True")
+        changed = True if self.track.has_changed and \
+                          self.track_two.has_changed else False
+        self.assertEqual(True, changed,
+                         "The has_changed values were not set to True")
 
     def tearDown(self):
         """

@@ -1,47 +1,55 @@
+import uuid
+
 import numpy as np
-
-from DRAGNN.storage import datastore as ds
-from DRAGNN.machinelearning import automategeneration as ag
-from DRAG.datacontext import context
-
+from sklearn import ensemble
 from sklearn import preprocessing
 from sklearn.model_selection import GridSearchCV
-from sklearn import ensemble
-import uuid
+
+from DRAG.datacontext import context
+from DRAGNN.machinelearning import automategeneration as ag
+from DRAGNN.storage import datastore as ds
 
 HIGH_FITNESS_DIVIDE = 7
 """
-HIGH_FITNESS_DIVIDE (int): The boundary by which high fitness candidates are categorised.
+HIGH_FITNESS_DIVIDE (int): The boundary by which high fitness candidates 
+are categorised.
 """
 MID_FITNESS_DIVIDE = 4
 """
-MID_FITNESS_DIVIDE (int): The boundary by which medium fitness candidates are categorised.
+MID_FITNESS_DIVIDE (int): The boundary by which medium fitness candidates 
+are categorised.
 """
 
 HIGH_FITNESS_CLASS = 2
 """
-HIGH_FITNESS_CLASS (int): The fitness class representation for highly rated candidates.
+HIGH_FITNESS_CLASS (int): The fitness class representation for highly 
+rated candidates.
 """
 MID_FITNESS_CLASS = 1
 """
-MID_FITNESS_CLASS (int): The fitness class representation for medium rated candidates.
+MID_FITNESS_CLASS (int): The fitness class representation for medium 
+rated candidates.
 """
 LOW_FITNESS_CLASS = 0
 """
-LOW_FITNESS_CLASS (int): The fitness class representation for low rated candidates.
+LOW_FITNESS_CLASS (int): The fitness class representation for low rated 
+candidates.
 """
 
 TREE_DEPTH = 8
 """
-TREE_DEPTH (int): How many levels to expand a decision tree within the Random Forest Classifier.
+TREE_DEPTH (int): How many levels to expand a decision tree within the 
+Random Forest Classifier.
 """
 CROSS_VAL_FOLDS = 10
 """
-CROSS_VAL_FOLDS (int): The number of times to fold training data with Cross Validation.
+CROSS_VAL_FOLDS (int): The number of times to fold training data with 
+Cross Validation.
 """
 FEATURE_VALUES = 17
 """
-FEATURE_VALUES (int): The amount of possible feature values, 0 to 16 inclusive.
+FEATURE_VALUES (int): The amount of possible feature values, 0 to 16 
+inclusive.
 """
 
 
@@ -95,16 +103,22 @@ def perform_classification(data, fitness, features, request, hot_encoder):
     Args:
         data (:obj:`ndarray`): Track data in a matrix like numpy array.
         fitness (:obj:`fitness`): Fitness data in a numpy array.
-        features (int): The number of features per sample. Used in write_to_file when called.
-        request (:obj:`Request`): The request object used in automating generations.
+        features (int): The number of features per sample. Used in
+        write_to_file when called.
+
+        request (:obj:`Request`): The request object used in automating
+        generations.
+
         hot_encoder (:obj:`OneHotEncoder`: The OHE used to encode future tracks.
     """
 
     # Establish a parameter set for GridSearchCV to search.
-    tuned_parameters = {"n_estimators": [10], "max_depth": [5, 8, 12], "min_samples_leaf": [3, 5, 8]}
+    tuned_parameters = {"n_estimators": [10], "max_depth": [5, 8, 12],
+                        "min_samples_leaf": [3, 5, 8]}
 
     # Perform parallelised GridSearchCV and RFC and fit the model.
-    clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1), tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
+    clf = GridSearchCV(ensemble.RandomForestClassifier(n_jobs=-1),
+                       tuned_parameters, n_jobs=-1, cv=CROSS_VAL_FOLDS)
     clf.fit(data, fitness)
 
     # Run the automated generations.
@@ -160,21 +174,25 @@ def write_to_file(predictions, fitness, features):
     np.savetxt(file, predictions.reshape(5, 20), fmt="%1.4f", delimiter=" ")
     file.write("\n")
 
+
     # Actuals block. Data is reshaped into a presentable format.
     file.write("Actuals: \n")
     np.savetxt(file, fitness.reshape(5, 20), fmt="%1.4f", delimiter=" ")
     file.write("\n")
+
 
     # Calculate the differences between predictions and actuals.
     differences = []
     for predict in range(0, len(predictions)):
         differences.append(predictions[predict] - fitness[predict])
 
+
     # Differences block.
     differences = np.asarray(differences).ravel()
     file.write("Differences: \n")
     np.savetxt(file, differences.reshape(5, 20), fmt="%1.4f", delimiter=" ")
     file.write("\n")
+
 
     # Metrics and parameters block.
     file.write("Number of zeros: " + str(list(differences).count(0)))

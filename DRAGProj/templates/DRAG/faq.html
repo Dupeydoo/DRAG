@@ -3,8 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>DRAG - About</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    {% block resources %} {% include 'DRAG/renderresources.html' %} {% endblock %}
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    {% block resources %}
+        {% include 'DRAG/renderresources.html' %}
+    {% endblock %}
 </head>
 <body>
 <div>
@@ -18,48 +21,57 @@
                     <h1>Frequently Asked Questions</h1>
                     <ol class="text-left faq-top-list">
                         <li>
-                            <a class="smooth" href="#one">So, what is a Genetic Algorithm?</a>
+                            <a class="smooth" href="#one">So, what is a Genetic
+                                Algorithm?</a>
                         </li>
                         <li>
                             <a class="smooth" href="#two">How does it work?</a>
                         </li>
                         <li>
-                            <a class="smooth" href="#three">Why would I use a GA to generate music?</a>
+                            <a class="smooth" href="#three">Why would I use a
+                                GA to generate music?</a>
                         </li>
                         <li>
-                            <a class="smooth" href="#four">How do I use the tool?</a>
+                            <a class="smooth" href="#four">How do I use the
+                                tool?</a>
                         </li>
                     </ol>
                 </header>
                 <article class="faq-article" id="one">
                     <h2>1. So, what is a Genetic Algorithm?</h2>
                     <p>
-                        Glad you asked! A Genetic Algorithm, or GA for short, models biological evolution.
-                        It was originally invented by John Holland in the 1960s as a way to study evolution.
+                        Glad you asked! A Genetic Algorithm, or GA for short,
+                        models biological evolution. It was originally invented
+                        by John Holland in the 1960s as a way to study evolution.
                         You can find all of the original ideas in his
                         <a href="http://cognet.mit.edu/book/adaptation-natural-and-artificial-systems"
                            target="_blank">book</a>
-                        "Adaptation in Natural and Artificial systems" published in 1975.
-                        However, it was soon realised that the GA proved invaluable in solving complex
-                        optimisation problems. Nowadays the GA is being used in a huge variety of fields,
-                        including robotics, Artificial Intelligence in games, and even complex multi-objective
+                        "Adaptation in Natural and Artificial systems" published
+                        in 1975. However, it was soon realised that the GA
+                        proved invaluable in solving complex optimisation
+                        problems. Nowadays the GA is being used in a huge
+                        variety of fields, including robotics, Artificial
+                        Intelligence in games, and even complex multi-objective
                         research projects. <br/><br/>
 
                         Some examples:
                     <ul class="text-left">
                         <li>
                             <a href="http://ieeexplore.ieee.org/abstract/document/1302402/" target="_blank">
-                                A knowledge based genetic algorithm for path planning of a mobile robot
+                                A knowledge based genetic algorithm for path
+                                planning of a mobile robot
                             </a>
                         </li>
                         <li>
                             <a href="http://ieeexplore.ieee.org/abstract/document/1330849/" target="_blank">
-                                Using a genetic algorithm to tune first-person shooter bots
+                                Using a genetic algorithm to tune first-person
+                                shooter bots
                             </a>
                         </li>
                         <li>
                             <a href="https://link.springer.com/chapter/10.1007/3-540-45356-3_83" target="_blank">
-                                A Fast Elitist Non-dominated Sorting Genetic Algorithm for Multi-objective Optimization:
+                                A Fast Elitist Non-dominated Sorting Genetic
+                                Algorithm for Multi-objective Optimization:
                                 NSGA-II
                             </a>
                         </li>
@@ -68,10 +80,14 @@
                     <div class="row">
                         <div class="col-md-12">
                             <figure>
-                                <img src="/DRAG/static/images/adaptation.jpg" style="margin: auto;"
-                                     class="figure-img img-fluid">
-                                <figcaption class="figure-caption">Fig.1. The book "Adaptation in Natural and
-                                    Artificial Systems" by John Holland, inventor of the GA.
+                                <img src="/DRAG/static/images/adaptation.jpg"
+                                     style="margin: auto;"
+                                     class="figure-img img-fluid"
+                                     alt="John Holland's book.">
+                                <figcaption class="figure-caption">Fig.1.
+                                    The book "Adaptation in Natural and
+                                    Artificial Systems" by John Holland,
+                                    inventor of the GA.
                                     Taken from:
                                     https://www.goodreads.com/book/show/881526.Adaptation_in_Natural_and_Artificial_Systems
                                 </figcaption>
@@ -82,57 +98,82 @@
                 <article class="faq-article" id="two">
                     <h2>2. How does it work?</h2>
                     <p>
-                        In a GA, a population of solutions are maintained. Each solution is a different way of solving
-                        a chosen problem. These solutions have an encoding. For instance, a single solution may be
-                        represented by a binary string. Each bit would represent an on or off state in this case.
-                        There are many other ways of encoding, one can use real values, vectors and even matrices.
+                        In a GA, a population of solutions are maintained. Each
+                        solution is a different way of solving a chosen problem.
+                        These solutions have an encoding. For instance, a single
+                        solution may be represented by a binary string. Each bit
+                        would represent an on or off state in this case.
+                        There are many other ways of encoding, one can use real
+                        values, vectors and even matrices.
                         <br/><br/>
-                        Each solution to a problem has a fitness assigned to it by a given fitness function. This
-                        fitness is a representation of how good a solution to the problem the candidate is. These
-                        fitness functions are usually automated and mathematical, however, in this project I employ
-                        a technique known as Interactive Evolutionary Computation (IEC). Since music is so subjective
-                        the usual fitness function is replaced by a human mentor who listens to and rates tracks.
-                        This means each user can get a unique output based on their taste in music.
+                        Each solution to a problem has a fitness assigned to it
+                        by a given fitness function. This fitness is a
+                        representation of how good a solution to the problem the
+                        candidate is. These fitness functions are usually
+                        automated and mathematical, however, in this project I
+                        employ a technique known as Interactive Evolutionary
+                        Computation (IEC). Since music is so subjective
+                        the usual fitness function is replaced by a human mentor
+                        who listens to and rates tracks. This means each user
+                        can get a unique output based on their taste in music.
                         <br/><br/>
-                        Once the population has been evaluated, selection is performed using a selection algorithm.
-                        This selection of candidates decides which candidates will propagate to the next generation.
-                        This is done based on fitness value, with some allowance for less fitter candidates to be
-                        chosen to maintain diversity in the population. Selection is usually performed without
-                        replacement for a number of times equal to the population size.
+                        Once the population has been evaluated, selection is
+                        performed using a selection algorithm. This selection of
+                        candidates decides which candidates will propagate to the
+                        next generation.
+                        This is done based on fitness value, with some allowance
+                        for less fitter candidates to be chosen to maintain
+                        diversity in the population. Selection is usually
+                        performed without replacement for a number of times equal
+                        to the population size.
                         <br/><br/>
-                        Selected candidates are then subjected to genetic operators, namely crossover and mutation.
-                        Crossover simulates fusion of haploid genes in reproduction and mutation simulates random
-                        genetic changes to alleles or genes. Once these operations are performed then a replacement
-                        mechanism replaces the old population with the new population. This whole process is repeated
+                        Selected candidates are then subjected to genetic
+                        operators, namely crossover and mutation.
+                        Crossover simulates fusion of haploid genes in
+                        reproduction and mutation simulates random
+                        genetic changes to alleles or genes. Once these
+                        operations are performed then a replacement
+                        mechanism replaces the old population with the new
+                        population. This whole process is repeated
                         until an optimum population of solutions are obtained.
                         <br/><br/>
                         In depth information can be found in this
                         <a target="_blank" href="http://www.boente.eti.br/fuzzy/ebook-fuzzy-mitchell.pdf">wonderful
                             book</a>
-                        by Mitchell Melanie. It features not only the mechanics of the GA, but also the history and a
+                        by Mitchell Melanie. It features not only the mechanics
+                        of the GA, but also the history and a
                         thorough explanation of all the concepts involved.
                     </p>
                 </article>
                 <article class="faq-article" id="three">
                     <h2>3. Why would I use a GA to generate music?</h2>
                     <p>
-                        An excellent question! Even a simple phrase of music can take millions or even billions
-                        of possible arrangements. For instance, in the case of DRAG, there are eight beats which
-                        can each take sixteen different values. As order matters we can calculate that the number
-                        of ordered permutations possible is 16 to the 8th power, or 4,294,967,296, a huge number!
+                        An excellent question! Even a simple phrase of music can
+                        take millions or even billions of possible arrangements.
+                        For instance, in the case of DRAG, there are eight beats
+                        which can each take sixteen different values. As order
+                        matters we can calculate that the number of ordered
+                        permutations possible is 16 to the 8th power, or
+                        4,294,967,296, a huge number!
                         <br/><br/>
-                        Thus, a GA which excels in solving complex optimisation problems with large search spaces
-                        is the ideal candidate. Also by using IEC, I can easily model the usually impossible
-                        function that a human brain creates when listening to their favourite music. More fascinating
-                        information about the human brain's response to music can be found in this
-                        <a href="http://www.pnas.org/content/98/20/11818?tab=author-info" target="_blank">paper</a>.
+                        Thus, a GA which excels in solving complex optimisation
+                        problems with large search spaces is the ideal candidate.
+                        Also by using IEC, I can easily model the usually
+                        impossible function that a human brain creates when
+                        listening to their favourite music. More fascinating
+                        information about the human brain's response to music
+                        can be found in this
+                        <a href="http://www.pnas.org/content/98/20/11818?tab=author-info"
+                           target="_blank">paper</a>.
                         <div class="row">
                             <div class="col-md-12">
                                 <figure>
-                                    <img src="/DRAG/static/images/musicbrain.jpg" style="margin: auto;"
+                                    <img src="/DRAG/static/images/musicbrain.jpg"
+                                         style="margin: auto;"
                                          class="figure-img img-fluid">
-                                    <figcaption class="figure-caption">Fig.2. The effects of listening to and playing music
-                                        on different parts of the brain.
+                                    <figcaption class="figure-caption">Fig.2.
+                                        The effects of listening to and playing
+                                        music on different parts of the brain.
                                         Taken from:
                                         https://www.tes.com/lessons/gOYcmFll4oE1cQ/music-and-the-human-brain
                                     </figcaption>
@@ -144,22 +185,32 @@
                 <article class="faq-article" id="four">
                     <h2>4. How do I use the tool?</h2>
                     <p>
-                        Start by clicking the Diversify Now option in the home menu. The process starts by providing
-                        an input track for the GA. You may do this from one of two forms. The first form has one
-                        drop-down for each beat in the bar, where you may pick an instrument/drum to use for that beat.
-                        The second form features a number of presets you may choose to save the time of building a
-                        track.
+                        Start by clicking the Diversify Now option in the home
+                        menu. The process starts by providing an input track for
+                        the GA. You may do this from one of two forms. The first
+                        form has one drop-down for each beat in the bar, where
+                        you may pick an instrument/drum to use for that beat.
+                        The second form features a number of presets you may
+                        choose to save the time of building a track.
                         <br/><br/>
-                        Once you have submitted one of the forms the GA generates the first population with some copies
-                        of your input track included. Then the fitness form is displayed. In this form you must listen
-                        to tracks and give them a rating between 0 and 10 in the provided inputs. Once you click submit
-                        the GA performs its operations and rebinds the new population for the next generation. This
-                        generation is once again displayed in the form for the next generation. This process continues
-                        until 10 generations have been rated, then a Machine Learning algorithm uses the fitness data
-                        you have provided previously to automate hundreds of generations instantly.
+                        Once you have submitted one of the forms the GA
+                        generates the first population with some copies
+                        of your input track included. Then the fitness form is
+                        displayed. In this form you must listen to tracks and
+                        give them a rating between 0 and 10 in the provided
+                        inputs. Once you click submit the GA performs its
+                        operations and rebinds the new population for the next
+                        generation. This generation is once again displayed in
+                        the form for the next generation. This process continues
+                        until 10 generations have been rated, then a Machine
+                        Learning algorithm uses the fitness data you have
+                        provided previously to automate hundreds of generations
+                        instantly.
                         <br/><br/>
-                        One great example of GA's applied to music generation can be found in this
-                        <a href="http://igm.rit.edu/~jabics/BilesICMC94.pdf" target="_blank">paper</a>.
+                        One great example of GA's applied to music generation
+                        can be found in this
+                        <a href="http://igm.rit.edu/~jabics/BilesICMC94.pdf"
+                           target="_blank">paper</a>.
                     </p>
                 </article>
             </main>

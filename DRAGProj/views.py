@@ -37,10 +37,12 @@ def index(request):
     View function for the index.html page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     request.session.flush()
     AppStart.clear = False
@@ -48,7 +50,8 @@ def index(request):
     # Reset the generations if the user goes home mid-diversification.
     request.session["current_generation"] = 1
     response = render(request, "DRAG/index.html", {"is_home": True})
-    cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" in request.COOKIES else None
+    cookie_uuid = request.COOKIES["track_identifier"] if "track_identifier" \
+        in request.COOKIES else None
     vh.set_uuid_cookie(response, request, cookie_uuid)
 
     ds.delete_data_store(request.session["user_id"])
@@ -60,11 +63,15 @@ def fitness(request):
     View function for the fitness.html page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
-        :obj:`HTTPResponseRedirect`: A HTTPResponseRedirect object that redirects the user to the routed url.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
+
+        :obj:`HTTPResponseRedirect`: A HTTPResponseRedirect object that
+        redirects the user to the routed url.
     """
     vh.check_app_start(request)
     context = dc.context
@@ -74,7 +81,8 @@ def fitness(request):
         # Create a fitness form object with the POST data.
         form = FitnessForm(request.POST, size=context["population_size"])
 
-        # If the data is valid perform a generation and redirect back here with a GET request.
+        # If the data is valid perform a generation and redirect back here
+        # with a GET request.
         if form.is_valid():
             vh.perform_generation(form, request)
             return HttpResponseRedirect('/RateFitness')
@@ -83,7 +91,8 @@ def fitness(request):
         # Here we check to see if the user is accessing the page correctly.
         try:
             bpm = request.session["bpm"]
-            if vh.generation_check(request.session["current_generation"], context["manual_generations"]):
+            if vh.generation_check(request.session["current_generation"],
+                                   context["manual_generations"]):
                 return HttpResponseRedirect("/MachineLearn")
             form = FitnessForm(size=context["population_size"])
             request.session["current_generation"] += 1
@@ -93,7 +102,8 @@ def fitness(request):
             return pe.catch_key_error(request)
 
     population = context[request.session["user_id"] + "population"]
-    return render(request, "DRAG/fitness.html", {"fitness_form": form, "population": population, "is_home": False})
+    return render(request, "DRAG/fitness.html",
+        {"fitness_form": form, "population": population, "is_home": False})
 
 
 def first_fitness(request):
@@ -101,10 +111,12 @@ def first_fitness(request):
     View function for the fitness.html page only accessed the first time.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     vh.check_app_start(request)
     context = dc.context
@@ -120,7 +132,8 @@ def first_fitness(request):
         # Reassign the population.
         context[request.session["user_id"] + "population"] = population
         return render(request, "DRAG/fitness.html",
-                      {"fitness_form": fitness_form, "population": population, "is_home": False})
+                      {"fitness_form": fitness_form, "population": population,
+                       "is_home": False})
 
     except KeyError as k:
         return pe.catch_key_error(request)
@@ -131,13 +144,16 @@ def diversify(request):
     View function for the startdiversify.html page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     if request.method == 'POST':
-        form = CustomInputForm(request.POST)  # Make an input form.
+        # Make an input form.
+        form = CustomInputForm(request.POST)
 
         if form.is_valid():
             request.session["genre"] = "Rock"
@@ -155,7 +171,8 @@ def diversify(request):
         preset = PresetForm()
 
     preset = preset if "preset" in locals() else PresetForm()
-    return render(request, 'DRAG/startdiversify.html', {"preset": preset, "form": form, "is_home": False})
+    return render(request, 'DRAG/startdiversify.html',
+                  {"preset": preset, "form": form, "is_home": False})
 
 
 def preset(request):
@@ -163,10 +180,12 @@ def preset(request):
     View function for the preset url route.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     if request.method == 'POST':
         form = PresetForm(request.POST)
@@ -188,14 +207,16 @@ def preset(request):
 
 def error(request):
     """
-    View function for the error.html page. Deals with errors from incorrectly accessing
-    pages.
+    View function for the error.html page. Deals with errors from incorrectly
+    accessing pages.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     response = render(request, 'DRAG/error.html', dc.context)
     cookie_uuid = request.COOKIES["track_identifier"]
@@ -209,10 +230,12 @@ def about(request):
     View function for the about page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     request.session.flush()
     return render(request, 'DRAG/about.html', {"is_home": False})
@@ -223,10 +246,12 @@ def faq(request):
     View function for the faq page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     request.session.flush()
     return render(request, 'DRAG/faq.html', {"is_home": False})
@@ -237,10 +262,12 @@ def page_not_found_error(request):
     View function for the 404 status code page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     request.session.flush()
     return render(request, 'DRAG/404.html', {"is_home": True})
@@ -251,10 +278,12 @@ def server_error(request):
     View function for the 500 status code page.
 
     Args:
-        request (:obj:`Request`): The Request object representing a HTTP request to a page.
+        request (:obj:`Request`): The Request object representing a HTTP request
+        to a page.
 
     Returns:
-        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP request and optional dictionary.
+        :obj:`HTTPResponse`: A HTTPResponse object to a page with the HTTP
+        request and optional dictionary.
     """
     request.session.flush()
     return render(request, 'DRAG/500.html', {"is_home": True})

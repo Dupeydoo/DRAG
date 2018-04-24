@@ -54,14 +54,16 @@ class TestFormHelper(TestCase):
         """
         Tests the construct_input method.
         """
-        self.assertEqual([1, 1, 1, 1, 1, 1, 1, 1], fh.construct_input(self.clean),
+        self.assertEqual([1, 1, 1, 1, 1, 1, 1, 1],
+                         fh.construct_input(self.clean),
                          "The input should be [1,1,1,1,1,1,1,1]")
 
     def test_get_preset(self):
         """
         Tests the get_preset method.
         """
-        self.assertEqual([2, 1, 3, 1, 2, 1, 3, 1], fh.get_preset(0), "Preset should be [2, 1, 3, 1, 2, 1, 3, 1]")
+        self.assertEqual([2, 1, 3, 1, 2, 1, 3, 1], fh.get_preset(0),
+                         "Preset should be [2, 1, 3, 1, 2, 1, 3, 1]")
 
     def tearDown(self):
         """

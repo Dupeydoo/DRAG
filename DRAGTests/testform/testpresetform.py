@@ -35,14 +35,16 @@ class TestPresetForm(TestCase):
         """
         Tests the Preset form validity.
         """
-        self.assertTrue(self.preset_form.is_valid(), "The preset form is invalid!")
+        self.assertTrue(self.preset_form.is_valid(),
+                        "The preset form is invalid!")
 
     def test_form_data(self):
         """
         Tests for equality of Preset form data.
         """
         self.preset_form.is_valid()
-        self.assertEqual(200, self.preset_form.cleaned_data["bpm"], "The form data is invalid!")
+        self.assertEqual(200, self.preset_form.cleaned_data["bpm"],
+                         "The form data is invalid!")
 
     def tearDown(self):
         """

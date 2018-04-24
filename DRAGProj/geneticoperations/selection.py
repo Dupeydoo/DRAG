@@ -18,10 +18,12 @@ def do_selection(population, tournament_size):
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        tournament_size (int): Tournament size parameter used to control selection.
+        tournament_size (int): Tournament size parameter used to control
+        selection.
 
     Returns:
-        parents (:obj:`list` of :obj:`Track`): The new population of tracks selected from the old.
+        parents (:obj:`list` of :obj:`Track`): The new population of tracks
+        selected from the old.
     """
     parents = []
     for selections in range(len(population)):
@@ -40,7 +42,8 @@ def tournament_select(population, tournament_size):
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        tournament_size (int): Tournament size parameter used to control selection.
+        tournament_size (int): Tournament size parameter used to control
+        selection.
 
     Returns:
         :obj:`Track`: A track that has been selected from a tournament.
@@ -60,7 +63,8 @@ def tournament(population, selections):
 
     Args:
         population (:obj:`list` of :obj:`Track`): The population of tracks.
-        selections: (:obj:`list` of :obj:`Track`): The randomly selected tracks to return a fitness from.
+        selections: (:obj:`list` of :obj:`Track`): The randomly selected tracks
+        to return a fitness from.
 
     Returns:
         :obj:`Track`: The winning track from the tournament.
@@ -83,6 +87,7 @@ def tournament(population, selections):
     return population[index[0]]
 
 
+# Integrity Test
 if __name__ == "__main__":
     from DRAGTests.mock.mockpopulation import MockPopulation
 

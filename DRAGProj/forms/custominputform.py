@@ -3,7 +3,8 @@ from django import forms
 from DRAG.datacontext import context
 
 """
-A module containing the form class and recipes to make the custom beat input form.
+A module containing the form class and recipes to make the custom beat input 
+form.
 
     Author:
         James
@@ -35,37 +36,42 @@ instrument_choices = (
     (16, "All Instruments")
 )
 """
-instrument_choices (:obj:`tuple` of :obj:`tuple`): The choices to be visible on the input drop-downs.
+instrument_choices (:obj:`tuple` of :obj:`tuple`): The choices to be visible on 
+the input drop-downs.
 """
 
 
 class CustomInputForm(forms.Form):
     """
-    The CustomInputForm class has fields for each beat of a 2 bar crotchet 4:4 time_sig track
-    where the user may create a custom track from a selection of instruments.
+    The CustomInputForm class has fields for each beat of a 2 bar crotchet 4:4
+    time_sig track where the user may create a custom track from a selection of
+    instruments.
 
     Attributes:
-        beat + number (:obj:`TypedChoiceField`): Each beat has its own drop-down object using a HTML5 Select.
-        bpm (:obj:`IntegerField`): An object representing a HTML5 number input for the bpm.
+        beat + number (:obj:`TypedChoiceField`): Each beat has its own drop-down
+        object using a HTML5 Select.
+
+        bpm (:obj:`IntegerField`): An object representing a HTML5 number input
+        for the bpm.
     """
-    beat_one = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                      widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_two = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                      widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_three = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                        widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_four = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                       widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_five = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                       widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_six = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                      widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_seven = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                        widget=forms.Select(attrs={"class": "form-control cb"}))
-    beat_eight = forms.TypedChoiceField(choices=instrument_choices, coerce=int,
-                                        widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_one = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_two = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_three = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_four = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_five = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_six = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_seven = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
+    beat_eight = forms.TypedChoiceField(choices=instrument_choices,
+            coerce=int, widget=forms.Select(attrs={"class": "form-control cb"}))
     bpm = forms.IntegerField(max_value=250, min_value=60,
-                             widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
+            widget=forms.NumberInput(attrs={"id": "bpm", "name": "bpm"}))
 
     def clean(self):
         """

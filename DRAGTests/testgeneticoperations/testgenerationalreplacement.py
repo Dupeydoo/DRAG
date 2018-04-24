@@ -20,7 +20,9 @@ class TestGenerationalReplacement(unittest.TestCase):
     Tests the generationalreplacement module.
 
     Attributes:
-        old_population (:obj:`list` of :obj:`Track`): The old population to replace.
+        old_population (:obj:`list` of :obj:`Track`): The old population to
+        replace.
+
         new_population (:obj:`list` of :obj:`Track`): The new population.
     """
     def setUp(self):
@@ -35,7 +37,8 @@ class TestGenerationalReplacement(unittest.TestCase):
         Tests the do_replacement function.
         """
         population = gr.do_replacement(self.old_population, self.new_population)
-        self.assertNotEqual(population[0].content, self.old_population[0].content)
+        self.assertNotEqual(population[0].content,
+                            self.old_population[0].content)
 
     def tearDown(self):
         """
